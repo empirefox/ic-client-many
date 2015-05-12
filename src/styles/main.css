@@ -26,3 +26,9 @@ a[ng-click] {
     padding-right: 15px;
     padding-left: 15px;
 }
+
+[ac-chart] {
+    float: left;
+    height: 200px;
+    margin: 5% 1%;
+}

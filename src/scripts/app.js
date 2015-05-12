@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('githubs', ['ui.bootstrap', 'angular.filter']);
+angular.module('githubs', ['ui.bootstrap', 'ngRoute', 'angularCharts', 'ngWebSocket']);
 angular.module('app.filters', []);
 angular.module('app.directives', []);
-angular.module('app.navs', ['app.navs.const']);
+angular.module('app.navs', ['app.header', 'app.navs.const']);
 /* jshint unused: false, -W079 */
 var angularApp = angular.module('myApp', ['githubs', 'app.filters', 'app.directives', 'l2m-tpl', 'app.navs']);
 

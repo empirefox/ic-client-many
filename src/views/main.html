@@ -1,2 +1,10 @@
-<h3>Welcome Savage Bucket</h3>
-<div><a href="/auth/login">Authenticate with your Google Id</a><div>
+<h3>Client Stats</h3>
+<select ng-model="chartType" ng-init="chartType='bar'">
+	<option value="pie">pie</option>
+	<option value="bar">bar</option>
+</select>
+<br />
+<div id="dataPingDistance" ac-chart="typePingPerid" ac-data="data.PingDistance" ac-config="configPingDistance" style="width: 55%"></div>
+<div id="dataDomainSuccess" ac-chart="chartType" ac-data="data.DomainSuccess" ac-config="configDomainSuccess" style="width: 55%"></div>
+<div id="dataDomainFail" ac-chart="chartType" ac-data="data.DomainFail" ac-config="configDomainFail" style="width: 55%"></div>
+<div id="dataDomainStatus" ac-chart="typeDomainStatus" ac-data="data.DomainStatus" ac-config="configDomainStatus" style="width: 70%"></div>
