@@ -1,1 +1,1 @@
-angular.module('manage', []);
+angular.module('manage', ['manage.ctrl.header']);
