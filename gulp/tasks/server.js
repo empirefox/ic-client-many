@@ -4,13 +4,14 @@ var swig = require('swig');
 var express = require('express');
 var config = require('../config');
 var Lazy = require("lazy.js");
-var resource = require('../resource.json');
 var helper = require('../helper');
 
 var jsdelivrJs = helper.jsdelivrLocalJs;
 var jsdelivrCss = helper.jsdelivrLocalCss;
 
+// do not test index now
 function indexHandler(req, res, next) {
+	var resource = require('../resource.json');
 	gulp.src(config['index.html'].src)
 	// inject css files to html
 	.pipe(plugins.inject(gulp.src(Lazy([resource.cdn.css, helper.jsdelivrLocalCss]).flatten().compact().toArray(), {
@@ -51,8 +52,8 @@ gulp.task('server', function(done) {
 	app.set('views', config.render('{{ test }}/e2e'));
 	app.set('view cache', false);
 
-	app.get('/', indexHandler);
-	app.get('/index.html', indexHandler);
+	// app.get('/', indexHandler);
+	// app.get('/index.html', indexHandler);
 	app.get('/scenario/:scenario/:view?/:js?', scenarioHandler);
 
 	app.use(express.static(config.dest, {

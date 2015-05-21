@@ -1,8 +1,3 @@
-// config in resource jsdelivr.js[{}]
-//{
-//  "package": "rangy",
-//  "files": "rangy-core.js+rangy-selectionsaverestore.js"
-//}
 var swig = require('swig');
 var replace = require('gulp-replace');
 var Lazy = require("lazy.js");
@@ -33,7 +28,7 @@ var helper = {
 	},
 
 	toStaticfilesCDN : function() {
-		return replace(/\/\/cdnjs\.cloudflare\.com\/ajax\/libs/g, '//cdn.staticfile.org');
+		return replace(/\/\/cdnjs\.cloudflare\.com\/ajax\/libs/g, '//dn-cdnjscn.qbox.me/ajax/libs');
 	}
 };
 

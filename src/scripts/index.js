@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('githubs', ['ui.bootstrap', 'ngRoute', 'angularCharts', 'ngWebSocket']);
+angular.module('githubs', ['ui.bootstrap', 'ngRoute']);
 angular.module('app.filters', []);
 angular.module('app.directives', []);
 angular.module('app.navs', ['app.header', 'app.navs.const']);
@@ -11,10 +11,6 @@ angularApp.config(['$routeProvider', 'navs',
 function($routeProvider, navs) {
 	angular.forEach(navs, function(nav) {
 		$routeProvider.when(nav.when, nav);
-	});
-	$routeProvider.when('/table/:fname', {
-		templateUrl : '/views/tables.html',
-		controller : 'TablesCtrl'
 	});
 	$routeProvider.otherwise({
 		redirectTo : '/'
