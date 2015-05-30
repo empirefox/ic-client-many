@@ -37,6 +37,10 @@ function addCopyPageTask(pagename) {
 	});
 }
 
-addCopyPageTask('manage');
+var tasks = [];
+config.pages.forEach(function(page) {
+	addCopyPageTask(page);
+	tasks.push('copy:' + page + '.html');
+});
 
-gulp.task('copy:html', ['copy:manage.html']);
+gulp.task('copy:html', tasks);

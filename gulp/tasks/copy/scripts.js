@@ -5,6 +5,7 @@ var angularFilesort = plugins.angularFilesort;
 var angularBuilder = plugins.angularBuilder;
 var streamqueue = require('streamqueue');
 var toStaticfilesCDN = require('./cdn-helper').toStaticfilesCDN();
+var pages = require('../../config').pages;
 var config = require('../../config').scripts;
 
 function addCopyPageJsTask(pagename) {
@@ -18,9 +19,7 @@ function addCopyPageJsTask(pagename) {
 		// third libs that are not in cdn
 		gulp.src(resource.js),
 		// local src filterd by pagename|modulename
-		gulp.src(config.src).
-		pipe(
-		    angularBuilder(['./src/scripts/' + pagename + '.js'], {
+		gulp.src(config.src).pipe(angularBuilder(['./src/scripts/' + pagename + '.js'], {
 			appModule : pagename,
 			globalDependencies : ['dialogs', 'toaster']
 		}))).
@@ -33,9 +32,6 @@ function addCopyPageJsTask(pagename) {
 	});
 }
 
-addCopyPageJsTask('manage');
-addCopyPageJsTask('index');
-
 gulp.task('copy:scripts:tpl', function() {
 	// all tpl
 	return gulp.src(config.tpl).pipe(plugins.angularTemplatecache({
@@ -46,4 +42,11 @@ gulp.task('copy:scripts:tpl', function() {
 	})).pipe(gulp.dest(config.dest));
 });
 
-gulp.task('copy:scripts', ['copy:scripts:tpl', 'copy:manage.js', 'copy:index.js']);
+var tasks = ['copy:scripts:tpl'];
+pages.forEach(function(page) {
+	addCopyPageJsTask(page);
+	tasks.push('copy:' + page + '.js');
+});
+
+gulp.task('copy:scripts', tasks);
+

@@ -1,13 +1,10 @@
 'use strict';
 
-angular.module('githubs', ['ui.bootstrap', 'ngRoute']);
-angular.module('app.filters', []);
-angular.module('app.directives', []);
-angular.module('app.navs', ['index.ctrl.header', 'app.navs.const']);
-/* jshint unused: false, -W079 */
-var angularApp = angular.module('myApp', ['githubs', 'app.filters', 'app.directives', 'l2m-tpl', 'app.navs']);
+angular.module('github', ['ui.bootstrap', 'ngRoute']);
+angular.module('index.ctrls', ['index.ctrl.header', 'index.ctrl.main']);
+angular.module('index', ['github', 'l2m-tpl', 'index.navs']);
 
-angularApp.config(['$routeProvider', 'navs',
+angular.module('index').config(['$routeProvider', 'navs',
 function($routeProvider, navs) {
 	angular.forEach(navs, function(nav) {
 		$routeProvider.when(nav.when, nav);

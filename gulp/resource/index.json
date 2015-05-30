@@ -38,6 +38,7 @@
 	{
 		"js":
 		[
+            "lib_3rd/RTCPeerConnection-v1.5.js",
 		],
 
 		"css":

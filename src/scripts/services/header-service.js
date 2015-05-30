@@ -6,7 +6,7 @@ function($location) {
         active : function(nav) {
             var path = $location.path();
             return {
-                active : path === nav.when || path === ('/table/' + nav.Name)
+                active : path === nav.when
             };
         }
     };

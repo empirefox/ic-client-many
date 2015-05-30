@@ -1,1 +1,0 @@
-angular.module('manage', ['manage.ctrl.header']);

@@ -1,6 +1,6 @@
-angular.module('app.navs.const', []).constant('navs', [{
+angular.module('index.navs', []).constant('navs', [{
 	display : 'HOME',
 	when : '/',
-	templateUrl : '/views/main.html',
-	controller : 'MainCtrl'
+	templateUrl : '/views/index/main.html',
+	controller : 'IndexMainCtrl'
 }]);

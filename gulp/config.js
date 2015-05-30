@@ -12,6 +12,7 @@ var config = {
 	render : r,
 	port : 8080,
 	dest : r('{{ dest }}'),
+	pages : ['index', 'login'],
 	scripts : {
 		src : r('{{ src }}/scripts/**/*.js'),
 		tpl : r('{{ src }}/{{ views }}/**/*.html'),
@@ -23,7 +24,7 @@ var config = {
 		name : 'app.css'
 	},
 	misc : {
-		src : [r('{{ src }}/.*'), r('!{{ src }}/index.html'), r('!{{ src }}/scripts'), r('!{{ src }}/styles'), r('!{{ src }}/{{ views }}')],
+		src : [r('{{ src }}/.*'), r('!{{ src }}/*.html'), r('!{{ src }}/scripts'), r('!{{ src }}/styles'), r('!{{ src }}/{{ views }}')],
 		dest : r('{{ dest }}')
 	},
 	test : {

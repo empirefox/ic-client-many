@@ -3,6 +3,7 @@ var Lazy = require("lazy.js");
 var concat = require('gulp-concat');
 var header = require('gulp-header');
 var pkg = require('../../../package.json');
+var pages = require('../../config').pages;
 var config = require('../../config').styles;
 
 function addCopyPageCssTask(pagename) {
@@ -16,6 +17,11 @@ function addCopyPageCssTask(pagename) {
 	});
 }
 
-addCopyPageCssTask('manage');
+var tasks = [];
+pages.forEach(function(page) {
+	addCopyPageCssTask(page);
+	// 'copy:manage.css'
+	tasks.push('copy:' + page + '.css');
+});
 
-gulp.task('copy:styles', ['copy:manage.css']);
+gulp.task('copy:styles', tasks);
