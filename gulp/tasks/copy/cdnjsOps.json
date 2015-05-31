@@ -70,7 +70,11 @@
         "file": "**/codemirror.css",
         "cdn": "cdnjs:codemirror:${ filenameMin }"
     },
-    "cdnjs:string.js",
+    {
+        "file": "**/string.js",
+        "package": "string",
+        "cdn": "cdnjs:string.js"
+    },
     {
         "file": "**/bootstrap/**/bootstrap.css",
         "package": "bootstrap",
