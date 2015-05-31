@@ -50,6 +50,6 @@ function all(pagenames) {
 	helpers.karmaFiles = Lazy([tmp.karmaFiles, units]).flatten().uniq().compact().toArray();
 }
 
-all(['manage']);
+all(config.pages);
 
 module.exports = helpers;

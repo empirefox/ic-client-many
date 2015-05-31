@@ -6,13 +6,18 @@
     "cdnjs:angular.js:angular-sanitize.min.js",
     "cdnjs:angular.js:angular.min.js",
     {
+        "file": "**/angular-locale_zh-cn.js",
+        "package": "angular-i18n",
+        "cdn": "cdnjs:angular.js:i18n/angular-locale_zh-cn.js"
+    },
+    {
         "file": "**/angular-translate/*.js",
         "package": "angular-translate",
-        "cdn": "cdnjs:bower-angular-translate:angular-translate.min.js"
+        "cdn": "//cdnjs.cloudflare.com/ajax/libs/angular-translate/${ version }/${ filenameMin }"
     },
-    "cdnjs:angular-i18n:angular-locale_zh-cn.js",
     {
-        "file": "**/angular-ui-bootstrap/**/*.js",
+        "file": "**/ui-bootstrap-tpls*.js",
+        "package": "angular-bootstrap",
         "cdn": "cdnjs:angular-ui-bootstrap:ui-bootstrap-tpls.min.js"
     },
     {
@@ -65,11 +70,7 @@
         "file": "**/codemirror.css",
         "cdn": "cdnjs:codemirror:${ filenameMin }"
     },
-    {
-        "file": "**/string.js",
-        "package": "string",
-        "cdn": "cdnjs:string.js:${ filenameMin }"
-    },
+    "cdnjs:string.js",
     {
         "file": "**/bootstrap/**/bootstrap.css",
         "package": "bootstrap",
