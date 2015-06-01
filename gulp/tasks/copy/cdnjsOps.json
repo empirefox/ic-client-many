@@ -35,6 +35,16 @@
     },
     "cdnjs:font-awesome",
     {
+        "file": "**/ngDialog/css/*.css",
+        "package": "ngDialog",
+        "cdn": "//cdnjs.cloudflare.com/ajax/libs/ng-dialog/${ version }/css/${ filenameMin }"
+    },
+    {
+        "file": "**/ngDialog/js/*.js",
+        "package": "ngDialog",
+        "cdn": "//cdnjs.cloudflare.com/ajax/libs/ng-dialog/${ version }/js/${ filenameMin }"
+    },
+    {
         "file": "**/spectrum/spectrum.js",
         "cdn": "cdnjs:spectrum:js/${ filenameMin }"
     },
