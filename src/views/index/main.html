@@ -2,18 +2,34 @@
 	<div ui-tree data-drag-enabled="false">
 		<ol ui-tree-nodes="" ng-model="CtrlClient.rooms">
 			<li ng-repeat="room in CtrlClient.rooms" ui-tree-node>
-				<div ng-click="CtrlClient.chatTarget=room">
-					{{room.name}} <i class="fa fa-comment"></i>
+				<div>
+					<button type="button" class="btn btn-link btn-xs"
+					ng-click="CtrlClient.chatTarget=room;visible=true">
+						<i class="fa fa-comment"></i>{{room.name}}
+					</button>
+					<div class="pull-right btn-group"
+					ng-if="room.isOwner">
+						<button type="button" class="btn btn-default btn-xs"
+						ng-click="Dialog.openManageRoomNameDialog(room)">
+							<i class="fa fa-edit"></i>
+						</button>
+					</div>
 				</div>
 				<ol ui-tree-nodes="" ng-model="room.cameras">
 					<li ng-repeat="camera in room.cameras" ui-tree-node>
 						<span>{{camera.name}}</span>
 						<div class="pull-right btn-group">
+							<button ng-if="room.isOwner" type="button" class="btn btn-default btn-xs"
+							ng-click="Dialog.openManageIpcamDialog(room,camera)" ng-disabled="camera.disabled">
+								<i class="fa fa-edit"></i>
+							</button>
+						</div>
+						<div class="pull-right btn-group">
 							<button ng-if="!camera.opened" type="button" class="btn btn-info btn-xs" ng-click="connect(room,camera)">
-								<i class="fa fa-copy"></i>
+								<i class="fa fa-play"></i>
 							</button>
 							<button ng-if="camera.opened" type="button" class="btn btn-danger btn-xs" ng-click="disconnect(room,camera)">
-								<i class="fa fa-remove"></i>
+								<i class="fa fa-stop"></i>
 							</button>
 						</div>
 					</li>
@@ -36,4 +52,5 @@ input-placeholder-text="You can write here"
 submit-button-text="Send"
 title="Chat"
 theme="material"
+visible="visible"
 submit-function="CtrlClient.chat"></irontec-simple-chat>

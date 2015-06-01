@@ -1,7 +1,9 @@
 'use strict';
 
-angular.module('app.service.ctrl', ['ngWebsocket', 'app.system.const']).factory('CtrlClient', ['$websocket', 'SystemData',
-function($websocket, SystemData) {
+angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebsocket', 'app.system.const']).factory('CtrlClient', [
+// inject
+'toaster', '$websocket', 'SystemData',
+function(toaster, $websocket, SystemData) {
 	var ctrlStream = $websocket('wss://' + SystemData.Host + '/many/ctrl');
 
 	var service = {
@@ -10,8 +12,18 @@ function($websocket, SystemData) {
 		get : function(name) {
 			ctrlStream.send('many:GetManyData:' + name);
 		},
-		exec : function(cmd) {
-			ctrlStream.send('many:Command:' + JSON.stringify(cmd));
+
+		// name: 'ManageGetIpcam'
+		// content: 'ipcam1_id'
+		// name: 'ManageSetIpcam'
+		// content: managed_ipcam_object
+		exec : function(name, room, content) {
+			ctrlStream.send('many:Command:' + JSON.stringify({
+				name : name,
+				room : room,
+				content : JSON.stringify(content)
+			}));
+			toaster.pop('success', 'info', 'Please wait! Sending command: ' + name);
 		}
 	};
 
@@ -32,21 +44,21 @@ function($websocket, SystemData) {
 		service.get('Username');
 	};
 
+	// Response from one, not from server
 	var OnResponse = function(response) {
-	    switch(response.type){
-            case 'ManageGetIpcam':
-            break;
-            case 'ManageSetIpcam':
-            break;
-            case 'ManageReconnectIpcam':
-            break;
-	    }
+		switch(response.type) {
+			case 'ManageGetIpcam':
+				if (service.ManageGetIpcamCallback) {
+					service.ManageGetIpcamCallback(JSON.parse(response.content));
+				}
+				break;
+		}
 	};
 
 	ctrlStream.onMessage(function(raw) {
 		var data = JSON.parse(raw.data);
 		switch (data.type) {
-			case 'Username':
+			case 'Userinfo':
 				service.username = data.content;
 				break;
 			case 'CameraList':
@@ -62,8 +74,9 @@ function($websocket, SystemData) {
 				OnResponse(JSON.parse(data.content));
 				break;
 			case 'Info':
+				// TODO change content to pop option object
+				toaster.pop('success', 'info', data.content);
 				break;
-			// TODO add Log type
 			default:
 				console.log('Unexpected data from server', data);
 		}
