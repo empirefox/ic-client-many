@@ -36,7 +36,7 @@ function($http, toaster, RegLocal) {
 	return {
 		reg : function(name) {
 			if (!RegLocal.hasLocalOne || RegLocal.status !== 'not_authed') {
-				return
+				return;
 			}
 			$http.post('/many/reg-room', {
 				name : name

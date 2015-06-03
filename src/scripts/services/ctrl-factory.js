@@ -45,7 +45,7 @@ function(toaster, $websocket, SystemData) {
 	};
 
 	// Response from one, not from server
-	var OnResponse = function(response) {
+	var onResponse = function(response) {
 		switch(response.type) {
 			case 'ManageGetIpcam':
 				if (service.ManageGetIpcamCallback) {
@@ -71,7 +71,7 @@ function(toaster, $websocket, SystemData) {
 				});
 				break;
 			case 'Response':
-				OnResponse(JSON.parse(data.content));
+				onResponse(JSON.parse(data.content));
 				break;
 			case 'Info':
 				// TODO change content to pop option object

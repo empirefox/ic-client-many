@@ -2,8 +2,6 @@
 
 angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl']).factory('Dialog', ['ngDialog', 'CtrlClient',
 function(ngDialog, CtrlClient) {
-	var callbacks = {};
-
 	var service = {};
 	service.openManageRoomNameDialog = function(room) {
 		ngDialog.openConfirm({

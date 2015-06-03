@@ -2,7 +2,7 @@
 
 angular.module('app.service.pcfactory', ['app.service.streams', 'app.system.const']).factory('PCFactory', ['Streams', 'SystemData',
 function(Streams, SystemData) {
-	function NewPeerConn(cid, ws) {
+	function newPeerConn(cid, ws) {
 		var pc = new RTCPeerConnection({
 			constraints : {
 				mandatory : {
@@ -48,7 +48,7 @@ function(Streams, SystemData) {
 
 		ws.onopen = function() {
 			wss[target] = ws;
-			pc = NewPeerConn(camera, ws);
+			pc = newPeerConn(camera, ws);
 		};
 		ws.onclose = function() {
 			pc.close();
