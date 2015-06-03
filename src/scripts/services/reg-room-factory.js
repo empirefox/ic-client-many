@@ -39,10 +39,9 @@ function($http, toaster, RegLocal) {
 				return
 			}
 			$http.post('/many/reg-room', {
-				type : 'RegRoomName',
-				content : name
-			}).success(function(addr) {
-				RegLocal.SetSecretAddress(addr);
+				name : name
+			}).success(function(data) {
+				RegLocal.SetSecretAddress(data.addr);
 				toaster.pop('success', 'Success', 'Reg room ok!');
 			}).error(function() {
 				toaster.pop('error', 'Error', 'Cannot reg room!');
