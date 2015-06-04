@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('github', ['ui.bootstrap', 'ngRoute']);
+angular.module('index.github', ['ui.bootstrap', 'ngRoute']);
 angular.module('index.ctrls', ['index.ctrl.header', 'index.ctrl.main']);
-angular.module('index', ['github', 'l2m-tpl', 'index.navs']);
+angular.module('index', ['index.github', 'l2m-tpl', 'index.navs']);
 
 angular.module('index').config(['$routeProvider', 'navs',
 function($routeProvider, navs) {

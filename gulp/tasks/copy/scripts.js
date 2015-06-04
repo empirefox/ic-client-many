@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var Lazy = require("lazy.js");
 var plugins = require('gulp-load-plugins')();
 var angularFilesort = plugins.angularFilesort;
-var angularBuilder = plugins.angularBuilder;
+var angularDependency = plugins.angularDependency;
 var streamqueue = require('streamqueue');
 var toStaticfilesCDN = require('./cdn-helper').toStaticfilesCDN();
 var pages = require('../../config').pages;
@@ -19,10 +19,7 @@ function addCopyPageJsTask(pagename) {
 		// third libs that are not in cdn
 		gulp.src(resource.js),
 		// local src filterd by pagename|modulename
-		gulp.src(config.src).pipe(angularBuilder(['./src/scripts/' + pagename + '.js'], {
-			appModule : pagename,
-			globalDependencies : ['dialogs', 'toaster']
-		}))).
+		gulp.src(config.src).pipe(angularDependency(pagename))).
 		// sort files
 		//		.pipe(angularFilesort())
 		// concat

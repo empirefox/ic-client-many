@@ -5,7 +5,7 @@
 2 info using npm@1.4.28
 3 info using node@v0.10.38
 4 verbose readDependencies using package.json deps
-5 verbose install where, deps [ '/home/savage/git/ng-gulp-seed',
+5 verbose install where, deps [ '/home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many',
 5 verbose install   [ 'bower',
 5 verbose install     'bower-path',
 5 verbose install     'cheerio',
@@ -14,12 +14,15 @@
 5 verbose install     'file-reader',
 5 verbose install     'glob',
 5 verbose install     'gulp',
+5 verbose install     'gulp-angular-builder',
+5 verbose install     'gulp-angular-dependency',
 5 verbose install     'gulp-angular-filesort',
 5 verbose install     'gulp-angular-templatecache',
 5 verbose install     'gulp-autoprefixer',
 5 verbose install     'gulp-concat',
 5 verbose install     'gulp-cdnizer',
 5 verbose install     'gulp-changed',
+5 verbose install     'gulp-debug',
 5 verbose install     'gulp-data',
 5 verbose install     'gulp-header',
 5 verbose install     'gulp-file',
@@ -60,272 +63,184 @@
 5 verbose install     'vinyl-source-stream' ] ]
 6 info preinstall l2m-frontend@4.3.0
 7 verbose readDependencies using package.json deps
-8 verbose already installed skipping bower-path@>=1.0.1 /home/savage/git/ng-gulp-seed
-9 verbose already installed skipping cheerio@>=0.18.0 /home/savage/git/ng-gulp-seed
-10 verbose already installed skipping del@>=0.1.1 /home/savage/git/ng-gulp-seed
-11 verbose already installed skipping express@>=4.10.6 /home/savage/git/ng-gulp-seed
-12 verbose already installed skipping file-reader@>=0.2.2 /home/savage/git/ng-gulp-seed
-13 verbose already installed skipping glob@>=5.0.6 /home/savage/git/ng-gulp-seed
-14 verbose already installed skipping gulp@>=3.8.11 /home/savage/git/ng-gulp-seed
-15 verbose already installed skipping gulp-angular-filesort@>=1.1.1 /home/savage/git/ng-gulp-seed
-16 verbose already installed skipping gulp-angular-templatecache@>=1.6.0 /home/savage/git/ng-gulp-seed
-17 verbose already installed skipping gulp-autoprefixer@>=2.1.0 /home/savage/git/ng-gulp-seed
-18 verbose already installed skipping gulp-concat@>=2.5.2 /home/savage/git/ng-gulp-seed
-19 verbose already installed skipping gulp-cdnizer@>=1.1.5 /home/savage/git/ng-gulp-seed
-20 verbose already installed skipping gulp-changed@>=0.4.1 /home/savage/git/ng-gulp-seed
-21 verbose already installed skipping gulp-data@>=1.1.1 /home/savage/git/ng-gulp-seed
-22 verbose already installed skipping gulp-header@>=1.0.5 /home/savage/git/ng-gulp-seed
-23 verbose already installed skipping gulp-file@>=0.2.0 /home/savage/git/ng-gulp-seed
-24 verbose already installed skipping gulp-imagemin@>=0.6.2 /home/savage/git/ng-gulp-seed
-25 verbose already installed skipping gulp-inject@>=1.2.0 /home/savage/git/ng-gulp-seed
-26 verbose already installed skipping gulp-jshint@>=1.10.0 /home/savage/git/ng-gulp-seed
-27 verbose already installed skipping gulp-karma@>=0.0.4 /home/savage/git/ng-gulp-seed
-28 verbose already installed skipping gulp-load-plugins@>=0.10.0 /home/savage/git/ng-gulp-seed
-29 verbose already installed skipping gulp-ng-constant@>=0.2.0 /home/savage/git/ng-gulp-seed
-30 verbose already installed skipping gulp-notify@>=1.4.2 /home/savage/git/ng-gulp-seed
-31 verbose already installed skipping gulp-protractor@>=0.0.12 /home/savage/git/ng-gulp-seed
-32 verbose already installed skipping gulp-rename@>=1.2.2 /home/savage/git/ng-gulp-seed
-33 verbose already installed skipping gulp-replace@>=0.4.0 /home/savage/git/ng-gulp-seed
-34 verbose already installed skipping gulp-sourcemaps@>=1.5.2 /home/savage/git/ng-gulp-seed
-35 verbose already installed skipping gulp-stylus@>=2.0.1 /home/savage/git/ng-gulp-seed
-36 verbose already installed skipping gulp-uglify@>=1.2.0 /home/savage/git/ng-gulp-seed
-37 verbose already installed skipping gulp-util@>=3.0.4 /home/savage/git/ng-gulp-seed
-38 verbose already installed skipping jasmine-jquery@>=2.0.5 /home/savage/git/ng-gulp-seed
-39 verbose already installed skipping jshint-stylish@>=1.0.1 /home/savage/git/ng-gulp-seed
-40 verbose already installed skipping karma@>=0.12.31 /home/savage/git/ng-gulp-seed
-41 verbose already installed skipping karma-jasmine@>=0.3.5 /home/savage/git/ng-gulp-seed
-42 verbose already installed skipping karma-chrome-launcher@>=0.1.8 /home/savage/git/ng-gulp-seed
-43 verbose already installed skipping karma-firefox-launcher@>=0.1.4 /home/savage/git/ng-gulp-seed
-44 verbose already installed skipping karma-phantomjs-launcher@>=0.1.4 /home/savage/git/ng-gulp-seed
-45 verbose already installed skipping karma-spec-reporter@>=0.0.19 /home/savage/git/ng-gulp-seed
-46 verbose already installed skipping karma-ng-html2js-preprocessor@>=0.1.2 /home/savage/git/ng-gulp-seed
-47 verbose already installed skipping karma-json-fixtures-preprocessor@>=0.0.1 /home/savage/git/ng-gulp-seed
-48 verbose already installed skipping lazy.js@>=0.4.0 /home/savage/git/ng-gulp-seed
-49 verbose already installed skipping nib@>=1.0.4 /home/savage/git/ng-gulp-seed
-50 verbose already installed skipping pretty-hrtime@>=0.2.1 /home/savage/git/ng-gulp-seed
-51 verbose already installed skipping protractor@>=2.0.0 /home/savage/git/ng-gulp-seed
-52 verbose already installed skipping request@>=2.55.0 /home/savage/git/ng-gulp-seed
-53 verbose already installed skipping require-dir@>=0.3.0 /home/savage/git/ng-gulp-seed
-54 verbose already installed skipping run-sequence@>=1.0.2 /home/savage/git/ng-gulp-seed
-55 verbose already installed skipping streamqueue@>=0.1.3 /home/savage/git/ng-gulp-seed
-56 verbose already installed skipping string@>=3.0.0 /home/savage/git/ng-gulp-seed
-57 verbose already installed skipping swig@>=1.4.2 /home/savage/git/ng-gulp-seed
-58 verbose already installed skipping vinyl-source-stream@>=0.1.1 /home/savage/git/ng-gulp-seed
-59 verbose already installed skipping bower@>=1.4.1 /home/savage/git/ng-gulp-seed
-60 silly resolved []
-61 info build /home/savage/git/ng-gulp-seed
-62 verbose linkStuff [ false, false, false, '/home/savage/git' ]
-63 info linkStuff l2m-frontend@4.3.0
-64 verbose linkBins l2m-frontend@4.3.0
-65 verbose linkMans l2m-frontend@4.3.0
-66 verbose rebuildBundles l2m-frontend@4.3.0
-67 verbose rebuildBundles [ '.bin',
-67 verbose rebuildBundles   'bower',
-67 verbose rebuildBundles   'bower-path',
-67 verbose rebuildBundles   'browser-sync',
-67 verbose rebuildBundles   'browserify',
-67 verbose rebuildBundles   'browserify-shim',
-67 verbose rebuildBundles   'cheerio',
-67 verbose rebuildBundles   'del',
-67 verbose rebuildBundles   'express',
-67 verbose rebuildBundles   'file-reader',
-67 verbose rebuildBundles   'glob',
-67 verbose rebuildBundles   'gulp',
-67 verbose rebuildBundles   'gulp-angular-filesort',
-67 verbose rebuildBundles   'gulp-angular-templatecache',
-67 verbose rebuildBundles   'gulp-autoprefixer',
-67 verbose rebuildBundles   'gulp-cdnizer',
-67 verbose rebuildBundles   'gulp-changed',
-67 verbose rebuildBundles   'gulp-concat',
-67 verbose rebuildBundles   'gulp-data',
-67 verbose rebuildBundles   'gulp-file',
-67 verbose rebuildBundles   'gulp-header',
-67 verbose rebuildBundles   'gulp-imagemin',
-67 verbose rebuildBundles   'gulp-inject',
-67 verbose rebuildBundles   'gulp-jshint',
-67 verbose rebuildBundles   'gulp-karma',
-67 verbose rebuildBundles   'gulp-load-plugins',
-67 verbose rebuildBundles   'gulp-ng-constant',
-67 verbose rebuildBundles   'gulp-notify',
-67 verbose rebuildBundles   'gulp-protractor',
-67 verbose rebuildBundles   'gulp-rename',
-67 verbose rebuildBundles   'gulp-replace',
-67 verbose rebuildBundles   'gulp-sourcemaps',
-67 verbose rebuildBundles   'gulp-stylus',
-67 verbose rebuildBundles   'gulp-uglify',
-67 verbose rebuildBundles   'gulp-util',
-67 verbose rebuildBundles   'jasmine-core',
-67 verbose rebuildBundles   'jasmine-jquery',
-67 verbose rebuildBundles   'jshint-stylish',
-67 verbose rebuildBundles   'karma',
-67 verbose rebuildBundles   'karma-chrome-launcher',
-67 verbose rebuildBundles   'karma-firefox-launcher',
-67 verbose rebuildBundles   'karma-jasmine',
-67 verbose rebuildBundles   'karma-json-fixtures-preprocessor',
-67 verbose rebuildBundles   'karma-ng-html2js-preprocessor',
-67 verbose rebuildBundles   'karma-phantomjs-launcher',
-67 verbose rebuildBundles   'karma-spec-reporter',
-67 verbose rebuildBundles   'lazy.js',
-67 verbose rebuildBundles   'nib',
-67 verbose rebuildBundles   'pretty-hrtime',
-67 verbose rebuildBundles   'protractor',
-67 verbose rebuildBundles   'request',
-67 verbose rebuildBundles   'require-dir',
-67 verbose rebuildBundles   'run-sequence',
-67 verbose rebuildBundles   'streamqueue',
-67 verbose rebuildBundles   'string',
-67 verbose rebuildBundles   'swig',
-67 verbose rebuildBundles   'vinyl-source-stream' ]
-68 verbose rebuild bundle /home/savage/git/ng-gulp-seed/node_modules/browser-sync
-69 info build /home/savage/git/ng-gulp-seed/node_modules/browser-sync
-70 info preinstall browser-sync@2.7.2
-71 verbose linkStuff [ false,
-71 verbose linkStuff   false,
-71 verbose linkStuff   false,
-71 verbose linkStuff   '/home/savage/git/ng-gulp-seed/node_modules' ]
-72 info linkStuff browser-sync@2.7.2
-73 verbose linkBins browser-sync@2.7.2
-74 verbose link bins [ { 'browser-sync': 'bin/browser-sync.js' },
-74 verbose link bins   '/home/savage/git/ng-gulp-seed/node_modules/.bin',
-74 verbose link bins   false ]
-75 verbose linkMans browser-sync@2.7.2
-76 verbose rebuildBundles browser-sync@2.7.2
-77 verbose rebuildBundles [ '.bin',
-77 verbose rebuildBundles   'anymatch',
-77 verbose rebuildBundles   'async-each-series',
-77 verbose rebuildBundles   'browser-sync-client',
-77 verbose rebuildBundles   'browser-sync-ui',
-77 verbose rebuildBundles   'chokidar',
-77 verbose rebuildBundles   'connect',
-77 verbose rebuildBundles   'dev-ip',
-77 verbose rebuildBundles   'easy-extender',
-77 verbose rebuildBundles   'eazy-logger',
-77 verbose rebuildBundles   'emitter-steward',
-77 verbose rebuildBundles   'foxy',
-77 verbose rebuildBundles   'immutable',
-77 verbose rebuildBundles   'localtunnel',
-77 verbose rebuildBundles   'lodash',
-77 verbose rebuildBundles   'longest',
-77 verbose rebuildBundles   'meow',
-77 verbose rebuildBundles   'opn',
-77 verbose rebuildBundles   'pad-left',
-77 verbose rebuildBundles   'portscanner',
-77 verbose rebuildBundles   'query-string',
-77 verbose rebuildBundles   'resp-modifier',
-77 verbose rebuildBundles   'serve-index',
-77 verbose rebuildBundles   'serve-static',
-77 verbose rebuildBundles   'socket.io',
-77 verbose rebuildBundles   'ua-parser-js',
-77 verbose rebuildBundles   'ucfirst' ]
-78 info install browser-sync@2.7.2
-79 info postinstall browser-sync@2.7.2
-80 verbose rebuild bundle /home/savage/git/ng-gulp-seed/node_modules/browserify
-81 info build /home/savage/git/ng-gulp-seed/node_modules/browserify
-82 info preinstall browserify@10.2.1
-83 verbose linkStuff [ false,
-83 verbose linkStuff   false,
-83 verbose linkStuff   false,
-83 verbose linkStuff   '/home/savage/git/ng-gulp-seed/node_modules' ]
-84 info linkStuff browserify@10.2.1
-85 verbose linkBins browserify@10.2.1
-86 verbose link bins [ { browserify: 'bin/cmd.js' },
-86 verbose link bins   '/home/savage/git/ng-gulp-seed/node_modules/.bin',
-86 verbose link bins   false ]
-87 verbose linkMans browserify@10.2.1
-88 verbose rebuildBundles browserify@10.2.1
-89 verbose rebuildBundles [ '.bin',
-89 verbose rebuildBundles   'JSONStream',
-89 verbose rebuildBundles   'assert',
-89 verbose rebuildBundles   'browser-pack',
-89 verbose rebuildBundles   'browser-resolve',
-89 verbose rebuildBundles   'browserify-zlib',
-89 verbose rebuildBundles   'buffer',
-89 verbose rebuildBundles   'builtins',
-89 verbose rebuildBundles   'commondir',
-89 verbose rebuildBundles   'concat-stream',
-89 verbose rebuildBundles   'console-browserify',
-89 verbose rebuildBundles   'constants-browserify',
-89 verbose rebuildBundles   'crypto-browserify',
-89 verbose rebuildBundles   'deep-equal',
-89 verbose rebuildBundles   'defined',
-89 verbose rebuildBundles   'deps-sort',
-89 verbose rebuildBundles   'domain-browser',
-89 verbose rebuildBundles   'duplexer2',
-89 verbose rebuildBundles   'events',
-89 verbose rebuildBundles   'glob',
-89 verbose rebuildBundles   'has',
-89 verbose rebuildBundles   'htmlescape',
-89 verbose rebuildBundles   'http-browserify',
-89 verbose rebuildBundles   'https-browserify',
-89 verbose rebuildBundles   'inherits',
-89 verbose rebuildBundles   'insert-module-globals',
-89 verbose rebuildBundles   'isarray',
-89 verbose rebuildBundles   'labeled-stream-splicer',
-89 verbose rebuildBundles   'module-deps',
-89 verbose rebuildBundles   'os-browserify',
-89 verbose rebuildBundles   'parents',
-89 verbose rebuildBundles   'path-browserify',
-89 verbose rebuildBundles   'process',
-89 verbose rebuildBundles   'punycode',
-89 verbose rebuildBundles   'querystring-es3',
-89 verbose rebuildBundles   'read-only-stream',
-89 verbose rebuildBundles   'readable-stream',
-89 verbose rebuildBundles   'resolve',
-89 verbose rebuildBundles   'shasum',
-89 verbose rebuildBundles   'shell-quote',
-89 verbose rebuildBundles   'stream-browserify',
-89 verbose rebuildBundles   'string_decoder',
-89 verbose rebuildBundles   'subarg',
-89 verbose rebuildBundles   'syntax-error',
-89 verbose rebuildBundles   'through2',
-89 verbose rebuildBundles   'timers-browserify',
-89 verbose rebuildBundles   'tty-browserify',
-89 verbose rebuildBundles   'url',
-89 verbose rebuildBundles   'util',
-89 verbose rebuildBundles   'vm-browserify',
-89 verbose rebuildBundles   'xtend' ]
-90 info install browserify@10.2.1
-91 info postinstall browserify@10.2.1
-92 verbose rebuild bundle /home/savage/git/ng-gulp-seed/node_modules/browserify-shim
-93 info build /home/savage/git/ng-gulp-seed/node_modules/browserify-shim
-94 info preinstall browserify-shim@3.7.0
-95 verbose linkStuff [ false,
-95 verbose linkStuff   false,
-95 verbose linkStuff   false,
-95 verbose linkStuff   '/home/savage/git/ng-gulp-seed/node_modules' ]
-96 info linkStuff browserify-shim@3.7.0
-97 verbose linkBins browserify-shim@3.7.0
-98 verbose linkMans browserify-shim@3.7.0
-99 verbose rebuildBundles browserify-shim@3.7.0
-100 verbose rebuildBundles [ 'exposify',
-100 verbose rebuildBundles   'mothership',
-100 verbose rebuildBundles   'rename-function-calls',
-100 verbose rebuildBundles   'resolve',
-100 verbose rebuildBundles   'through' ]
-101 info install browserify-shim@3.7.0
-102 info postinstall browserify-shim@3.7.0
-103 verbose rebuild bundle /home/savage/git/ng-gulp-seed/node_modules/jasmine-core
-104 info build /home/savage/git/ng-gulp-seed/node_modules/jasmine-core
-105 info preinstall jasmine-core@2.3.4
-106 verbose linkStuff [ false,
-106 verbose linkStuff   false,
-106 verbose linkStuff   false,
-106 verbose linkStuff   '/home/savage/git/ng-gulp-seed/node_modules' ]
-107 info linkStuff jasmine-core@2.3.4
-108 verbose linkBins jasmine-core@2.3.4
-109 verbose linkMans jasmine-core@2.3.4
-110 verbose rebuildBundles jasmine-core@2.3.4
-111 info install jasmine-core@2.3.4
-112 info postinstall jasmine-core@2.3.4
-113 info install l2m-frontend@4.3.0
-114 info postinstall l2m-frontend@4.3.0
-115 info prepublish l2m-frontend@4.3.0
-116 error peerinvalid The package browserify does not satisfy its siblings' peerDependencies requirements!
-116 error peerinvalid Peer browserify-shim@3.7.0 wants browserify@>= 2.3.0 < 6
-117 error System Linux 3.19.0-17-generic
-118 error command "/home/savage/.nvm/v0.10.38/bin/node" "/home/savage/.nvm/v0.10.38/bin/npm" "install"
-119 error cwd /home/savage/git/ng-gulp-seed
-120 error node -v v0.10.38
-121 error npm -v 1.4.28
-122 error code EPEERINVALID
-123 verbose exit [ 1, true ]
+8 verbose already installed skipping bower@>=1.4.1 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+9 verbose already installed skipping bower-path@>=1.0.1 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+10 verbose already installed skipping cheerio@>=0.18.0 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+11 verbose already installed skipping del@>=0.1.1 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+12 verbose already installed skipping express@>=4.10.6 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+13 verbose already installed skipping file-reader@>=0.2.2 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+14 verbose already installed skipping glob@>=5.0.6 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+15 verbose already installed skipping gulp@>=3.8.11 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+16 verbose already installed skipping gulp-angular-builder@>=0.3.11 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+17 verbose already installed skipping gulp-angular-dependency@>=0.1.4 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+18 verbose already installed skipping gulp-angular-filesort@>=1.1.1 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+19 verbose already installed skipping gulp-angular-templatecache@>=1.6.0 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+20 verbose already installed skipping gulp-autoprefixer@>=2.1.0 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+21 verbose already installed skipping gulp-concat@>=2.5.2 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+22 verbose already installed skipping gulp-cdnizer@>=1.1.5 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+23 verbose already installed skipping gulp-changed@>=0.4.1 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+24 verbose already installed skipping gulp-debug@>=2.0.1 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+25 verbose already installed skipping gulp-data@>=1.1.1 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+26 verbose already installed skipping gulp-header@>=1.0.5 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+27 verbose already installed skipping gulp-file@>=0.2.0 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+28 verbose already installed skipping gulp-imagemin@>=0.6.2 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+29 verbose already installed skipping gulp-inject@>=1.2.0 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+30 verbose already installed skipping gulp-jshint@>=1.10.0 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+31 verbose already installed skipping gulp-karma@>=0.0.4 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+32 verbose already installed skipping gulp-load-plugins@>=0.10.0 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+33 verbose already installed skipping gulp-ng-constant@>=0.2.0 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+34 verbose already installed skipping gulp-notify@>=1.4.2 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+35 verbose already installed skipping gulp-protractor@>=0.0.12 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+36 verbose already installed skipping gulp-rename@>=1.2.2 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+37 verbose already installed skipping gulp-replace@>=0.4.0 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+38 verbose already installed skipping gulp-sourcemaps@>=1.5.2 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+39 verbose already installed skipping gulp-stylus@>=2.0.1 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+40 verbose already installed skipping gulp-uglify@>=1.2.0 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+41 verbose already installed skipping gulp-util@>=3.0.5 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+42 verbose already installed skipping jasmine-jquery@>=2.0.5 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+43 verbose already installed skipping jshint-stylish@>=1.0.1 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+44 verbose already installed skipping karma@>=0.12.31 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+45 verbose already installed skipping karma-jasmine@>=0.3.5 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+46 verbose already installed skipping karma-chrome-launcher@>=0.1.8 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+47 verbose already installed skipping karma-firefox-launcher@>=0.1.4 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+48 verbose already installed skipping karma-phantomjs-launcher@>=0.1.4 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+49 verbose already installed skipping karma-spec-reporter@>=0.0.19 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+50 verbose already installed skipping karma-ng-html2js-preprocessor@>=0.1.2 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+51 verbose already installed skipping karma-json-fixtures-preprocessor@>=0.0.1 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+52 verbose already installed skipping lazy.js@>=0.4.0 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+53 verbose already installed skipping nib@>=1.0.4 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+54 verbose already installed skipping pretty-hrtime@>=0.2.1 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+55 verbose already installed skipping protractor@>=2.0.0 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+56 verbose already installed skipping request@>=2.55.0 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+57 verbose already installed skipping require-dir@>=0.3.0 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+58 verbose already installed skipping run-sequence@>=1.0.2 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+59 verbose already installed skipping streamqueue@>=0.1.3 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+60 verbose already installed skipping string@>=3.0.0 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+61 verbose already installed skipping swig@>=1.4.2 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+62 verbose already installed skipping vinyl-source-stream@>=0.1.1 /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+63 silly resolved []
+64 info build /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+65 verbose linkStuff [ false,
+65 verbose linkStuff   false,
+65 verbose linkStuff   false,
+65 verbose linkStuff   '/home/savage/soft/workspace/AptanaStudio3.7.0' ]
+66 info linkStuff l2m-frontend@4.3.0
+67 verbose linkBins l2m-frontend@4.3.0
+68 verbose linkMans l2m-frontend@4.3.0
+69 verbose rebuildBundles l2m-frontend@4.3.0
+70 verbose rebuildBundles [ '.bin',
+70 verbose rebuildBundles   'bower',
+70 verbose rebuildBundles   'bower-path',
+70 verbose rebuildBundles   'cheerio',
+70 verbose rebuildBundles   'del',
+70 verbose rebuildBundles   'express',
+70 verbose rebuildBundles   'file-reader',
+70 verbose rebuildBundles   'glob',
+70 verbose rebuildBundles   'gulp',
+70 verbose rebuildBundles   'gulp-angular-builder',
+70 verbose rebuildBundles   'gulp-angular-dependency',
+70 verbose rebuildBundles   'gulp-angular-filesort',
+70 verbose rebuildBundles   'gulp-angular-templatecache',
+70 verbose rebuildBundles   'gulp-autoprefixer',
+70 verbose rebuildBundles   'gulp-cdnizer',
+70 verbose rebuildBundles   'gulp-changed',
+70 verbose rebuildBundles   'gulp-concat',
+70 verbose rebuildBundles   'gulp-data',
+70 verbose rebuildBundles   'gulp-debug',
+70 verbose rebuildBundles   'gulp-file',
+70 verbose rebuildBundles   'gulp-header',
+70 verbose rebuildBundles   'gulp-imagemin',
+70 verbose rebuildBundles   'gulp-inject',
+70 verbose rebuildBundles   'gulp-jshint',
+70 verbose rebuildBundles   'gulp-karma',
+70 verbose rebuildBundles   'gulp-load-plugins',
+70 verbose rebuildBundles   'gulp-ng-constant',
+70 verbose rebuildBundles   'gulp-notify',
+70 verbose rebuildBundles   'gulp-protractor',
+70 verbose rebuildBundles   'gulp-rename',
+70 verbose rebuildBundles   'gulp-replace',
+70 verbose rebuildBundles   'gulp-sourcemaps',
+70 verbose rebuildBundles   'gulp-stylus',
+70 verbose rebuildBundles   'gulp-uglify',
+70 verbose rebuildBundles   'gulp-util',
+70 verbose rebuildBundles   'jasmine-core',
+70 verbose rebuildBundles   'jasmine-jquery',
+70 verbose rebuildBundles   'jshint-stylish',
+70 verbose rebuildBundles   'karma',
+70 verbose rebuildBundles   'karma-chrome-launcher',
+70 verbose rebuildBundles   'karma-firefox-launcher',
+70 verbose rebuildBundles   'karma-jasmine',
+70 verbose rebuildBundles   'karma-json-fixtures-preprocessor',
+70 verbose rebuildBundles   'karma-ng-html2js-preprocessor',
+70 verbose rebuildBundles   'karma-phantomjs-launcher',
+70 verbose rebuildBundles   'karma-spec-reporter',
+70 verbose rebuildBundles   'lazy.js',
+70 verbose rebuildBundles   'nib',
+70 verbose rebuildBundles   'phantomjs',
+70 verbose rebuildBundles   'pretty-hrtime',
+70 verbose rebuildBundles   'protractor',
+70 verbose rebuildBundles   'request',
+70 verbose rebuildBundles   'require-dir',
+70 verbose rebuildBundles   'run-sequence',
+70 verbose rebuildBundles   'streamqueue',
+70 verbose rebuildBundles   'string',
+70 verbose rebuildBundles   'swig',
+70 verbose rebuildBundles   'vinyl-source-stream' ]
+71 verbose rebuild bundle /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many/node_modules/jasmine-core
+72 info build /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many/node_modules/jasmine-core
+73 info preinstall jasmine-core@2.3.4
+74 verbose linkStuff [ false,
+74 verbose linkStuff   false,
+74 verbose linkStuff   false,
+74 verbose linkStuff   '/home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many/node_modules' ]
+75 info linkStuff jasmine-core@2.3.4
+76 verbose linkBins jasmine-core@2.3.4
+77 verbose linkMans jasmine-core@2.3.4
+78 verbose rebuildBundles jasmine-core@2.3.4
+79 info install jasmine-core@2.3.4
+80 info postinstall jasmine-core@2.3.4
+81 verbose rebuild bundle /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many/node_modules/phantomjs
+82 info build /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many/node_modules/phantomjs
+83 info preinstall phantomjs@1.9.17
+84 verbose linkStuff [ false,
+84 verbose linkStuff   false,
+84 verbose linkStuff   false,
+84 verbose linkStuff   '/home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many/node_modules' ]
+85 info linkStuff phantomjs@1.9.17
+86 verbose linkBins phantomjs@1.9.17
+87 verbose link bins [ { phantomjs: './bin/phantomjs' },
+87 verbose link bins   '/home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many/node_modules/.bin',
+87 verbose link bins   false ]
+88 verbose linkMans phantomjs@1.9.17
+89 verbose rebuildBundles phantomjs@1.9.17
+90 verbose rebuildBundles [ '.bin',
+90 verbose rebuildBundles   'adm-zip',
+90 verbose rebuildBundles   'fs-extra',
+90 verbose rebuildBundles   'kew',
+90 verbose rebuildBundles   'npmconf',
+90 verbose rebuildBundles   'progress',
+90 verbose rebuildBundles   'request',
+90 verbose rebuildBundles   'request-progress',
+90 verbose rebuildBundles   'which' ]
+91 info install phantomjs@1.9.17
+92 verbose unsafe-perm in lifecycle true
+93 info postinstall phantomjs@1.9.17
+94 info install l2m-frontend@4.3.0
+95 info postinstall l2m-frontend@4.3.0
+96 info prepublish l2m-frontend@4.3.0
+97 warn unmet dependency /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many/node_modules/gulp-header/node_modules/gulp-util requires through2@'^0.6.3' but will load
+97 warn unmet dependency /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many/node_modules/gulp-header/node_modules/through2,
+97 warn unmet dependency which is version 1.1.1
+98 error peerinvalid The package karma does not satisfy its siblings' peerDependencies requirements!
+98 error peerinvalid Peer gulp-karma@0.0.4 wants karma@>=0.10 <=0.13
+98 error peerinvalid Peer karma-jasmine@0.3.5 wants karma@>=0.9
+98 error peerinvalid Peer karma-phantomjs-launcher@0.2.0 wants karma@>=0.9
+98 error peerinvalid Peer karma-spec-reporter@0.0.19 wants karma@>=0.9
+98 error peerinvalid Peer karma-ng-html2js-preprocessor@0.1.2 wants karma@>=0.9
+99 error System Linux 3.19.0-20-generic
+100 error command "/home/savage/.nvm/v0.10.38/bin/node" "/home/savage/.nvm/v0.10.38/bin/npm" "install"
+101 error cwd /home/savage/soft/workspace/AptanaStudio3.7.0/ic-client-many
+102 error node -v v0.10.38
+103 error npm -v 1.4.28
+104 error code EPEERINVALID
+105 verbose exit [ 1, true ]
