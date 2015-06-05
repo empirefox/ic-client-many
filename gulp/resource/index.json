@@ -13,7 +13,6 @@
 			"bower_components/angular-sanitize/angular-sanitize.js",
             "bower_components/angular-translate/angular-translate.js",
             "bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
-            "bower_components/angular-ui-tree/dist/angular-ui-tree.js",
             "bower_components/ngDialog/js/ngDialog.js",
             "bower_components/angularjs-toaster/toaster.js"
 		],
@@ -22,7 +21,6 @@
 		[
 			"bower_components/bootstrap/dist/css/bootstrap.css",
 			"bower_components/font-awesome/css/font-awesome.css",
-            "bower_components/angular-ui-tree/dist/angular-ui-tree.min.css",
             "bower_components/ngDialog/css/ngDialog.css",
             "bower_components/ngDialog/css/ngDialog-theme-plain.css",
             "bower_components/angularjs-toaster/toaster.css"
@@ -47,13 +45,15 @@
 		[
             "lib_3rd/RTCPeerConnection-v1.5.js",
             "bower_components/angular-websocket/dist/angular-websocket.js",
-            "bower_conponents/abs-chat/src/scripts/index.js"
+            "bower_components/angular-ui-tree/dist/angular-ui-tree.js",
+            "bower_components/abs-chat/src/scripts/index.js"
 		],
 
 		"css":
 		[
-            "bower_conponents/abs-chat/src/css/style.css",
-            "bower_conponents/abs-chat/src/css/themes.css"
+            "bower_components/angular-ui-tree/dist/angular-ui-tree.min.css",
+            "bower_components/abs-chat/src/css/style.css",
+            "bower_components/abs-chat/src/css/themes.css"
 		]
 	},
 
