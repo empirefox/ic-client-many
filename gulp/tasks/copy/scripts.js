@@ -3,23 +3,25 @@ var Lazy = require("lazy.js");
 var plugins = require('gulp-load-plugins')();
 var angularFilesort = plugins.angularFilesort;
 var angularDependency = plugins.angularDependency;
-var streamqueue = require('streamqueue');
+var StreamQueue = require('streamqueue');
 var toStaticfilesCDN = require('./cdn-helper').toStaticfilesCDN();
 var pages = require('../../config').pages;
 var config = require('../../config').scripts;
 
 function addCopyPageJsTask(pagename) {
-	var resource = require('../../resource/' + pagename + '.json').local || {};
 	gulp.task('copy:' + pagename + '.js', function() {
 		// var src = Lazy([resource.js, config.src]).flatten().toArray();
+		var resource = require('../../resource/' + pagename + '.json').local;
 
-		return streamqueue({
+		return new StreamQueue({
 			objectMode : true
-		},
+		}).
 		// third libs that are not in cdn
-		gulp.src(resource.js),
+		queue(gulp.src(resource.js)).
 		// local src filterd by pagename|modulename
-		gulp.src(config.src).pipe(angularDependency(pagename))).
+		queue(gulp.src(config.src).pipe(angularDependency(pagename))).
+		// done
+		done().
 		// sort files
 		//		.pipe(angularFilesort())
 		// concat
