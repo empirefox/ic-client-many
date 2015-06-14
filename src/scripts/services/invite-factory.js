@@ -5,7 +5,7 @@ angular.module('app.service.invite', ['app.constants.system']).factory('Invite',
 '$http', '$window', 'SystemData',
 function($http, $window, SystemData) {
 	var genInviteUrl = function(id, code) {
-		return SystemData.DevProd.WsPrefix + $window.location.host + '/many/invite/' + id + '/' + code;
+		return SystemData.DevProd.HttpPrefix + $window.location.host + '/many/invite/' + id + '/' + code;
 	};
 	var service = {
 		getCode : function(room) {

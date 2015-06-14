@@ -44,7 +44,7 @@
 </div>
 <div class="col-md-9">
 	<div ng-repeat="room in CtrlClient.rooms" class="col-md-12">
-		<video ng-if="Streams.map[camera.id]" ng-repeat="camera in room.cameras" src="{{Streams.map[camera.id]}}" autoplay></video>
+		<video ng-if="Streams.map[camera.id]" ng-repeat="camera in room.cameras" ng-src="{{Streams.map[camera.id]}}" autoplay></video>
 	</div>
 </div>
 

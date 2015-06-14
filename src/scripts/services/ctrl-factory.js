@@ -1,9 +1,12 @@
 'use strict';
 
-angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.constants.system']).factory('CtrlClient', [
+angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.constants.system', 'app.service.login']).factory('CtrlClient', [
 // inject
-'$window', 'toaster', '$websocket', 'SystemData',
-function($window, toaster, $websocket, SystemData) {
+'$window', 'LoginChecker', 'toaster', '$websocket', 'SystemData',
+function($window, LoginChecker, toaster, $websocket, SystemData) {
+	LoginChecker.fail(function() {
+		$window.location.assign('/login.html');
+	});
 	var ctrlStream = $websocket(SystemData.DevProd.WsPrefix + $window.location.host + '/many/ctrl');
 
 	var service = {
@@ -41,7 +44,7 @@ function($window, toaster, $websocket, SystemData) {
 	};
 
 	service.getUsername = function() {
-		service.get('Username');
+		service.get('Userinfo');
 	};
 
 	// Response from one, not from server

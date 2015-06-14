@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('app.service.reg-room', ['toaster', 'ngWebsocket', 'app.system.const']).factory('RegLocal', [
+angular.module('app.service.reg-room', ['toaster', 'ngWebsocket']).factory('RegLocal', [
 // deps
 '$websocket',
 function($websocket) {
-	var ctrlStream = $websocket('wss://127.0.0.1:12301/register');
+	var ctrlStream = $websocket('ws://127.0.0.1:12301/register');
 
 	var service = {
 		SetSecretAddress : function(addr) {

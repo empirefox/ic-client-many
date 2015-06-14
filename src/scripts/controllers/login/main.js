@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('login.ctrl.main', ['login.service.oauth']).controller('LoginMainCtrl', ['$scope', '$http', 'OauthFactory',
-function($scope, $http, OauthFactory) {
+angular.module('login.ctrl.main', ['app.service.login', 'login.service.oauth']).controller('LoginMainCtrl', [
+// deps
+'$scope', '$window', 'OauthFactory', 'LoginChecker',
+function($scope, $window, OauthFactory, LoginChecker) {
 	$scope.OauthFactory = OauthFactory;
-	window.setTimeout(function() {
-		$http.get('/many/checklogin').success(function() {
-			window.location = '/';
-		});
-	}, 200);
+	LoginChecker.success(function() {
+		$window.location.assign('/');
+	});
 }]);
