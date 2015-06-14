@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('join.ctrl.main', ['app.service.invite']).controller('JoinMainCtrl', [
+angular.module('join.ctrl.main', ['app.service.invite', 'toaster']).controller('JoinMainCtrl', [
 // deps
-'$scope', 'Invite',
-function($scope, Invite) {
+'$scope', 'toaster', 'Invite',
+function($scope, toaster, Invite) {
 	$scope.invite = {};
 	$scope.join = function(invite) {
 		Invite.anwser(invite).then(function() {

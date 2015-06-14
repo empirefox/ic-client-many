@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('app.service.invite', ['toaster', 'app.constants.system']).factory('Invite', [
+angular.module('app.service.invite', ['app.constants.system']).factory('Invite', [
 // deps
-'$http', '$window', 'toaster', 'SystemData',
-function($http, $window, toaster, SystemData) {
+'$http', '$window', 'SystemData',
+function($http, $window, SystemData) {
 	var genInviteUrl = function(id, code) {
 		return SystemData.DevProd.WsPrefix + $window.location.host + '/many/invite/' + id + '/' + code;
 	};
