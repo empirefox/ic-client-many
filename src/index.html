@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="index" lang="zh_CN">
+<html ng-app="[[module]]" lang="zh_CN">
     <head>
         <meta charset="utf-8">
 
@@ -21,7 +21,7 @@
 
         <!-- head:css -->
         <!-- endinject -->
-        <link rel="stylesheet" href="/css/index.css" />
+        <link rel="stylesheet" href="/css/[[module]].css" />
 
         <!-- head:js -->
         <!-- only importantFile.js will be injected here -->
@@ -83,7 +83,8 @@
                 &copy; Copyright  by savage
             </p>
         </footer>
+        <script src="/ng/sys-data.js"></script>
         <script src="/js/templates.js"></script>
-        <script src="/js/index.js"></script>
+        <script src="/js/[[module]].js"></script>
     </body>
 </html>
