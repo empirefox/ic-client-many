@@ -50,10 +50,11 @@
         "protractor": ">=2.0.0",
         "request": ">=2.55.0",
         "require-dir": ">=0.3.0",
-        "run-sequence": ">=1.0.2",
+        "run-sequence": ">=1.1.0",
         "streamqueue": ">=1.0.0",
         "string": ">=3.0.0",
         "swig": ">=1.4.2",
+        "through2": "^0.6.3",
         "vinyl-source-stream": ">=0.1.1"
     },
     "engines": {

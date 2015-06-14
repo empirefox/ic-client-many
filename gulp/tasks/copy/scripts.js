@@ -3,8 +3,9 @@ var Lazy = require("lazy.js");
 var plugins = require('gulp-load-plugins')();
 var angularFilesort = plugins.angularFilesort;
 var angularDependency = plugins.angularDependency;
+var runSequence = require('run-sequence');
 var StreamQueue = require('streamqueue');
-var toStaticfilesCDN = require('./cdn-helper').toStaticfilesCDN();
+var toStaticfilesCDN = require('./cdn-helper').toStaticfilesCDN;
 var pages = require('../../config').pages;
 var config = require('../../config').scripts;
 
@@ -25,7 +26,7 @@ function addCopyPageJsTask(pagename) {
 		// sort files
 		//		.pipe(angularFilesort())
 		// concat
-		pipe(plugins.concat(pagename + '.js')).pipe(toStaticfilesCDN).
+		pipe(plugins.concat(pagename + '.js')).pipe(toStaticfilesCDN()).
 		//.pipe(plugins.uglify())
 		pipe(gulp.dest(config.dest));
 	});
@@ -47,5 +48,8 @@ pages.forEach(function(page) {
 	tasks.push('copy:' + page + '.js');
 });
 
-gulp.task('copy:scripts', tasks);
+gulp.task('copy:scripts', function(done) {
+	tasks.push(done);
+	runSequence.apply(null, tasks);
+});
 
