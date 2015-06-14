@@ -1,7 +1,9 @@
 'use strict';
 
-angular.module('app.service.pcfactory', ['app.service.streams', 'app.system.const']).factory('PCFactory', ['Streams', 'SystemData',
-function(Streams, SystemData) {
+angular.module('app.service.pcfactory', ['app.service.streams', 'app.constants.system']).factory('PCFactory', [
+// deps
+'$window', 'Streams', 'SystemData',
+function($window, Streams, SystemData) {
 	function newPeerConn(cid, ws) {
 		var pc = new RTCPeerConnection({
 			constraints : {
@@ -38,7 +40,7 @@ function(Streams, SystemData) {
 
 	var service = {};
 
-	var urlPrefix = 'wss://' + SystemData.Host + '/many/signaling/';
+	var urlPrefix = SystemData.DevProd.WsPrefix + $window.location.host + '/many/signaling/';
 	var wss = {};
 
 	service.createPeerConn = function(room, camera) {

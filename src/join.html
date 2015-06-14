@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="reg-room" lang="zh_CN">
+<html ng-app="join" lang="zh_CN">
 	<head>
 		<meta charset="utf-8">
 
@@ -7,7 +7,7 @@
 		Remove this if you use the .htaccess -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-		<title>Reg room</title>
+		<title>Join room</title>
 		<meta name="author" content="savage">
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +20,7 @@
 
 		<!-- head:css -->
 		<!-- endinject -->
-		<link rel="stylesheet" href="/css/reg-room.css" />
+		<link rel="stylesheet" href="/css/join.css" />
 
 		<!-- head:js -->
 		<!-- only importantFile.js will be injected here -->
@@ -40,17 +40,20 @@
 		</div>
 		<div class="header-placeholder"></div>
 
-		<div ng-controller="RegRoomMainCtrl" class="container">
-			<h3>注册监控室</h3>
-			<span ng-if="!RegLocal.hasLocalOne">本地监控室没有运行</span>
-			<form ng-if="RegLocal.hasLocalOne">
+		<div ng-controller="JoinMainCtrl" class="container">
+			<h3>加入监控室</h3>
+			<form>
 				<div class="form-group">
-					<label> Enter the room name here:
-						<input ng-model="newRoomName" type="text" class="form-control" required>
+					<label> Enter the room id:
+						<input ng-model="invite.room" type="number" class="form-control" required>
 					</label>
 				</div>
-				<button type="submit" class="btn btn-default"
-				ng-disabled="RegLocal.status !== 'not_authed'" ng-click="regRoom(newRoomName)">
+				<div class="form-group">
+					<label> Enter the invite code:
+						<input ng-model="invite.code" type="text" class="form-control" required>
+					</label>
+				</div>
+				<button type="submit" class="btn btn-default" ng-click="join(invite)">
 					OK
 				</button>
 				<button type="reset" class="btn btn-default">
@@ -64,6 +67,6 @@
 				&copy; Copyright  by savage
 			</p>
 		</footer>
-		<script src="/js/reg-room.js"></script>
+		<script src="/js/join.js"></script>
 	</body>
 </html>

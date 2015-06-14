@@ -1,7 +1,9 @@
 'use strict';
 
-angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl']).factory('Dialog', ['ngDialog', 'CtrlClient',
-function(ngDialog, CtrlClient) {
+angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl', 'app.service.invite']).factory('Dialog', [
+// deps
+'$window', 'SystemData', 'ngDialog', 'CtrlClient', 'Invite',
+function($window, SystemData, ngDialog, CtrlClient, Invite) {
 	var service = {};
 	service.openManageRoomNameDialog = function(room) {
 		ngDialog.openConfirm({
@@ -10,6 +12,24 @@ function(ngDialog, CtrlClient) {
 			className : 'ngdialog-theme-plain'
 		}).then(function(value) {
 			CtrlClient.exec('ManageSetRoomName', room.id, value);
+		});
+	};
+
+	service.openManageNewInviteUrlDialog = function(room) {
+		ngDialog.open({
+			template : '/views/join/dialog/ManagedNewInviteUrl.html',
+			className : 'ngdialog-theme-plain',
+			showClose : true,
+			resolve : {
+				invite : function() {
+					return Invite.getCode(room);
+				}
+			},
+			controller : ['$scope', 'invite',
+			function($scope, invite) {
+				$scope.invite = invite;
+			}]
+
 		});
 	};
 

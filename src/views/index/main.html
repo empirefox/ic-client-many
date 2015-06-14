@@ -13,13 +13,17 @@
 						ng-click="Dialog.openManageRoomNameDialog(room)">
 							<i class="fa fa-edit"></i>
 						</button>
+						<button type="button" class="btn btn-default btn-xs"
+						ng-click="Dialog.openManageNewInviteUrlDialog(room)">
+							<i class="fa fa-edit"></i>
+						</button>
 					</div>
 				</div>
 				<ol ui-tree-nodes="" ng-model="room.cameras">
 					<li ng-repeat="camera in room.cameras" ui-tree-node>
 						<span>{{camera.name}}</span>
-						<div class="pull-right btn-group">
-							<button ng-if="room.isOwner" type="button" class="btn btn-default btn-xs"
+						<div ng-if="room.isOwner" class="pull-right btn-group">
+							<button type="button" class="btn btn-default btn-xs"
 							ng-click="Dialog.openManageIpcamDialog(room,camera)" ng-disabled="camera.disabled">
 								<i class="fa fa-edit"></i>
 							</button>

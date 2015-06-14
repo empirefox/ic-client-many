@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebsocket', 'app.system.const']).factory('CtrlClient', [
+angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.constants.system']).factory('CtrlClient', [
 // inject
-'toaster', '$websocket', 'SystemData',
-function(toaster, $websocket, SystemData) {
-	var ctrlStream = $websocket('wss://' + SystemData.Host + '/many/ctrl');
+'$window', 'toaster', '$websocket', 'SystemData',
+function($window, toaster, $websocket, SystemData) {
+	var ctrlStream = $websocket(SystemData.DevProd.WsPrefix + $window.location.host + '/many/ctrl');
 
 	var service = {
 		chats : [],

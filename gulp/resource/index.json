@@ -14,7 +14,8 @@
             "bower_components/angular-translate/angular-translate.js",
             "bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
             "bower_components/ngDialog/js/ngDialog.js",
-            "bower_components/angularjs-toaster/toaster.js"
+            "bower_components/angularjs-toaster/toaster.js",
+            "/ng/sys-data.js"
 		],
 
 		"css":
@@ -44,7 +45,7 @@
 		"js":
 		[
             "lib_3rd/RTCPeerConnection-v1.5.js",
-            "bower_components/angular-websocket/dist/angular-websocket.js",
+            "bower_components/angular-websocket/angular-websocket.js",
             "bower_components/angular-ui-tree/dist/angular-ui-tree.js",
             "bower_components/abs-chat/src/scripts/index.js"
 		],
@@ -60,6 +61,6 @@
     "test":
     [
         "bower_components/angular-mocks/angular-mocks.js",
-        "bower_components/angular-websocket/dist/angular-websocket-mock.js"
+        "bower_components/angular-websocket/angular-websocket-mock.js"
     ]
 }
