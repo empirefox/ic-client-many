@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.service.reg-room', ['toaster', 'ngWebsocket']).factory('RegLocal', [
+angular.module('app.service.reg-room', ['toaster', 'ngWebSocket']).factory('RegLocal', [
 // deps
 '$websocket',
 function($websocket) {

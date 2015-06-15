@@ -36,7 +36,7 @@
 	{
 		"js":
 		[
-            "bower_components/angular-websocket/dist/angular-websocket.js"
+            "bower_components/angular-websocket/angular-websocket.js"
 		],
 
 		"css":
@@ -47,6 +47,6 @@
     "test":
     [
         "bower_components/angular-mocks/angular-mocks.js",
-        "bower_components/angular-websocket/dist/angular-websocket-mock.js"
+        "bower_components/angular-websocket/angular-websocket-mock.js"
     ]
 }
