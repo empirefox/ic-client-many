@@ -53,8 +53,8 @@ function($window, Streams, SystemData) {
 			pc = newPeerConn(camera, ws);
 		};
 		ws.onclose = function() {
-			pc.close();
 			delete wss[target];
+            pc.close();
 		};
 		ws.onmessage = function(e) {
 			console.log('ws.onmessage:', e.data);
