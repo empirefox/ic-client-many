@@ -12,6 +12,11 @@ function($websocket) {
 				type : 'SetSecretAddress',
 				content : addr
 			}));
+		},
+		GetStatus : function() {
+			ctrlStream.send(JSON.stringify({
+				type : 'GetStatus'
+			}));
 		}
 	};
 

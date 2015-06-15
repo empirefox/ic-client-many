@@ -6,4 +6,5 @@ angular.module('reg-room.ctrl.main', ['app.service.reg-room']).controller('RegRo
 function($scope, RegRoom, RegLocal) {
 	$scope.RegLocal = RegLocal;
 	$scope.regRoom = RegRoom.reg;
+	RegLocal.GetStatus();
 }]);
