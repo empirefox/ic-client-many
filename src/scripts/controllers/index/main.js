@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('index.ctrl.main', ['ui.tree', 'irontec.simpleChat', 'app.service.ctrl', 'app.service.pcfactory', 'app.service.dialog']).
+angular.module('index.ctrl.main', ['ui.tree', 'irontec.simpleChat', 'app.service.ctrl', 'app.service.pcfactory', 'app.service.dialog', 'app.directive.rtc-video']).
 // controller
 controller('IndexMainCtrl',
 // deps
