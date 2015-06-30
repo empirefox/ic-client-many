@@ -14,17 +14,17 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "1.4.0",
-    "angular-animate": "1.4.0",
-    "angular-i18n": "1.4.0",
-    "angular-resource": "1.4.0",
-    "angular-route": "1.4.0",
+    "angular": "1.4.1",
+    "angular-animate": "1.4.1",
+    "angular-i18n": "1.4.1",
+    "angular-resource": "1.4.1",
+    "angular-route": "1.4.1",
     "angular-bootstrap": "0.13.0",
     "angular-translate": "2.7.2",
     "angular-websocket": "1.0.13",
     "angular-ui-tree": "2.5.0",
     "angularjs-toaster": "0.4.14",
-    "bootstrap": "3.3.4",
+    "bootstrap": "3.3.5",
     "font-awesome": "4.3.0",
     "jquery": "2.1.4",
     "ngDialog": "0.4.0",
@@ -32,6 +32,6 @@
     "abs-chat": "empirefox/angular-bootstrap-simple-chat#593eb35f57e16737ec31402d0fc518b5e9a3e520"
   },
   "devDependencies": {
-    "angular-mocks": "1.4.0"
+    "angular-mocks": "1.4.1"
   }
 }
