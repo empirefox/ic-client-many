@@ -7,7 +7,7 @@ function($window, SystemData, ngDialog, CtrlClient, Invite) {
 	var service = {};
 	service.openManageRoomNameDialog = function(room) {
 		ngDialog.openConfirm({
-			template : '/views/rooms/dialog/ManagedSetRoomName.html',
+			template : '/views/rooms/dialogs/ManagedSetRoomName.html',
 			data : room,
 			className : 'ngdialog-theme-plain'
 		}).then(function(value) {
@@ -17,7 +17,7 @@ function($window, SystemData, ngDialog, CtrlClient, Invite) {
 
 	service.openManageNewInviteUrlDialog = function(room) {
 		ngDialog.open({
-			template : '/views/join/dialog/ManagedNewInviteUrl.html',
+			template : '/views/join/dialogs/ManagedNewInviteUrl.html',
 			className : 'ngdialog-theme-plain',
 			showClose : true,
 			resolve : {
@@ -40,7 +40,7 @@ function($window, SystemData, ngDialog, CtrlClient, Invite) {
 		camera.disabled = true;
 		CtrlClient.ManageGetIpcamCallback = function(data) {
 			ngDialog.openConfirm({
-				template : '/views/rooms/dialog/ManagedSetIpcam.html',
+				template : '/views/rooms/dialogs/ManagedSetIpcam.html',
 				data : {
 					room : room,
 					ipcam : data
