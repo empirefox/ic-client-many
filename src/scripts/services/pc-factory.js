@@ -54,7 +54,12 @@ function($window, Streams, SystemData) {
 		};
 		ws.onclose = function() {
 			delete wss[target];
-            pc.close();
+			try {
+				pc.close();
+			}/*jshint unused:true */
+			catch(e) {
+				// ignore
+			};
 		};
 		ws.onmessage = function(e) {
 			console.log('ws.onmessage:', e.data);

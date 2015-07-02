@@ -11,13 +11,14 @@ function($scope, CtrlClient, Streams, PCFactory, Dialog) {
 	$scope.Dialog = Dialog;
 
 	$scope.connect = function(room, camera) {
-		if (!camera.opened && camera.online) {
+		if (!Streams.map[camera.id] && camera.online) {
 			PCFactory.createPeerConn(room.id, camera.id);
 		}
 	};
 
 	$scope.disconnect = function(room, camera) {
 		PCFactory.closePeerConn(room.id, camera.id);
+		Streams.remove(camera.id);
 	};
 
 	$scope.$on("$destroy", function() {

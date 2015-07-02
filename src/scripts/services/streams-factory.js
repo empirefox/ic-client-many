@@ -22,9 +22,9 @@ function($rootScope) {
 		if (url) {
 			URL.revokeObjectURL(url);
 			delete service.map[camera];
-		}
-		if (!$rootScope.$$digest) {
-			$rootScope.$apply();
+			if (!$rootScope.$$digest) {
+				$rootScope.$apply();
+			}
 		}
 	};
 	service.clear = function() {
