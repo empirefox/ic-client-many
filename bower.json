@@ -30,7 +30,7 @@
     "jquery": "2.1.4",
     "ngDialog": "0.4.0",
     "string": "3.2.0",
-    "abs-chat": "empirefox/angular-bootstrap-simple-chat#593eb35f57e16737ec31402d0fc518b5e9a3e520"
+    "abs-chat": "empirefox/angular-bootstrap-simple-chat#e467de698d0a5596d1e57f7bc51994455a14f601"
   },
   "devDependencies": {
     "angular-mocks": "1.4.1"
