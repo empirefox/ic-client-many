@@ -11,7 +11,7 @@ function($scope, CtrlClient, Streams, PCFactory, Dialog) {
 	$scope.Dialog = Dialog;
 
 	$scope.connect = function(room, camera) {
-		if (!camera.opened) {
+		if (!camera.opened && camera.online) {
 			PCFactory.createPeerConn(room.id, camera.id);
 		}
 	};

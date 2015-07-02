@@ -48,7 +48,8 @@ function($translateProvider) {
 				OPEN_INVITE_CODE : 'Share with friend',
 				OPEN_SET_CAM : 'Manage camera',
 				CAM : {
-					PLAY : 'Play'
+					PLAY : 'Play',
+					STOP : 'Stop'
 				},
 				SET_ROOM : {
 					TITLE : 'Set room name',

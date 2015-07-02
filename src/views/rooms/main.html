@@ -26,14 +26,15 @@
 				</div>
 				<p ng-if="room.desc" ng-bind="room.desc"></p>
 			</div>
-			<div ng-if="Streams.map[camera.id]" ng-repeat="camera in room.cameras">
+			<div ng-if="camera.online||room.isOwner" ng-repeat="camera in room.cameras">
 				<div>
 					<a type="button" class="btn btn-link"
 					ng-click="connect(room,camera)" tooltip="{{'PAGE.ROOMS.CAM.PLAY'|translate}}"
-					> <h3 ng-attr-id="{{roomNavId+'camera'+$index}}" ng-bind="camera.name" class="room-title"></h3><i
-					ng-if="!camera.opened" class="fa fa-play-circle-o fa-3x"></i></a>
+					> <h3 ng-attr-id="{{roomNavId+'camera'+$index}}" ng-bind="camera.name" class="room-title"></h3> <i
+					ng-if="!camera.opened && camera.online" class="fa fa-play-circle-o fa-3x"></i></a>
 					<div class="pull-right">
-						<button ng-if="camera.opened" ng-click="disconnect(room,camera)" type="button" class="btn btn-default">
+						<button ng-if="camera.opened" ng-click="disconnect(room,camera)"
+						tooltip="{{'PAGE.ROOMS.CAM.STOP'|translate}}" type="button" class="btn btn-default">
 							<i class="fa fa-times-circle-o fa-3x"></i>
 						</button>
 					</div>
@@ -48,7 +49,7 @@
 						<small ng-if="camera.desc" am-time-ago="camera.desc"></small>
 					<p>
 				</div>
-				<video ng-if="Streams.map[camera.id]" ng-attr-src="Streams.map[camera.id]" autoplay></video>
+				<video ng-if="Streams.map[camera.id]" rtc-video="Streams.map[camera.id]" autoplay></video>
 			</div>
 		</div>
 	</div>
