@@ -5,6 +5,7 @@
     "cdnjs:angular.js:angular-route.min.js",
     "cdnjs:angular.js:angular-sanitize.min.js",
     "cdnjs:angular.js:angular.min.js",
+    "cdnjs:angular-moment",
     {
         "file": "**/angular-locale_zh-cn.js",
         "package": "angular-i18n",

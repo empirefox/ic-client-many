@@ -1,21 +1,21 @@
 <div class="ngdialog-message">
-	<h3>Set Room Name</h3>
+	<h3 ng-bind="'PAGE.ROOMS.SET_ROOM.TITLE'|translate"></h3>
 	<p>
-		Old name is: <span ng-bind="ngDialogData.name"></span>
+		<span ng-bind="'PAGE.ROOMS.SET_ROOM.OLD_NAME_IS'|translate"></span><span ng-bind="ngDialogData.name"></span>
 	</p>
 </div>
 <form>
 	<div class="form-group">
-		<label> Enter the new room name here:
+		<label> <span ng-bind="'PAGE.ROOMS.SET_ROOM.NEW_NAME'|translate"></span>
 			<input ng-model="confirmValue" type="text" class="form-control" placeholder="Username" required>
 		</label>
 	</div>
 	<div class="ngdialog-buttons">
 		<button type="submit" class="ngdialog-button ngdialog-button-primary" ng-click="confirm(confirmValue)">
-			Confirm
+			<span ng-bind="'BTN.OK'|translate"></span>
 		</button>
 		<button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog()">
-			Cancel
+			<span ng-bind="'BTN.NO'|translate"></span>
 		</button>
 	</div>
 </form>

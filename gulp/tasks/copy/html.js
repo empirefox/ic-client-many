@@ -9,7 +9,7 @@ function addCopyPageTask(pagename) {
 	var resource = require('../../resource/' + pagename + '.json');
 
 	gulp.task('copy:' + pagename + '.html', function() {
-		return gulp.src('./src/' + pagename + '.html').
+		return gulp.src('./src/pages/' + pagename + '.html').
 		// replace module with pagename
 		pipe(swig({
 			defaults : {

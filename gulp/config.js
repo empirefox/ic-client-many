@@ -1,10 +1,12 @@
 var swig = require('swig');
 var r = new swig.Swig({
 	locals : {
-		src : './src',
-		dest : './dist',
-		test : './test',
-		views : 'views'
+		src : 'src',
+		dest : 'dist',
+		test : 'test',
+		views : 'views',
+		base : process.env.PWD,
+		pagename : '{{ pagename }}'
 	}
 }).render;
 
@@ -12,11 +14,16 @@ var config = {
 	render : r,
 	port : 8080,
 	dest : r('{{ dest }}'),
-	pages : ['index', 'login', 'reg-room', 'join'],
+	pages : ['rooms', 'login', 'reg-room', 'join'],
 	scripts : {
 		src : r('{{ src }}/scripts/**/*.js'),
 		tpl : r('{{ src }}/{{ views }}/**/*.html'),
 		dest : r('{{ dest }}/js')
+	},
+	stylus : {
+		paths : [r('{{ base }}/{{ src }}/stylus'), r('{{ base }}/bower_components')],
+		src : r('{{ src }}/stylus/*.styl'),
+		dest : r('{{ dest }}/css')
 	},
 	styles : {
 		src : r('{{ src }}/styles/*.css'),

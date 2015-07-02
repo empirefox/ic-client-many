@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('index.ctrl.main', ['ui.tree', 'irontec.simpleChat', 'app.service.ctrl', 'app.service.pcfactory', 'app.service.dialog', 'app.directive.rtc-video']).
+angular.module('rooms.ctrl.main', ['irontec.simpleChat', 'app.service.ctrl', 'app.service.pcfactory', 'app.service.dialog', 'app.directive.rtc-video']).
 // controller
-controller('IndexMainCtrl',
+controller('RoomsMainCtrl',
 // deps
 ['$scope', 'CtrlClient', 'Streams', 'PCFactory', 'Dialog',
 function($scope, CtrlClient, Streams, PCFactory, Dialog) {
@@ -11,7 +11,9 @@ function($scope, CtrlClient, Streams, PCFactory, Dialog) {
 	$scope.Dialog = Dialog;
 
 	$scope.connect = function(room, camera) {
-		PCFactory.createPeerConn(room.id, camera.id);
+		if (!camera.opened) {
+			PCFactory.createPeerConn(room.id, camera.id);
+		}
 	};
 
 	$scope.disconnect = function(room, camera) {

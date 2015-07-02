@@ -7,7 +7,7 @@
 		Remove this if you use the .htaccess -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-		<title>Reg room</title>
+		<title ng-bind="'PAGE_NAME.JOIN'|translate"></title>
 		<meta name="author" content="savage">
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +20,7 @@
 
 		<!-- head:css -->
 		<!-- endinject -->
-        <link rel="stylesheet" href="/css/[[module]].css" />
+		<link rel="stylesheet" href="/css/[[module]].css" />
 
 		<!-- head:js -->
 		<!-- only importantFile.js will be injected here -->
@@ -30,31 +30,26 @@
 	</head>
 
 	<body>
-		<div class="navbar navbar-default navbar-fixed-top">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="container">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="/"><i class="fa fa-home"> </i> 首页</a>
-				</div>
-			</div>
-		</div>
-		<div class="header-placeholder"></div>
+		<div ng-include="'/views/share/navbar.html'"></div>
 
-		<div ng-controller="RegRoomMainCtrl" class="container">
-			<h3>注册监控室</h3>
-			<span ng-if="!RegLocal.hasLocalOne">本地监控室没有运行</span>
-			<form ng-if="RegLocal.hasLocalOne">
+		<div ng-controller="JoinMainCtrl" class="container">
+			<h4 ng-bind="'PAGE.JOIN.DESC'|translate"></h4>
+			<form>
 				<div class="form-group">
-					<label> 发现本地监控室, Enter the room name here:
-						<input ng-model="newRoomName" type="text" class="form-control" required>
+					<label> <span ng-bind="'PAGE.JOIN.FORM.ENTER_ROOM'|translate"></span>
+						<input ng-model="invite.room" type="number" class="form-control" required>
 					</label>
 				</div>
-				<button type="submit" class="btn btn-default"
-				ng-disabled="RegLocal.status !== 'not_authed'" ng-click="regRoom(newRoomName)">
-					OK
+				<div class="form-group">
+					<label> <span ng-bind="'PAGE.JOIN.FORM.ENTER_CODE'|translate"></span>
+						<input ng-model="invite.code" type="text" class="form-control" required>
+					</label>
+				</div>
+				<button type="submit" class="btn btn-default" ng-click="join(invite)">
+					<span ng-bind="'BTN.OK'|translate"></span>
 				</button>
 				<button type="reset" class="btn btn-default">
-					Cancel
+					<span ng-bind="'BTN.RESET'|translate"></span>
 				</button>
 			</form>
 		</div>
@@ -64,7 +59,8 @@
 				&copy; Copyright  by savage
 			</p>
 		</footer>
-        <script src="/ng/sys-data.js"></script>
-        <script src="/js/[[module]].js"></script>
+		<script src="/ng/sys-data.js"></script>
+		<script src="/js/templates.js"></script>
+		<script src="/js/[[module]].js"></script>
 	</body>
 </html>

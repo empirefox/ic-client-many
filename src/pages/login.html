@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="[[module]]" lang="zh_CN">
+	<head>
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<title ng-bind="'PAGE_NAME.LOGIN'|translate"></title>
+		<meta name="author" content="savage">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+		<!-- jsdelivr-css -->
+
+		<!-- head:css -->
+		<!-- endinject -->
+		<link rel="stylesheet" href="/css/[[module]].css" />
+
+		<!-- head:js -->
+		<!-- only importantFile.js will be injected here -->
+		<!-- endinject -->
+
+		<!-- jsdelivr-js -->
+	</head>
+
+	<body>
+		<div ng-include="'/views/[[module]]/navbar.html'"></div>
+
+		<div ng-controller="LoginMainCtrl" class="container">
+			<h4 ng-bind="'PAGE.LOGIN.DESC'|translate"></h4>
+			<hr/>
+			<ul class="bs-oauth-list">
+				<li>
+					<span class="fa fa-qq" aria-hidden="true"></span>
+					<span class="bs-oauth-text" ng-bind="'PAGE.LOGIN.OAUTH.QQ'|translate"></span>
+				</li>
+				<li>
+					<span class="fa fa-qq" aria-hidden="true"></span>
+					<span class="bs-oauth-text" ng-bind="'PAGE.LOGIN.OAUTH.BAIDU'|translate"></span>
+				</li>
+				<li>
+					<span class="fa fa-qq" aria-hidden="true"></span>
+					<span class="bs-oauth-text" ng-bind="'PAGE.LOGIN.OAUTH.WEIBO'|translate"></span>
+				</li>
+				<li ng-repeat="oauth in OauthFactory.oauths" ng-click="OauthFactory.doLogin(oauth)">
+					<span ng-class="oauth.css" aria-hidden="true"></span>
+					<span ng-bind="oauth.text|translate" class="bs-oauth-text"></span>
+				</li>
+			</ul>
+		</div>
+
+		<footer class="container">
+			<p>
+				&copy; Copyright  by savage
+			</p>
+		</footer>
+		<script src="/ng/sys-data.js"></script>
+		<script src="/js/templates.js"></script>
+		<script src="/js/[[module]].js"></script>
+	</body>
+</html>

@@ -1,23 +1,31 @@
 .bs-oauth-list {
-    padding-left: 0px;
-    list-style: outside none none;
+	padding-left: 0px;
+	list-style: outside none none;
 }
 .bs-oauth-list li {
-    width: 12.5%;
-    font-size: 12px;
-    float: left;
-    height: 115px;
-    padding: 10px;
-    line-height: 1.4;
-    text-align: center;
-    background-color: #F9F9F9;
-    border: 1px solid #FFF;
+	width: 12.5%;
+	font-size: 12px;
+	float: left;
+	height: 115px;
+	padding: 10px;
+	line-height: 1.4;
+	text-align: center;
+	background-color: #F9F9F9;
+	border: 1px solid #FFF;
 }
 .bs-oauth-list li:hover {
-    cursor: pointer;
+	color: #FFF;
+	background-color: #563D7C;
+	cursor: pointer;
 }
 .bs-oauth-list .bs-oauth-text {
-    display: block;
-    text-align: center;
-    word-wrap: break-word;
+	display: block;
+	text-align: center;
+	word-wrap: break-word;
+	font-size: 20px;
+}
+.bs-oauth-list .fa {
+	font-size: 42px;
+	margin-top: 5px;
+	margin-bottom: 10px;
 }

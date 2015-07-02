@@ -7,7 +7,7 @@
 		Remove this if you use the .htaccess -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-		<title>Join room</title>
+		<title ng-bind="'PAGE_NAME.REG_ROOM'|translate"></title>
 		<meta name="author" content="savage">
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +20,7 @@
 
 		<!-- head:css -->
 		<!-- endinject -->
-        <link rel="stylesheet" href="/css/[[module]].css" />
+		<link rel="stylesheet" href="/css/[[module]].css" />
 
 		<!-- head:js -->
 		<!-- only importantFile.js will be injected here -->
@@ -30,34 +30,23 @@
 	</head>
 
 	<body>
-		<div class="navbar navbar-default navbar-fixed-top">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="container">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="/"><i class="fa fa-home"> </i> 首页</a>
-				</div>
-			</div>
-		</div>
-		<div class="header-placeholder"></div>
+		<div ng-include="'/views/share/navbar.html'"></div>
 
-		<div ng-controller="JoinMainCtrl" class="container">
-			<h3>加入监控室</h3>
-			<form>
+		<div ng-controller="RegRoomMainCtrl" class="container">
+			<h4 ng-bind="'PAGE.REG_ROOM.DESC'|translate"></h4>
+			<span ng-if="!RegLocal.hasLocalOne" ng-bind="'PAGE.REG_ROOM.NO_RUNNING_CLIENT'|translate"></span>
+			<form ng-if="RegLocal.hasLocalOne">
 				<div class="form-group">
-					<label> Enter the room id:
-						<input ng-model="invite.room" type="number" class="form-control" required>
+					<label> <span ng-bind="'PAGE.REG_ROOM.ENTER_ROOM_NAME'|translate"></span>
+						<input ng-model="newRoomName" type="text" class="form-control" required>
 					</label>
 				</div>
-				<div class="form-group">
-					<label> Enter the invite code:
-						<input ng-model="invite.code" type="text" class="form-control" required>
-					</label>
-				</div>
-				<button type="submit" class="btn btn-default" ng-click="join(invite)">
-					OK
+				<button type="submit" class="btn btn-default"
+				ng-disabled="RegLocal.status !== 'not_authed'" ng-click="regRoom(newRoomName)">
+					<span ng-bind="'BTN.OK'|translate"></span>
 				</button>
 				<button type="reset" class="btn btn-default">
-					Cancel
+					<span ng-bind="'BTN.RESET'|translate"></span>
 				</button>
 			</form>
 		</div>
@@ -67,8 +56,8 @@
 				&copy; Copyright  by savage
 			</p>
 		</footer>
-        <script src="/ng/sys-data.js"></script>
-        <script src="/js/templates.js"></script>
-        <script src="/js/[[module]].js"></script>
+		<script src="/ng/sys-data.js"></script>
+		<script src="/js/templates.js"></script>
+		<script src="/js/[[module]].js"></script>
 	</body>
 </html>
