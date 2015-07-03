@@ -13,7 +13,7 @@ function($rootScope) {
 		if (old) {
 			URL.revokeObjectURL(old);
 		}
-		if (!$rootScope.$$digest) {
+		if (!$rootScope.$$phase) {
 			$rootScope.$apply();
 		}
 	};
@@ -22,7 +22,7 @@ function($rootScope) {
 		if (url) {
 			URL.revokeObjectURL(url);
 			delete service.map[camera];
-			if (!$rootScope.$$digest) {
+			if (!$rootScope.$$phase) {
 				$rootScope.$apply();
 			}
 		}
