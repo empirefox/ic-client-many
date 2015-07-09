@@ -36,18 +36,6 @@
 			<h4 ng-bind="'PAGE.LOGIN.DESC'|translate"></h4>
 			<hr/>
 			<ul class="bs-oauth-list">
-				<li>
-					<span class="fa fa-qq" aria-hidden="true"></span>
-					<span class="bs-oauth-text" ng-bind="'PAGE.LOGIN.OAUTH.QQ'|translate"></span>
-				</li>
-				<li>
-					<span class="fa fa-qq" aria-hidden="true"></span>
-					<span class="bs-oauth-text" ng-bind="'PAGE.LOGIN.OAUTH.BAIDU'|translate"></span>
-				</li>
-				<li>
-					<span class="fa fa-qq" aria-hidden="true"></span>
-					<span class="bs-oauth-text" ng-bind="'PAGE.LOGIN.OAUTH.WEIBO'|translate"></span>
-				</li>
 				<li ng-repeat="oauth in OauthFactory.oauths" ng-click="OauthFactory.doLogin(oauth)">
 					<span ng-class="oauth.css" aria-hidden="true"></span>
 					<span ng-bind="oauth.text|translate" class="bs-oauth-text"></span>
