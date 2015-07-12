@@ -3,12 +3,16 @@
 angular.module('app.system', ['app.constants.system']).factory('AppSystem', [
   '$window', 'SystemData',
   function($window, SystemData) {
-    var service = {
-      wsPrefix: SystemData.DevProd.WsProto + '://' + $window.location.hostname + ':' + SystemData.DevProd.WsPort,
+    var wsProto = SystemData.DevProd.WsProto;
+    var localRoomPort = wsProto === 'ws' ? '12301' : '12302';
+    var wsPrefix = wsProto + '://' + $window.location.hostname + ':' + SystemData.DevProd.WsPort;
+
+    return {
+      wsPrefix: wsPrefix,
+      ctrlUrl: wsPrefix + '/many/ctrl',
+      signalingUrl: wsPrefix + '/many/signaling',
+      localRoomUrl: wsProto + '://127.0.0.1:' + localRoomPort + '/register',
       httpPrefix: SystemData.DevProd.HttpProto + '://' + $window.location.host,
     };
-    service.ctrlUrl = service.wsPrefix + '/many/ctrl';
-    service.signalingUrl = service.wsPrefix + '/many/signaling';
-    return service;
   }
 ]);

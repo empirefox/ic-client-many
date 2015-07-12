@@ -1,56 +1,61 @@
 'use strict';
 
-angular.module('app.service.reg-room', ['toaster', 'ngWebSocket']).factory('RegLocal', [
-// deps
-'$websocket',
-function($websocket) {
-	var ctrlStream = $websocket('ws://127.0.0.1:12301/register');
+angular.module('app.service.reg-room', ['toaster', 'ngWebSocket', 'app.system']).factory('RegLocal', [
+	'$websocket', 'AppSystem',
+	function($websocket, AppSystem) {
+		var ctrlStream = $websocket(AppSystem.localRoomUrl);
 
-	var service = {
-		SetSecretAddress : function(addr) {
+		var SetSecretAddress = function(addr) {
 			ctrlStream.send(JSON.stringify({
-				type : 'SetSecretAddress',
-				content : addr
+				type: 'SetSecretAddress',
+				content: addr,
 			}));
-		},
-		GetStatus : function() {
+		};
+
+		var GetStatus = function() {
 			ctrlStream.send(JSON.stringify({
-				type : 'GetStatus'
+				type: 'GetStatus',
 			}));
-		}
-	};
+		};
 
-	ctrlStream.onOpen(function() {
-		service.hasLocalOne = true;
-	});
-	ctrlStream.onClose(function() {
-		service.hasLocalOne = false;
-	});
+		var service = {
+			SetSecretAddress: SetSecretAddress,
+			GetStatus: GetStatus,
+		};
 
-	ctrlStream.onMessage(function(raw) {
-		var data = JSON.parse(raw.data);
-		switch (data.type) {
-			case 'Status':
-				service.status = data.content;
-				break;
-		}
-	});
-	return service;
-}]).factory('RegRoom', ['$http', 'toaster', 'RegLocal',
-function($http, toaster, RegLocal) {
-	return {
-		reg : function(name) {
-			if (!RegLocal.hasLocalOne || RegLocal.status !== 'not_authed') {
-				return;
+		ctrlStream.onOpen(function() {
+			service.hasLocalOne = true;
+		});
+		ctrlStream.onClose(function() {
+			service.hasLocalOne = false;
+		});
+
+		ctrlStream.onMessage(function(raw) {
+			var data = JSON.parse(raw.data);
+			switch (data.type) {
+				case 'Status':
+					service.status = data.content;
+					break;
 			}
-			$http.post('/many/reg-room', {
-				name : name
-			}).success(function(data) {
-				RegLocal.SetSecretAddress(data.addr);
-				toaster.pop('success', 'Success', 'Reg room ok!');
-			}).error(function() {
-				toaster.pop('error', 'Error', 'Cannot reg room!');
-			});
-		}
-	};
-}]);
+		});
+		return service;
+	}
+]).factory('RegRoom', ['$http', 'toaster', 'RegLocal',
+	function($http, toaster, RegLocal) {
+		return {
+			reg: function(name) {
+				if (!RegLocal.hasLocalOne || RegLocal.status !== 'not_authed') {
+					return;
+				}
+				$http.post('/many/reg-room', {
+					name: name,
+				}).success(function(data) {
+					RegLocal.SetSecretAddress(data.addr);
+					toaster.pop('success', 'Success', 'Reg room ok!');
+				}).error(function() {
+					toaster.pop('error', 'Error', 'Cannot reg room!');
+				});
+			}
+		};
+	}
+]);

@@ -7,21 +7,21 @@ angular.module('app.i18n.en_US', ['pascalprecht.translate']).config(['$translate
 			BTN: {
 				OK: 'OK',
 				RESET: 'Reset',
-				NO: 'Cancel'
+				NO: 'Cancel',
 			},
 			PAGE_NAME: {
-				HOME: 'Home',
+				INDEX: 'Home',
 				ROOMS: 'My rooms',
 				JOIN: 'Join room',
 				REG_ROOM: 'Register local room',
 				LOGIN: 'Login',
-				LOGOUT: 'Logout'
+				LOGOUT: 'Logout',
 			},
 			PAGE: {
 				REG_ROOM: {
 					DESC: 'Register your local running room client to cloud',
 					NO_RUNNING_CLIENT: 'There is no running room client!',
-					ENTER_ROOM_NAME: 'Local room found, enter the room name here:'
+					ENTER_ROOM_NAME: 'Local room found, enter the room name here:',
 				},
 				LOGIN: {
 					DESC: 'Choose your favorite login site',
@@ -29,7 +29,7 @@ angular.module('app.i18n.en_US', ['pascalprecht.translate']).config(['$translate
 						QQ: 'Login with QQ',
 						BAIDU: 'Login with Baidu',
 						WEIBO: 'Login with Weibo',
-						MOCK: 'Login with Mock'
+						MOCK: 'Login with Mock',
 					}
 				},
 				JOIN: {
@@ -40,7 +40,7 @@ angular.module('app.i18n.en_US', ['pascalprecht.translate']).config(['$translate
 						ENTER_CODE: 'Enter the invite code:',
 						ROOM: 'Room:',
 						CODE: 'Code:',
-						URL: 'Full Url'
+						URL: 'Full Url',
 					}
 				},
 				ROOMS: {
@@ -49,12 +49,12 @@ angular.module('app.i18n.en_US', ['pascalprecht.translate']).config(['$translate
 					OPEN_SET_CAM: 'Manage camera',
 					CAM: {
 						PLAY: 'Play',
-						STOP: 'Stop'
+						STOP: 'Stop',
 					},
 					SET_ROOM: {
 						TITLE: 'Set room name',
 						OLD_NAME_IS: 'Old name is: ',
-						NEW_NAME: 'Enter the new room name:'
+						NEW_NAME: 'Enter the new room name:',
 					},
 					SET_IPCAM: {
 						TITLE: 'Edit the ipcam',
@@ -63,10 +63,14 @@ angular.module('app.i18n.en_US', ['pascalprecht.translate']).config(['$translate
 						TURN_OFF: 'Turn off',
 					},
 					CHAT: {
-						OPEN: 'Send message to room'
-					}
-				}
-			}
+						OPEN: 'Send message to room',
+					},
+				},
+				INDEX: {
+					DESC: 'Home Page',
+					START: 'Start Now!',
+				},
+			},
 		});
 	}
 ]);

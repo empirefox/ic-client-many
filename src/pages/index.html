@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="[[module]]" lang="zh_CN">
+
+<head>
+	<meta charset="utf-8">
+
+	<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title ng-bind="'PAGE_NAME.INDEX'|translate"></title>
+	<meta name="author" content="savage">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+	<link rel="shortcut icon" href="/favicon.ico">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+	<!-- jsdelivr-css -->
+
+	<!-- head:css -->
+	<!-- endinject -->
+	<link rel="stylesheet" href="/css/[[module]].css" />
+	<script src="/js_3rd/colorful-background-css-generator.min.js"></script>
+
+	<!-- head:js -->
+	<!-- only importantFile.js will be injected here -->
+	<!-- endinject -->
+
+	<!-- jsdelivr-js -->
+</head>
+
+<body>
+	<div ng-controller="IndexCtrl" class="start-container">
+		<button id="startButton" class="btn btn-success btn-lg center-block start-btn"
+		data-anijs="if: mouseover, do: shake animated" ng-bind="'PAGE.INDEX.START'|translate" ng-click="start()"></button>
+	</div>
+	<div id="container" random-color>
+		<div id="body">
+			<div data-anijs="if: mouseover, do: tada animated, to: #startButton">
+				<div ng-include="'/views/share/navbar.html'"></div>
+			</div>
+		</div>
+		<footer id="footer" class="hidden-xs">
+			<div class="row" style="text-align: center;">
+				<div class="col-md-12" style="text-align: center;">为保证登录后各项功能正常运行,请使用下列现代浏览器</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-sm-6" style="text-align: center;">
+					<a target="_blank" href="http://www.firefox.com.cn/download/" title="Firefox">
+						<img src="http://goodluck.qiniudn.com/firefox_256x256.png" style="max-width: 100%;" width="80">
+					</a>
+					<p>
+						<a target="_blank" href="http://www.firefox.com.cn/download/" class="dl">下载(推荐)</a>
+					</p>
+					<p>Mozilla Firefox | 全球最安全 功能齐全 体验最好的浏览器</p>
+				</div>
+				<div class="col-md-6 col-sm-6" style="text-align: center;">
+					<a target="_blank" href="http://www.google.cn/intl/zh-CN/chrome/browser/" title="谷歌浏览器">
+						<img src="http://goodluck.qiniudn.com/chrome_256x256.png" style="max-width: 100%;" width="80">
+					</a>
+					<p>
+						<a target="_blank" href="http://www.google.com/chrome" class="dl">下载</a>
+					</p>
+					<p>Google Chrome | 谷歌公司出品 快速便捷</p>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<script src="/ng/sys-data.js"></script>
+	<script src="/js/templates.js"></script>
+	<script src="/js/[[module]].js"></script>
+</body>
+
+</html>
