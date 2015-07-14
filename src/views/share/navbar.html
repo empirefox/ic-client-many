@@ -1,9 +1,49 @@
 <div class="navbar navbar-default navbar-fixed-top">
-	<!-- Brand and toggle get grouped for better mobile display -->
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="/rooms.html"><i class="fa fa-desktop"> </i> <span ng-bind="'PAGE_NAME.ROOMS'|translate"></span> </a>
+			<button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed" data-toggle="collapse" data-target="#bs-navbar">
+				<span class="sr-only" ng-bind="'Menu'|translate"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<span class="navbar-brand"><i class="fa fa-home"> </i>
+				<span ng-bind="'PAGE_NAME.INDEX'|translate"></span>
+			</span>
 		</div>
+		<nav class="hidden-xs">
+			<ul class="nav navbar-nav navbar-right">
+				<li ng-repeat="nav in navs" ng-if="nav.visible" ng-class="{active:nav.active}">
+					<a href ng-click="nav.go()"><i ng-if="nav.icon" class="{{::nav.icon}}"></i> <span ng-if="nav.txt" ng-bind="::nav.txt|translate"></span></a>
+				</li>
+				<li class="dropdown">
+					<a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+						<i class="fa fa-language"></i>
+						<span ng-bind="'NAVBAR.LANG'|translate"> </span>
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href ng-click="change(en_US)">
+								<span ng-bind="'NAVBAR.EN_US'|translate"> </span>
+							</a>
+						</li>
+						<li>
+							<a href ng-click="change(zh_CN)">
+								<span ng-bind="'NAVBAR.ZH_CN'|translate"> </span>
+							</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+		<nav class="visible-xs" collapse="!isCollapsed">
+			<ul class="nav navbar-nav">
+				<li ng-repeat="nav in navs" ng-if="!nav.hideXs && nav.visible" ng-class="{active:nav.active}">
+					<a href ng-click="nav.go()"><i ng-if="nav.icon" class="{{::nav.icon}}"></i> <span ng-if="nav.txt" ng-bind="::nav.txt|translate"></span></a>
+				</li>
+			</ul>
+		</nav>
 	</div>
 </div>
 <div class="header-placeholder"></div>

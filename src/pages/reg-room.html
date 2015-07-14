@@ -30,7 +30,7 @@
 	</head>
 
 	<body>
-		<div ng-include="'/views/share/navbar.html'"></div>
+		<nav-bar></nav-bar>
 
 		<div ng-controller="RegRoomMainCtrl" class="container">
 			<h4 ng-bind="'PAGE.REG_ROOM.DESC'|translate"></h4>
@@ -42,7 +42,7 @@
 					</label>
 				</div>
 				<button type="submit" class="btn btn-default"
-				ng-disabled="RegLocal.status !== 'not_authed'" ng-click="regRoom(newRoomName)">
+				ng-disabled="RegLocal.status !== 'not_authed' && RegLocal.status !== 'auth_failed'" ng-click="regRoom(newRoomName)">
 					<span ng-bind="'BTN.OK'|translate"></span>
 				</button>
 				<button type="reset" class="btn btn-default">
@@ -51,11 +51,6 @@
 			</form>
 		</div>
 
-		<footer class="container">
-			<p>
-				&copy; Copyright  by savage
-			</p>
-		</footer>
 		<script src="/ng/sys-data.js"></script>
 		<script src="/js/templates.js"></script>
 		<script src="/js/[[module]].js"></script>

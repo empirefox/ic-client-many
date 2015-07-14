@@ -1,0 +1,15 @@
+<div class="ngdialog-message">
+	<h3 ng-bind="'PAGE.LOGOFF.CONFIRM'|translate"></h3>
+</div>
+<p>
+	<span class="label label-danger" ng-bind="'PAGE.LOGOFF.WARNING'|translate"></span>
+	<span ng-bind="'PAGE.LOGOFF.MESSAGE'|translate"></span>
+</p>
+<div class="ngdialog-buttons">
+	<button type="submit" class="ngdialog-button ngdialog-button-primary" ng-click="confirm()">
+		<span ng-bind="'BTN.OK'|translate"></span>
+	</button>
+	<button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog()">
+		<span ng-bind="'BTN.NO'|translate"></span>
+	</button>
+</div>

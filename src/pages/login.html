@@ -30,7 +30,7 @@
 	</head>
 
 	<body>
-		<div ng-include="'/views/[[module]]/navbar.html'"></div>
+		<nav-bar></nav-bar>
 
 		<div ng-controller="LoginMainCtrl" class="container">
 			<h4 ng-bind="'PAGE.LOGIN.DESC'|translate"></h4>
@@ -43,11 +43,6 @@
 			</ul>
 		</div>
 
-		<footer class="container">
-			<p>
-				&copy; Copyright  by savage
-			</p>
-		</footer>
 		<script src="/ng/sys-data.js"></script>
 		<script src="/js/templates.js"></script>
 		<script src="/js/[[module]].js"></script>

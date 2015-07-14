@@ -47,7 +47,7 @@ function addCopyPageTask(pagename) {
 	});
 }
 
-var tasks = [];
+var tasks = ['copy:iframeLocal'];
 config.pages.forEach(function(page) {
 	addCopyPageTask(page);
 	tasks.push('copy:' + page + '.html');

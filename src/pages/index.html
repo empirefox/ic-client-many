@@ -39,31 +39,31 @@
 	<div id="container" random-color>
 		<div id="body">
 			<div data-anijs="if: mouseover, do: tada animated, to: #startButton">
-				<div ng-include="'/views/share/navbar.html'"></div>
+				<nav-bar></nav-bar>
 			</div>
 		</div>
 		<footer id="footer" class="hidden-xs">
 			<div class="row" style="text-align: center;">
-				<div class="col-md-12" style="text-align: center;">为保证登录后各项功能正常运行,请使用下列现代浏览器</div>
+				<div class="col-md-12" style="text-align: center;" ng-bind="'PAGE.INDEX.BROWSER_TIP'|translate"></div>
 			</div>
 			<div class="row">
 				<div class="col-md-6 col-sm-6" style="text-align: center;">
 					<a target="_blank" href="http://www.firefox.com.cn/download/" title="Firefox">
-						<img src="http://goodluck.qiniudn.com/firefox_256x256.png" style="max-width: 100%;" width="80">
+						<img src="http://goodluck.qiniudn.com/firefox_256x256.png" style="max-width: 100%;" width="60">
 					</a>
 					<p>
-						<a target="_blank" href="http://www.firefox.com.cn/download/" class="dl">下载(推荐)</a>
+						<a target="_blank" href="http://www.firefox.com.cn/download/" class="dl" ng-bind="'PAGE.INDEX.DOWNLOAD'|translate"></a>
 					</p>
-					<p>Mozilla Firefox | 全球最安全 功能齐全 体验最好的浏览器</p>
+					<p ng-bind="'PAGE.INDEX.FIREFOX'|translate"></p>
 				</div>
 				<div class="col-md-6 col-sm-6" style="text-align: center;">
-					<a target="_blank" href="http://www.google.cn/intl/zh-CN/chrome/browser/" title="谷歌浏览器">
-						<img src="http://goodluck.qiniudn.com/chrome_256x256.png" style="max-width: 100%;" width="80">
+					<a target="_blank" href="http://www.google.cn/intl/zh-CN/chrome/browser/" title="Chrome">
+						<img src="http://goodluck.qiniudn.com/chrome_256x256.png" style="max-width: 100%;" width="60">
 					</a>
 					<p>
-						<a target="_blank" href="http://www.google.com/chrome" class="dl">下载</a>
+						<a target="_blank" href="http://www.google.com/chrome" class="dl" ng-bind="'PAGE.INDEX.DOWNLOAD'|translate"></a>
 					</p>
-					<p>Google Chrome | 谷歌公司出品 快速便捷</p>
+					<p ng-bind="'PAGE.INDEX.CHROME'|translate"></p>
 				</div>
 			</div>
 		</footer>

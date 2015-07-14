@@ -30,50 +30,12 @@
 	</head>
 
 	<body>
-		<div ng-controller="RoomsHeaderCtrl" class="navbar navbar-default navbar-fixed-top">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-3">
-						<span class="sr-only" ng-bind="'Menu'|translate"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<span class="navbar-brand"><i class="fa fa-home"> </i><span ng-bind="'PAGE_NAME.INDEX'|translate"></span></span>
-				</div>
-				<nav class="hidden-xs">
-					<ul class="nav navbar-nav navbar-right">
-						<li>
-							<a href="/reg-room.html"><span ng-bind="'PAGE_NAME.REG_ROOM'|translate"></span></a>
-						</li>
-						<li>
-							<a href="/join.html"><span ng-bind="'PAGE_NAME.JOIN'|translate"></span></a>
-						</li>
-						<li>
-							<a href="/logout"><span ng-bind="'PAGE_NAME.LOGOUT'|translate"></span></a>
-						</li>
-					</ul>
-				</nav>
-				<nav class="visible-xs" collapse="!isCollapsed">
-					<ul class="nav navbar-nav">
-						<li>
-							<a href="/logout"><span ng-bind="'PAGE_NAME.LOGOUT'|translate"></span></a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</div>
+		<nav-bar></nav-bar>
 
 		<div class="header-placeholder"></div>
 		<toaster-container></toaster-container>
 
 		<div class="container" ng-include="'/views/rooms/main.html'"></div>
-		<footer class="container">
-			<p>
-				&copy; Copyright  by savage
-			</p>
-		</footer>
 		<script src="/ng/sys-data.js"></script>
 		<script src="/js/templates.js"></script>
 		<script src="/js/[[module]].js"></script>

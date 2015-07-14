@@ -9,6 +9,11 @@ angular.module('app.i18n.zh_CN', ['pascalprecht.translate']).config(['$translate
         RESET: '重置',
         NO: '取消',
       },
+      NAVBAR: {
+        LANG: '语言',
+        EN_US: 'English',
+        ZH_CN: '中文',
+      },
       PAGE_NAME: {
         INDEX: '首页',
         ROOMS: '我的监控室',
@@ -16,6 +21,7 @@ angular.module('app.i18n.zh_CN', ['pascalprecht.translate']).config(['$translate
         REG_ROOM: '注册本地监控室',
         LOGIN: '登录',
         LOGOUT: '退出',
+        LOGOFF: '销毁账号',
       },
       PAGE: {
         REG_ROOM: {
@@ -69,6 +75,15 @@ angular.module('app.i18n.zh_CN', ['pascalprecht.translate']).config(['$translate
         INDEX: {
           DESC: '首页',
           START: '开始体验!',
+          BROWSER_TIP: '为保证登录后各项功能正常运行,请使用下列现代浏览器',
+          DOWNLOAD: '下载',
+          FIREFOX: 'Mozilla Firefox | 全球最安全 功能齐全 体验最好的浏览器',
+          CHROME: 'Google Chrome | 谷歌公司出品 快速便捷',
+        },
+        LOGOFF: {
+          CONFIRM: '需要确认才能销毁您的账户',
+          WARNING: '非常危险!',
+          MESSAGE: '当您继续操作后，您的所有数据将永久删除.'
         },
       }
     });
