@@ -1,0 +1,9 @@
+.ic-navbar-brand>img {
+  top: -15px;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+.ic-navbar-brand>span {
+  position: absolute;
+}

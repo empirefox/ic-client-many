@@ -34,13 +34,14 @@
 <body>
 	<div ng-controller="IndexCtrl" class="start-container">
 		<button id="startButton" class="btn btn-success btn-lg center-block start-btn"
-		data-anijs="if: mouseover, do: shake animated" ng-bind="'PAGE.INDEX.START'|translate" ng-click="start()"></button>
+		data-anijs="if: mouseover, do: shake animated"
+		ng-bind="'PAGE.INDEX.START'|translate" ng-click="start()"></button>
 	</div>
+		<div data-anijs="if: mouseover, do: tada animated, to: #startButton">
+			<nav-bar></nav-bar>
+		</div>
 	<div id="container" random-color>
 		<div id="body">
-			<div data-anijs="if: mouseover, do: tada animated, to: #startButton">
-				<nav-bar></nav-bar>
-			</div>
 		</div>
 		<footer id="footer" class="hidden-xs">
 			<div class="row" style="text-align: center;">

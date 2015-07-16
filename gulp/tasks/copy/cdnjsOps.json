@@ -1,6 +1,7 @@
 [
   "cdnjs:jquery",
   "cdnjs:angular.js:angular-animate.min.js",
+  "cdnjs:angular.js:angular-cookies.min.js",
   "cdnjs:angular.js:angular-resource.min.js",
   "cdnjs:angular.js:angular-route.min.js",
   "cdnjs:angular.js:angular-sanitize.min.js",
@@ -13,6 +14,14 @@
     "file": "**/angular-translate/*.js",
     "package": "angular-translate",
     "cdn": "//cdnjs.cloudflare.com/ajax/libs/angular-translate/${ version }/${ filenameMin }"
+  }, {
+    "file": "**/angular-translate-storage-cookie/*.js",
+    "package": "angular-translate-storage-cookie",
+    "cdn": "//cdnjs.cloudflare.com/ajax/libs/angular-translate-storage-cookie/${ version }/${ filenameMin }"
+  }, {
+    "file": "**/angular-translate-storage-local/*.js",
+    "package": "angular-translate-storage-local",
+    "cdn": "//cdnjs.cloudflare.com/ajax/libs/angular-translate-storage-local/${ version }/${ filenameMin }"
   }, {
     "file": "**/ui-bootstrap-tpls*.js",
     "package": "angular-bootstrap",
