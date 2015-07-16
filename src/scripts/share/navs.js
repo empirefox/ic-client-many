@@ -115,7 +115,7 @@ angular.module('app.navs', ['ngDialog', 'app.i18n', 'app.service.login']).direct
   right: false,
   hideXs: false,
 }, {
-  href: '/logoff',
+  href: '/many/logoff',
   icon: 'fa fa-user-times',
   txt: 'PAGE_NAME.LOGOFF',
   hideFrom: ['/login.html'],

@@ -36,14 +36,15 @@
 	<div ng-controller="RegRoomMainCtrl" class="container">
 		<h4 ng-bind="'PAGE.REG_ROOM.DESC'|translate"></h4>
 		<span ng-if="!RegLocal.hasLocalOne" ng-bind="'PAGE.REG_ROOM.NO_RUNNING_CLIENT'|translate"></span>
-		<form ng-if="RegLocal.hasLocalOne" ng-disabled="RegLocal.status !== 'not_authed' && RegLocal.status !== 'auth_failed'">
+		<form ng-if="RegLocal.hasLocalOne">
 			<div class="form-group">
 				<label>
 					<span ng-bind="'PAGE.REG_ROOM.ENTER_ROOM_NAME'|translate"></span>
 					<input ng-model="newRoomName" type="text" class="form-control" required>
 				</label>
 			</div>
-			<button type="submit" class="btn btn-default" ng-click="regRoom(newRoomName)">
+			<button type="submit" class="btn btn-default" ng-click="regRoom(newRoomName)"
+			ng-disabled="RegLocal.status !== 'not_authed' && RegLocal.status !== 'auth_failed'">
 				<span ng-bind="'BTN.OK'|translate"></span>
 			</button>
 			<button type="reset" class="btn btn-default">
