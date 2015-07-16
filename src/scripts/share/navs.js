@@ -19,6 +19,17 @@ angular.module('app.navs', ['ngDialog', 'app.i18n', 'app.service.login']).direct
   function($window, $http, $q, ngDialog, NavList, LoginChecker) {
     var path = window.location.pathname;
 
+    function visit(nav) {
+      var promise = nav.authOnly ? LoginChecker.check().catch(function() {
+        $window.location.assign('/login.html');
+        return $q.reject();
+      }) : $q.when();
+
+      return promise.then(function() {
+        return confirm(nav);
+      });
+    }
+
     function initNav(nav) {
       nav.visible = nav.hideFrom.every(function(hide) {
         if (path !== hide) {
@@ -27,17 +38,10 @@ angular.module('app.navs', ['ngDialog', 'app.i18n', 'app.service.login']).direct
       });
       nav.active = nav.href === path;
 
-      nav.go = function() {
-        if (nav.authOnly) {
-          LoginChecker.check().
-          then(function() {
-            confirm(nav);
-          }, function() {
-            $window.location.assign('/login.html');
-          });
-        } else {
-          confirm(nav);
-        }
+      nav.go = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        visit(nav);
       };
       return nav;
     }
@@ -59,17 +63,14 @@ angular.module('app.navs', ['ngDialog', 'app.i18n', 'app.service.login']).direct
     }
 
     function confirm(nav) {
-      if (nav.dialog) {
-        ngDialog.open({
-          template: '/views/share/dialogs/' + nav.dialog + '.html',
-          className: 'ngdialog-theme-plain',
-          showClose: true,
-        }).then(function() {
-          $window.location.assign(nav.href);
-        });
-      } else {
+      var promise = nav.dialog ? ngDialog.openConfirm({
+        template: '/views/share/dialogs/' + nav.dialog + '.html',
+        className: 'ngdialog-theme-plain',
+      }) : $q.when();
+
+      return promise.then(function() {
         $window.location.assign(nav.href);
-      }
+      });
     }
 
     // include path === '/' || path === 'index.html', cause no authed provided
@@ -120,7 +121,7 @@ angular.module('app.navs', ['ngDialog', 'app.i18n', 'app.service.login']).direct
   hideFrom: ['/login.html'],
   authOnly: true,
   right: false,
-  dailog: 'ConfirmLogoff',
+  dialog: 'ConfirmLogoff',
   hideXs: true,
 }, {
   href: '/logout',

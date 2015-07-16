@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.service.reg-room', ['toaster', 'app.system']).factory('RegLocal', [
+angular.module('app.service.reg-room', ['toaster', 'app.system', 'app.service.local']).factory('RegLocal', [
   'toaster', 'AppSystem', 'IframeLocalService',
   function(toaster, AppSystem, IframeLocalService) {
     var service = {};

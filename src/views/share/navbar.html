@@ -8,29 +8,32 @@
 				<span class="icon-bar"></span>
 			</button>
 			<a href="/" class="navbar-brand ic-navbar-brand">
-				<img src="/brand.png"/>
+				<img src="/brand.png" />
 				<span ng-bind="'PAGE_NAME.INDEX'|translate"></span>
 			</a>
 		</div>
 		<nav class="hidden-xs">
 			<ul class="nav navbar-nav navbar-right">
 				<li ng-repeat="nav in navs" ng-if="nav.visible" ng-class="{active:nav.active}">
-					<a href ng-click="nav.go()"><i ng-if="nav.icon" class="{{::nav.icon}}"></i> <span ng-if="nav.txt" ng-bind="nav.txt|translate"></span></a>
+					<a ng-attr-href="{{nav.href}}" ng-click="nav.go($event)">
+						<i ng-if="nav.icon" class="{{::nav.icon}}"></i>
+						<span ng-if="nav.txt" ng-bind="nav.txt|translate"></span>
+					</a>
 				</li>
 				<li class="dropdown" dropdown>
-					<a href class="dropdown-toggle" dropdown-toggle aria-haspopup="true" aria-expanded="false">
+					<a class="dropdown-toggle" dropdown-toggle aria-haspopup="true" aria-expanded="false">
 						<i class="fa fa-language"></i>
 						<span ng-bind="'NAVBAR.LANG'|translate"> </span>
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu" role="menu">
 						<li>
-							<a href ng-click="change('en_US')">
+							<a ng-click="change('en_US')">
 								<span ng-bind="'NAVBAR.EN_US'|translate"> </span>
 							</a>
 						</li>
 						<li>
-							<a href ng-click="change('zh_CN')">
+							<a ng-click="change('zh_CN')">
 								<span ng-bind="'NAVBAR.ZH_CN'|translate"> </span>
 							</a>
 						</li>
@@ -41,7 +44,10 @@
 		<nav class="visible-xs" collapse="!isCollapsed">
 			<ul class="nav navbar-nav">
 				<li ng-repeat="nav in navs" ng-if="!nav.hideXs && nav.visible" ng-class="{active:nav.active}">
-					<a href ng-click="nav.go()"><i ng-if="nav.icon" class="{{::nav.icon}}"></i> <span ng-if="nav.txt" ng-bind="nav.txt|translate"></span></a>
+					<a ng-attr-href="{{nav.href}}" ng-click="nav.go($event)">
+						<i ng-if="nav.icon" class="{{::nav.icon}}"></i>
+						<span ng-if="nav.txt" ng-bind="nav.txt|translate"></span>
+					</a>
 				</li>
 			</ul>
 		</nav>
