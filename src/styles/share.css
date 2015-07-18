@@ -1,6 +1,9 @@
 a[ng-click], a[dropdown-toggle] {
   cursor: pointer;
 }
+.text-center {
+  text-align: center;
+}
 .ic-navbar-brand>img {
   top: -15px;
   position: relative;

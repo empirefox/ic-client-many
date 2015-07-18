@@ -84,7 +84,7 @@
         "console",
         "$",
         "S",
-        "pluralize",
+        "detector",
         "RTCPeerConnection",
         "ColorfulBackgroundLayer",
         "ColorfulBackgroundGenerator"

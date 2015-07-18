@@ -22,6 +22,7 @@ angular.module('app.i18n.en_US', ['pascalprecht.translate']).config(['$translate
         LOGIN: 'Login',
         LOGOUT: 'Logout',
         LOGOFF: 'Destory Account',
+        DOWNLOAD: 'Download',
       },
       PAGE: {
         REG_ROOM: {
@@ -84,6 +85,12 @@ angular.module('app.i18n.en_US', ['pascalprecht.translate']).config(['$translate
           CONFIRM: 'Need Confirm to Destroy Your Account',
           WARNING: 'Very Dangerous!',
           MESSAGE: 'All data will be deleted permanently, when your continue this action.'
+        },
+        DOWNLOAD: {
+          DESC: 'Only linux client provided now',
+          PUB_TIME: 'Publish Time',
+          BIT: 'bit',
+          OS: 'Operation System',
         },
       },
     });

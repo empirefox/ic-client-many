@@ -22,6 +22,7 @@ angular.module('app.i18n.zh_CN', ['pascalprecht.translate']).config(['$translate
         LOGIN: '登录',
         LOGOUT: '退出',
         LOGOFF: '销毁账号',
+        DOWNLOAD: '下载',
       },
       PAGE: {
         REG_ROOM: {
@@ -84,6 +85,12 @@ angular.module('app.i18n.zh_CN', ['pascalprecht.translate']).config(['$translate
           CONFIRM: '需要确认才能销毁您的账户',
           WARNING: '非常危险!',
           MESSAGE: '当您继续操作后，您的所有数据将永久删除.'
+        },
+        DOWNLOAD: {
+          DESC: '当前仅提供linux平台客户端',
+          PUB_TIME: '发布时间',
+          BIT: '位',
+          OS: '操作系统',
         },
       }
     });

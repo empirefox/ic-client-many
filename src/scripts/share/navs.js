@@ -140,4 +140,13 @@ angular.module('app.navs', ['ngDialog', 'app.i18n', 'app.service.login']).direct
   right: false,
   hideXs: false,
   unauthedOnly: true,
+}, {
+  href: '/dl.html',
+  icon: 'fa fa-cloud-download',
+  txt: 'PAGE_NAME.DOWNLOAD',
+  hideFrom: [],
+  authOnly: false,
+  right: false,
+  hideXs: true,
+  unauthedOnly: false,
 }]);
