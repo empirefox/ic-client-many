@@ -6,7 +6,7 @@ var ipc = require('ipc');
 function RegRoom(name) {
   var xhr = new XMLHttpRequest();
   xhr.open('POST', '/many/reg-room', true);
-  xhr.setRequestHeader("Content-type", "application/json");
+  xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
   xhr.responseType = 'json';
 
   xhr.onload = function(e) {
