@@ -32,6 +32,9 @@ angular.module('app.navs', ['ngDialog', 'app.i18n', 'app.service.login']).direct
 
     function initNav(nav) {
       nav.visible = nav.hideFrom.every(function(hide) {
+        if (hide === '*') {
+          return false;
+        }
         if (path !== hide) {
           return true;
         }
@@ -94,7 +97,7 @@ angular.module('app.navs', ['ngDialog', 'app.i18n', 'app.service.login']).direct
   href: '/rooms.html',
   icon: 'fa fa-desktop',
   txt: 'PAGE_NAME.ROOMS',
-  hideFrom: ['/login.html'],
+  hideFrom: ['/login.html', '/reg-room.html'],
   authOnly: true,
   right: false,
   hideXs: false,
@@ -102,7 +105,7 @@ angular.module('app.navs', ['ngDialog', 'app.i18n', 'app.service.login']).direct
   href: '/reg-room.html',
   icon: 'fa fa-plus',
   txt: 'PAGE_NAME.REG_ROOM',
-  hideFrom: ['/login.html'],
+  hideFrom: ['*'],
   authOnly: true,
   right: true,
   hideXs: true,
@@ -110,7 +113,7 @@ angular.module('app.navs', ['ngDialog', 'app.i18n', 'app.service.login']).direct
   href: '/join.html',
   icon: 'fa fa-wifi',
   txt: 'PAGE_NAME.JOIN',
-  hideFrom: ['/login.html'],
+  hideFrom: ['/login.html', '/reg-room.html'],
   authOnly: true,
   right: false,
   hideXs: false,
@@ -118,7 +121,7 @@ angular.module('app.navs', ['ngDialog', 'app.i18n', 'app.service.login']).direct
   href: '/many/logoff',
   icon: 'fa fa-user-times',
   txt: 'PAGE_NAME.LOGOFF',
-  hideFrom: ['/login.html'],
+  hideFrom: ['/login.html', '/reg-room.html'],
   authOnly: true,
   right: false,
   dialog: 'ConfirmLogoff',

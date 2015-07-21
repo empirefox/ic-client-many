@@ -14,7 +14,7 @@ var config = {
   render: r,
   port: 8080,
   dest: r('{{ dest }}'),
-  pages: ['rooms', 'login', 'reg-room', 'join', 'index', 'dl'],
+  pages: ['rooms', 'login', 'join', 'index', 'dl'],
   scripts: {
     src: r('{{ src }}/scripts/**/*.js'),
     tpl: r('{{ src }}/{{ views }}/**/*.html'),

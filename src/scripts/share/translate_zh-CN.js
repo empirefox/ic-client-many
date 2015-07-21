@@ -27,7 +27,7 @@ angular.module('app.i18n.zh_CN', ['pascalprecht.translate']).config(['$translate
       PAGE: {
         REG_ROOM: {
           DESC: '注册本地监控室到云中心',
-          NO_RUNNING_CLIENT: '本地没有运行监控室, 请稍后下载客户端(内测中)',
+          NO_RUNNING_CLIENT: '本地没有运行监控室',
           ENTER_ROOM_NAME: '本地监控室正在运行, 为监控室命名:',
         },
         LOGIN: {

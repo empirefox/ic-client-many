@@ -30,11 +30,11 @@
 	</head>
 
 	<body>
-		<nav-bar></nav-bar>
+		<nav-bar class="hidden-xs"></nav-bar>
 
 		<div ng-controller="LoginMainCtrl" class="container">
-			<h4 ng-bind="'PAGE.LOGIN.DESC'|translate"></h4>
-			<hr/>
+			<h4 class="hidden-xs" ng-bind="'PAGE.LOGIN.DESC'|translate"></h4>
+			<hr class="hidden-xs"/>
 			<ul class="bs-oauth-list">
 				<li ng-repeat="oauth in OauthFactory.oauths" ng-click="OauthFactory.doLogin(oauth)">
 					<span ng-class="oauth.css" aria-hidden="true"></span>

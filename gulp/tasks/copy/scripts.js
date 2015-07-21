@@ -27,7 +27,7 @@ function addCopyPageJsTask(pagename) {
       //		.pipe(angularFilesort())
       // concat
     pipe($.concat(pagename + '.js')).pipe(toStaticfilesCDN()).
-    pipe($.uglify()).
+    // pipe($.uglify()).
     pipe(gulp.dest(config.dest));
   });
 }
