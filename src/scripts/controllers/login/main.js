@@ -9,10 +9,7 @@ angular.module('login.ctrl.main', ['app.service.login', 'login.service.oauth']).
       // https://icv3.luck2.me/login.html?from=/reg-room.html
       // simplely remove /login.html?from=
       var whole = $window.location.href;
-      var to = '/';
-      if (/\?from=/i.test(whole)) {
-        to = whole.replace(/\/login\.html\?from=/gi, '');
-      }
+      var to = /\?from=/i.test(whole) ? whole.replace(/\/login\.html\?from=/gi, '') : '/';
       $window.location.assign(to);
     });
   }

@@ -12,14 +12,14 @@ function RegRoom(name) {
   xhr.onload = function(e) {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
-        ipc.sendToHost('addr', xhr.response.addr);
+        ipc.sendToHost('reg-addr', xhr.response.addr);
       } else {
-        ipc.sendToHost('error', xhr.statusText);
+        ipc.sendToHost('reg-error', xhr.statusText);
       }
     }
   };
   xhr.onerror = function(e) {
-    ipc.sendToHost('error', xhr.statusText);
+    ipc.sendToHost('reg-error', xhr.statusText);
   };
 
   xhr.send(JSON.stringify({
