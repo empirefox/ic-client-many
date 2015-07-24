@@ -1,13 +1,13 @@
 <div class="ngdialog-message">
 	<h3 sidenav-ignore ng-bind="'PAGE.ROOMS.SET_IPCAM.TITLE'|translate"></h3>
 	<p>
-		<span ng-bind="::ngDialogData.room.name"></span>/<span ng-bind="::ngDialogData.ipcam.name"></span>
+		<span ng-bind="::ngDialogData.room.name"></span>/<span ng-bind="::ngDialogData.ipcam.id"></span>
 	</p>
 </div>
 <form>
 	<div class="form-group">
-		<label><span ng-bind="'PAGE.ROOMS.SET_IPCAM.NAME'|translate"></span>
-			<input ng-model="ngDialogData.ipcam.name" required type="text" class="form-control">
+		<label><span ng-bind="'PAGE.ROOMS.SET_IPCAM.ID'|translate"></span>
+			<input ng-model="ngDialogData.ipcam.id" required type="text" class="form-control">
 		</label>
 	</div>
 	<div class="form-group">

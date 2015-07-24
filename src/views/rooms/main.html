@@ -30,7 +30,7 @@
 				<div>
 					<a type="button" class="btn btn-link"
 					ng-click="connect(room,camera)" tooltip="{{'PAGE.ROOMS.CAM.PLAY'|translate}}"
-					> <h3 ng-attr-id="{{roomNavId+'camera'+$index}}" ng-bind="camera.name" class="room-title"></h3> <i
+					> <h3 ng-attr-id="{{roomNavId+'camera'+$index}}" ng-bind="camera.id" class="room-title"></h3> <i
 					ng-if="!Streams.map[camera.id] && camera.online" class="fa fa-play-circle-o fa-3x"></i></a>
 					<div class="pull-right">
 						<button ng-if="Streams.map[camera.id]" ng-click="disconnect(room,camera)"

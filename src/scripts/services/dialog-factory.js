@@ -41,6 +41,7 @@ angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl', 'app.servi
       }
       camera.disabled = true;
       CtrlClient.ManageGetIpcamCallback = function(data) {
+        var cameraId = data.id;
         ngDialog.openConfirm({
           template: '/views/rooms/dialogs/ManagedSetIpcam.html',
           data: {
@@ -49,6 +50,7 @@ angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl', 'app.servi
           },
           className: 'ngdialog-theme-plain',
         }).then(function(value) {
+          value.target = cameraId;
           CtrlClient.exec('ManagedSetIpcam', room.id, value);
         }).finally(function() {
           camera.disabled = false;

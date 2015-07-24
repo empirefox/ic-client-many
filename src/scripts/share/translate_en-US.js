@@ -65,7 +65,7 @@ angular.module('app.i18n.en_US', ['pascalprecht.translate']).config(['$translate
           },
           SET_IPCAM: {
             TITLE: 'Edit the ipcam',
-            NAME: 'Name',
+            ID: 'Id',
             URL: 'Url',
             TURN_OFF: 'Turn off',
           },

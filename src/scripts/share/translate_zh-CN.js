@@ -65,7 +65,7 @@ angular.module('app.i18n.zh_CN', ['pascalprecht.translate']).config(['$translate
           },
           SET_IPCAM: {
             TITLE: '编辑摄像头',
-            NAME: '名称',
+            ID: '名称',
             URL: '监控室连接摄像头的url',
             TURN_OFF: '关闭状态',
           },
