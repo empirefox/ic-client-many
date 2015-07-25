@@ -6,7 +6,7 @@ angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl', 'app.servi
     var service = {};
     service.openManageRoomNameDialog = function(room) {
       ngDialog.openConfirm({
-        template: '/views/rooms/dialogs/ManagedSetRoomName.html',
+        template: '/views/rooms/dialogs/ManageSetRoomName.html',
         data: room,
         className: 'ngdialog-theme-plain',
       }).then(function(value) {
@@ -16,7 +16,7 @@ angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl', 'app.servi
 
     service.openManageNewInviteUrlDialog = function(room) {
       ngDialog.open({
-        template: '/views/join/dialogs/ManagedNewInviteUrl.html',
+        template: '/views/join/dialogs/ManageNewInviteUrl.html',
         className: 'ngdialog-theme-plain',
         showClose: true,
 
@@ -43,7 +43,7 @@ angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl', 'app.servi
       CtrlClient.ManageGetIpcamCallback = function(data) {
         var cameraId = data.id;
         ngDialog.openConfirm({
-          template: '/views/rooms/dialogs/ManagedSetIpcam.html',
+          template: '/views/rooms/dialogs/ManageSetIpcam.html',
           data: {
             room: room,
             ipcam: data,
@@ -51,12 +51,12 @@ angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl', 'app.servi
           className: 'ngdialog-theme-plain',
         }).then(function(value) {
           value.target = cameraId;
-          CtrlClient.exec('ManagedSetIpcam', room.id, value);
+          CtrlClient.exec('ManageSetIpcam', room.id, value);
         }).finally(function() {
           camera.disabled = false;
         });
       };
-      CtrlClient.exec('ManagedGetIpcam', room.id, camera.id);
+      CtrlClient.exec('ManageGetIpcam', room.id, camera.id);
     };
 
     return service;

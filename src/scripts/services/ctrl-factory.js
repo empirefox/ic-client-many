@@ -20,7 +20,7 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
           ctrlStream.send('many:Command:' + JSON.stringify({
             name: name,
             room: room,
-            content: JSON.stringify(content)
+            content: content,
           }));
           toaster.pop('success', 'info', 'Please wait! Sending command: ' + name);
         }
@@ -30,7 +30,7 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
         if (service.chatTarget && msg && msg !== '') {
           ctrlStream.send('many:Chat:' + JSON.stringify({
             to: service.chatTarget.id,
-            content: msg
+            content: msg,
           }));
         }
       };
@@ -47,8 +47,9 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
       var onResponse = function(response) {
         switch (response.type) {
           case 'ManageGetIpcam':
+            // indect by endpoint in dialog
             if (service.ManageGetIpcamCallback) {
-              service.ManageGetIpcamCallback(JSON.parse(response.content));
+              service.ManageGetIpcamCallback(response.content);
             }
             break;
         }
@@ -66,15 +67,16 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
           case 'Chat':
             service.chats.push({
               username: data.content.from,
-              content: data.content.content
+              content: data.content.content,
             });
             break;
           case 'Response':
-            onResponse(JSON.parse(data.content));
+            // raw content
+            onResponse(data.content);
             break;
           case 'Info':
             // TODO change content to pop option object
-            toaster.pop('success', 'info', data.content);
+            toaster.pop('info', 'info', data.content);
             break;
           default:
             console.log('Unexpected data from server', data);

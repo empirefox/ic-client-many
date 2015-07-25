@@ -1,68 +1,56 @@
 <div ng-controller="RoomsMainCtrl">
-	<div class="col-md-2 hidden-xs">
-		<div class="sidebar">
-			<sidenav class="sidenav"></sidenav>
-		</div>
-	</div>
 	<div class="col-md-10">
 		<div ng-init="roomNavId='room'+$index" ng-if="room.cameras" ng-repeat="room in CtrlClient.rooms" class="col-md-12">
 			<div class="page-header">
 				<div>
-					<a type="button" class="btn btn-link"
-					ng-click="CtrlClient.chatTarget=room;visible=true"
-					tooltip="{{'PAGE.ROOMS.CHAT.OPEN'|translate}}"
-					> <h2 ng-attr-id="{{roomNavId}}" ng-bind="room.name" class="room-title"></h2><i class="fa fa-comments fa-3x"></i></a>
-					<div class="pull-right"	ng-if="room.isOwner">
+					<a type="button" class="btn btn-link" ng-click="CtrlClient.chatTarget=room;visible=true" tooltip="{{'PAGE.ROOMS.CHAT.OPEN'|translate}}">
+						<h3 ng-attr-id="{{roomNavId}}" ng-bind="room.name" class="room-title"></h3>
+						<i class="fa fa-comments fa-3x"></i>
+					</a>
+					<div class="pull-right" ng-if="room.isOwner">
 						<button ng-click="Dialog.openManageRoomNameDialog(room)" type="button" class="btn btn-link">
-							<i class="fa fa-pencil"></i><span ng-bind="'PAGE.ROOMS.OPEN_SET_ROOM'|translate"></span>
+							<i class="fa fa-pencil"></i>
+							<span ng-bind="'PAGE.ROOMS.OPEN_SET_ROOM'|translate"></span>
 						</button>
 						<button ng-click="Dialog.openManageNewInviteUrlDialog(room)" type="button" class="btn btn-default btn-success">
-							<i class="fa fa-share-alt"></i><span ng-bind="'PAGE.ROOMS.OPEN_INVITE_CODE'|translate"></span>
+							<i class="fa fa-share-alt"></i>
+							<span ng-bind="'PAGE.ROOMS.OPEN_INVITE_CODE'|translate"></span>
 						</button>
 					</div>
 					<p>
 						<small ng-if="room.createdTime" am-time-ago="room.createdTime"></small>
-					<p>
+						<p>
 				</div>
 				<p ng-if="room.desc" ng-bind="room.desc"></p>
 			</div>
 			<div ng-if="camera.online||room.isOwner" ng-repeat="camera in room.cameras">
 				<div>
-					<a type="button" class="btn btn-link"
-					ng-click="connect(room,camera)" tooltip="{{'PAGE.ROOMS.CAM.PLAY'|translate}}"
-					> <h3 ng-attr-id="{{roomNavId+'camera'+$index}}" ng-bind="camera.id" class="room-title"></h3> <i
-					ng-if="!Streams.map[camera.id] && camera.online" class="fa fa-play-circle-o fa-3x"></i></a>
+					<a type="button" class="btn btn-link" ng-click="connect(room,camera)" tooltip="{{'PAGE.ROOMS.CAM.PLAY'|translate}}">
+						<h4 ng-attr-id="{{roomNavId+'camera'+$index}}" ng-bind="camera.id" class="room-title"></h4>
+						<i ng-if="!Streams.map[camera.id] && camera.online" class="fa fa-play-circle-o fa-3x"></i>
+					</a>
 					<div class="pull-right">
-						<button ng-if="Streams.map[camera.id]" ng-click="disconnect(room,camera)"
-						tooltip="{{'PAGE.ROOMS.CAM.STOP'|translate}}" type="button" class="btn btn-danger">
+						<button ng-if="Streams.map[camera.id]" ng-click="disconnect(room,camera)" tooltip="{{'PAGE.ROOMS.CAM.STOP'|translate}}" type="button" class="btn btn-danger">
 							<i class="fa fa-times-circle-o fa-lg"></i>
 						</button>
 					</div>
-					<div class="pull-right"	ng-if="room.isOwner">
+					<div class="pull-right" ng-if="room.isOwner">
 						<!-- camera.disabled used when setting camera. see dialog-factory.js -->
-						<button type="button" class="btn btn-link" ng-disabled="camera.disabled"
-						ng-click="Dialog.openManageIpcamDialog(room,camera)">
-							<i class="fa fa-pencil"></i><span ng-bind="'PAGE.ROOMS.OPEN_SET_CAM'|translate"></span>
+						<button type="button" class="btn btn-link" ng-disabled="camera.disabled" ng-click="Dialog.openManageIpcamDialog(room,camera)">
+							<i class="fa fa-pencil"></i>
+							<span ng-bind="'PAGE.ROOMS.OPEN_SET_CAM'|translate"></span>
 						</button>
 					</div>
 					<p>
 						<small ng-if="camera.desc" am-time-ago="camera.desc"></small>
-					<p>
+						<p>
 				</div>
 				<video ng-if="Streams.map[camera.id]" rtc-video="Streams.map[camera.id]" class="center-block" autoplay></video>
 			</div>
 		</div>
 	</div>
 	<div sidenav-ignore>
-		<irontec-simple-chat
-		messages="CtrlClient.chats"
-		username="CtrlClient.username"
-		to="CtrlClient.chatTarget.name"
-		input-placeholder-text="You can write here"
-		submit-button-text="Send"
-		title="Chat"
-		theme="material"
-		visible="visible"
-		submit-function="CtrlClient.chat"></irontec-simple-chat>
+		<irontec-simple-chat messages="CtrlClient.chats" username="CtrlClient.username" to="CtrlClient.chatTarget.name" input-placeholder-text="You can write here" submit-button-text="Send" title="Chat" theme="material" visible="visible" submit-function="CtrlClient.chat">
+		</irontec-simple-chat>
 	</div>
 </div>
