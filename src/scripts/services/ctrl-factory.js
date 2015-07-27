@@ -60,12 +60,19 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
 
       ctrlStream.onMessage(function(raw) {
         var data = JSON.parse(raw.data);
+        if (!data.content) {
+          // console.log('wrong data:', data);
+          return;
+        }
         switch (data.type) {
           case 'Userinfo':
             service.username = data.content;
             break;
           case 'CameraList':
-            service.rooms = data.content;
+            service.rooms = data.content.reverse().map(function(room) {
+              room.cameras = room.cameras.reverse();
+              return room;
+            });
             break;
           case 'Chat':
             service.chats.push({
