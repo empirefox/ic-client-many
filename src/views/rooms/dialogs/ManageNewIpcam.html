@@ -1,22 +1,22 @@
 <div class="ngdialog-message">
-	<h3 sidenav-ignore ng-bind="'PAGE.ROOMS.SET_IPCAM.TITLE'|translate"></h3>
+	<h3 sidenav-ignore ng-bind="'PAGE.ROOMS.NEW_IPCAM.TITLE'|translate"></h3>
 	<p>
 		<span ng-bind="::ngDialogData.room.name"></span>/
-		<span ng-bind="::ngDialogData.ipcam.id"></span>
+		<span ng-bind="ngDialogData.ipcam.id"></span>
 	</p>
 </div>
-<form name="mangeSetIpcam">
+<form name="manageNewIpcam">
 	<div class="form-group">
 		<label>
 			<span ng-bind="'PAGE.ROOMS.SET_IPCAM.ID'|translate"></span>
-			<span class="text-danger" ng-hide="mangeSetIpcam.id.$valid">*</span>
+			<span class="text-danger" ng-hide="manageNewIpcam.id.$valid">*</span>
 			<input ng-model="ngDialogData.ipcam.id" required type="text" class="form-control" name="id">
 		</label>
 	</div>
 	<div class="form-group">
 		<label>
 			<span ng-bind="'PAGE.ROOMS.SET_IPCAM.URL'|translate"></span>
-			<span class="text-danger" ng-hide="mangeSetIpcam.url.$valid">*</span>
+			<span class="text-danger" ng-hide="manageNewIpcam.url.$valid">*</span>
 			<input ng-model="ngDialogData.ipcam.url" required type="text" class="form-control" name="url">
 		</label>
 	</div>
@@ -27,7 +27,7 @@
 		</label>
 	</div>
 	<div class="ngdialog-buttons">
-		<button type="submit" class="ngdialog-button ngdialog-button-primary" ng-disabled="!mangeSetIpcam.$valid" ng-click="confirm(ngDialogData.ipcam)">
+		<button type="submit" class="ngdialog-button ngdialog-button-primary" ng-disabled="!manageNewIpcam.$valid" ng-click="confirm(ngDialogData.ipcam)">
 			<span ng-bind="'BTN.OK'|translate"></span>
 		</button>
 		<button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog()">

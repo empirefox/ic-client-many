@@ -1,0 +1,18 @@
+<div class="ngdialog-message">
+	<h3 sidenav-ignore translate="PAGE.ROOMS.DEL_IPCAM.TITLE"></h3>
+	<p translate="PAGE.ROOMS.DEL_IPCAM.WARNING"></p>
+	<p>
+		<span ng-bind="::ngDialogData.room.name"></span>/
+		<span ng-bind="::ngDialogData.ipcam.id"></span>
+	</p>
+</div>
+<form>
+	<div class="ngdialog-buttons">
+		<button type="submit" class="ngdialog-button ngdialog-button-primary" ng-click="confirm(ngDialogData.ipcam)">
+			<span ng-bind="'BTN.OK'|translate"></span>
+		</button>
+		<button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog()">
+			<span ng-bind="'BTN.NO'|translate"></span>
+		</button>
+	</div>
+</form>

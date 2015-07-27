@@ -54,6 +54,8 @@ angular.module('app.i18n.en_US', ['pascalprecht.translate']).config(['$translate
           OPEN_SET_ROOM: 'Set room name',
           OPEN_INVITE_CODE: 'Share with friend',
           OPEN_SET_CAM: 'Manage camera',
+          OPEN_NEW_IPCAM: 'New Camera',
+          OPEN_DEL_CAM: 'Delete',
           CAM: {
             PLAY: 'Play',
             STOP: 'Stop',
@@ -68,6 +70,13 @@ angular.module('app.i18n.en_US', ['pascalprecht.translate']).config(['$translate
             ID: 'Id',
             URL: 'Url',
             TURN_OFF: 'Turn off',
+          },
+          NEW_IPCAM: {
+            TITLE: 'Add new ipcam',
+          },
+          DEL_IPCAM: {
+            TITLE: 'Delete ipcam',
+            WARNING:'Are you sure deleting this camera?',
           },
           CHAT: {
             OPEN: 'Send message to room',

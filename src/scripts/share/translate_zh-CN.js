@@ -54,6 +54,8 @@ angular.module('app.i18n.zh_CN', ['pascalprecht.translate']).config(['$translate
           OPEN_SET_ROOM: '设置监控室名称',
           OPEN_INVITE_CODE: '邀请',
           OPEN_SET_CAM: '设置摄像头',
+          OPEN_NEW_IPCAM: '添加摄像头',
+          OPEN_DEL_CAM: '删除',
           CAM: {
             PLAY: '播放',
             STOP: '停止',
@@ -68,6 +70,13 @@ angular.module('app.i18n.zh_CN', ['pascalprecht.translate']).config(['$translate
             ID: '名称',
             URL: '监控室连接摄像头的url',
             TURN_OFF: '关闭状态',
+          },
+          NEW_IPCAM:{
+            TITLE: '添加新的摄像头',
+          },
+          DEL_IPCAM: {
+            TITLE: '删除摄像头',
+            WARNING:'您确定要删除吗?',
           },
           CHAT: {
             OPEN: '发送消息到监控室',
@@ -87,7 +96,7 @@ angular.module('app.i18n.zh_CN', ['pascalprecht.translate']).config(['$translate
           MESSAGE: '当您继续操作后，您的所有数据将永久删除.'
         },
         DOWNLOAD: {
-          DESC: '当前仅提供linux平台客户端',
+          DESC: '当前仅提供linux平台客户端，其它平台客户端稍后提供',
           PUB_TIME: '发布时间',
           BIT: '位',
           OS: '操作系统',

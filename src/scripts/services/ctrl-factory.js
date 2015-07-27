@@ -46,6 +46,9 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
       // Response from one, not from server
       var onResponse = function(response) {
         switch (response.type) {
+          case 'ManageSetRoomName':
+            angular.extend(service.rooms, response.content);
+            break;
           case 'ManageGetIpcam':
             // indect by endpoint in dialog
             if (service.ManageGetIpcamCallback) {

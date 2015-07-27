@@ -1,17 +1,20 @@
 <div class="ngdialog-message">
 	<h3 sidenav-ignore ng-bind="'PAGE.ROOMS.SET_ROOM.TITLE'|translate"></h3>
 	<p>
-		<span ng-bind="'PAGE.ROOMS.SET_ROOM.OLD_NAME_IS'|translate"></span><span ng-bind="ngDialogData.name"></span>
+		<span ng-bind="'PAGE.ROOMS.SET_ROOM.OLD_NAME_IS'|translate"></span>
+		<span ng-bind="ngDialogData.name"></span>
 	</p>
 </div>
 <form>
 	<div class="form-group">
-		<label> <span ng-bind="'PAGE.ROOMS.SET_ROOM.NEW_NAME'|translate"></span>
-			<input ng-model="confirmValue" type="text" class="form-control" placeholder="Username" required>
+		<label>
+			<span ng-bind="'PAGE.ROOMS.SET_ROOM.NEW_NAME'|translate"></span>
+			<span class="text-danger" ng-show="!confirmValue">*</span>
+			<input ng-model="confirmValue" type="text" class="form-control" placeholder="name" required>
 		</label>
 	</div>
 	<div class="ngdialog-buttons">
-		<button type="submit" class="ngdialog-button ngdialog-button-primary" ng-click="confirm(confirmValue)">
+		<button type="submit" class="ngdialog-button ngdialog-button-primary" ng-disabled="!confirmValue" ng-click="confirm(confirmValue)">
 			<span ng-bind="'BTN.OK'|translate"></span>
 		</button>
 		<button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog()">
