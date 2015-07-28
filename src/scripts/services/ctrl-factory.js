@@ -6,6 +6,7 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
       var ctrlStream = $websocket(AppSystem.ctrlUrl);
 
       var service = {
+        rooms: {},
         chats: [],
 
         get: function(name) {
@@ -68,10 +69,19 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
           case 'Userinfo':
             service.username = data.content;
             break;
+          case 'RoomOffline':
+            service.rooms.forEach(function(room) {
+              if (room.id === data.content) {
+                delete room.cameras;
+              }
+            });
+            break;
           case 'CameraList':
-            service.rooms = data.content.reverse().map(function(room) {
-              room.cameras = room.cameras.reverse();
-              return room;
+            service.rooms = data.content.reverse();
+            service.rooms.forEach(function(room) {
+              if (room.cameras) {
+                room.cameras = room.cameras.reverse();
+              }
             });
             break;
           case 'Chat':

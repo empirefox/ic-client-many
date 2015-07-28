@@ -62,7 +62,7 @@ function RTCPeerConnection(options) {
         iceServers: iceServers
     };
 
-    console.debug('ice-servers', JSON.stringify(iceServers.iceServers, null, '\t'));
+    //console.debug('ice-servers', JSON.stringify(iceServers.iceServers, null, '\t'));
 
     var optional = {
         optional: []
@@ -79,7 +79,7 @@ function RTCPeerConnection(options) {
             }];
     }
 
-    console.debug('optional-arguments', JSON.stringify(optional.optional, null, '\t'));
+    //console.debug('optional-arguments', JSON.stringify(optional.optional, null, '\t'));
 
     var peer = new PeerConnection(iceServers, optional);
 
@@ -114,7 +114,7 @@ function RTCPeerConnection(options) {
         // onRemoteStream(MediaStream)
         if (options.onRemoteStream) options.onRemoteStream(remoteMediaStream);
 
-        console.debug('on:add:stream', remoteMediaStream);
+        //console.debug('on:add:stream', remoteMediaStream);
     };
 
     var constraints = options.constraints || {
@@ -125,7 +125,7 @@ function RTCPeerConnection(options) {
         }
     };
 
-    console.debug('sdp-constraints', JSON.stringify(constraints.mandatory, null, '\t'));
+    //console.debug('sdp-constraints', JSON.stringify(constraints.mandatory, null, '\t'));
 
     // onOfferSDP(RTCSessionDescription)
 
@@ -137,7 +137,7 @@ function RTCPeerConnection(options) {
             peer.setLocalDescription(sessionDescription);
             options.onOfferSDP(sessionDescription);
 
-            console.debug('offer-sdp', sessionDescription.sdp);
+            //console.debug('offer-sdp', sessionDescription.sdp);
         }, onSdpError, constraints);
     }
 
@@ -147,13 +147,13 @@ function RTCPeerConnection(options) {
         if (!options.onAnswerSDP) return;
 
         //options.offerSDP.sdp = addStereo(options.offerSDP.sdp);
-        console.debug('offer-sdp', options.offerSDP.sdp);
+        //console.debug('offer-sdp', options.offerSDP.sdp);
         peer.setRemoteDescription(new SessionDescription(options.offerSDP), onSdpSuccess, onSdpError);
         peer.createAnswer(function(sessionDescription) {
             sessionDescription.sdp = setBandwidth(sessionDescription.sdp);
             peer.setLocalDescription(sessionDescription);
             options.onAnswerSDP(sessionDescription);
-            console.debug('answer-sdp', sessionDescription.sdp);
+            //console.debug('answer-sdp', sessionDescription.sdp);
         }, onSdpError, constraints);
     }
 
@@ -277,7 +277,7 @@ function RTCPeerConnection(options) {
 
     return {
         addAnswerSDP: function(sdp) {
-            console.debug('adding answer-sdp', sdp.sdp);
+            //console.debug('adding answer-sdp', sdp.sdp);
             peer.setRemoteDescription(new SessionDescription(sdp), onSdpSuccess, onSdpError);
         },
         addICE: function(candidate) {
@@ -286,7 +286,7 @@ function RTCPeerConnection(options) {
                 candidate: candidate.candidate
             }));
 
-            console.debug('adding-ice', candidate.candidate);
+            //console.debug('adding-ice', candidate.candidate);
         },
 
         peer: peer,
