@@ -4,7 +4,7 @@ angular.module('app.system', ['app.constants.system']).factory('AppSystem', [
   '$window', 'SystemData',
   function($window, SystemData) {
     var wsProto = SystemData.DevProd.WsProto;
-    var wsPrefix = wsProto + '://' + $window.location.hostname + ':' + SystemData.DevProd.WsPort;
+    var wsPrefix = wsProto + '://' + SystemData.SubDomain + ':' + SystemData.DevProd.WsPort;
 
     return {
       wsPrefix: wsPrefix,
