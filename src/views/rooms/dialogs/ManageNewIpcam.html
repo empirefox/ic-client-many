@@ -10,7 +10,7 @@
 		<label>
 			<span ng-bind="'PAGE.ROOMS.SET_IPCAM.ID'|translate"></span>
 			<span class="text-danger" ng-hide="manageNewIpcam.id.$valid">*</span>
-			<input ng-model="ngDialogData.ipcam.id" required type="text" class="form-control" name="id">
+			<input ng-model="ngDialogData.ipcam.id" required ng-maxlength="12" type="text" class="form-control" name="id">
 		</label>
 	</div>
 	<div class="form-group">

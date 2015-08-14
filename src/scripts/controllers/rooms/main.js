@@ -9,13 +9,17 @@ controller('RoomsMainCtrl', ['$scope', 'CtrlClient', 'Streams', 'PCFactory', 'Di
 
     $scope.connect = function(room, camera) {
       if (!Streams.map[camera.id] && camera.online) {
-        PCFactory.createPeerConn(room.id, camera.id);
+        if (!camera.playing) {
+          camera.playing = true;
+          PCFactory.createPeerConn(room.id, camera.id);
+        }
       }
     };
 
     $scope.disconnect = function(room, camera) {
       PCFactory.closePeerConn(room.id, camera.id);
       Streams.remove(camera.id);
+      camera.playing = false;
     };
 
     $scope.$on("$destroy", function() {

@@ -1,0 +1,17 @@
+<div ng-controller="JoinMainCtrl" class="container">
+  <h4 ng-bind="'PAGE.JOIN.DESC'|translate"></h4>
+  <form>
+    <div class="form-group">
+      <label>
+        <span ng-bind="'PAGE.JOIN.FORM.ENTER_CODE'|translate"></span>
+        <input ng-model="full" type="text" class="form-control" required>
+      </label>
+    </div>
+    <button type="submit" class="btn btn-default" ng-click="join()">
+      <span ng-bind="'BTN.OK'|translate"></span>
+    </button>
+    <button type="reset" class="btn btn-default">
+      <span ng-bind="'BTN.RESET'|translate"></span>
+    </button>
+  </form>
+</div>

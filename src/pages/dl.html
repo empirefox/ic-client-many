@@ -8,20 +8,20 @@
 		Remove this if you use the .htaccess -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-	<title ng-bind="'PAGE_NAME.DOWNLOAD'|translate"></title>
-	<meta name="author" content="savage">
+	<title translate="PAGE_NAME.DOWNLOAD"></title>
+	<meta name="author" content="empirefox@gmail.com">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
-	<link rel="shortcut icon" href="/favicon.ico">
-	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+	<link rel="shortcut icon" href="[[cdnImg]]/favicon.ico">
+	<link rel="apple-touch-icon" href="[[cdnImg]]/apple-touch-icon.png">
 
 	<!-- jsdelivr-css -->
 
 	<!-- head:css -->
 	<!-- endinject -->
-	<link rel="stylesheet" href="/css/[[module]].css" />
+	<link rel="stylesheet" href="[[cdnCss]]/[[module]].css" />
 
 	<!-- head:js -->
 	<!-- only importantFile.js will be injected here -->
@@ -32,62 +32,9 @@
 
 <body>
 	<nav-bar></nav-bar>
-
-	<div ng-controller="DlMainCtrl" class="container">
-		<div class="download-header">
-			<h4 ng-bind="'PAGE.DOWNLOAD.DESC'|translate" class="col-md-9"></h4>
-			<div class="col-md-3">
-				<div class="btn-group pull-right" dropdown>
-					<button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
-						<span translate="PAGE.DOWNLOAD.OS"></span>:
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu" role="menu">
-						<li ng-repeat="os in supportedOs">
-							<a ng-click="setOs(os)" ng-bind="os"></a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div ng-repeat="data in datas|filterBy:['os']:currentOs" class="media download-panel row">
-			<div class="media-left">
-				<img data-holder-rendered="true" src="/ic-client-50x60.png" class="media-object">
-			</div>
-			<div class="media-body">
-				<h4 class="media-heading">
-					<span ng-bind="data[currentLang].name"></span>
-					-
-					<span ng-bind="data[currentLang].version"></span>
-				</h4>
-				<hr>
-				<div class="col-md-6 pull-left">
-					<span class="label label-default" ng-bind="data.size"></span>
-					<span translate="PAGE.DOWNLOAD.PUB_TIME"></span>:
-					<span ng-bind="data.time|date:'yyyy-MM-dd HH:mm:ss'"></span>
-				</div>
-				<div class="col-md-6">
-					<div class="pull-right download-btns">
-						<p ng-bind="data.os"></p>
-						<a ng-disabled="!data.url.bit32" ng-attr-href="{{data.url.bit32}}" target="_blank">
-							<i class="fa fa-download"></i> 32
-							<span stranslate="PAGE.DOWNLOAD.BIT"></span>
-						</a>
-						|
-						<a ng-disabled="!data.url.bit64" ng-attr-href="{{data.url.bit64}}" target="_blank">
-							<i class="fa fa-download"></i> 64
-							<span stranslate="PAGE.DOWNLOAD.BIT"></span>
-						</a>
-					</div>
-				</div>
-				<span class="col-md-9" ng-bind="data[currentLang].desc"></span>
-			</div>
-		</div>
-	</div>
-
-	<script src="/ng/sys-data.js"></script>
-	<script src="/js/templates.js"></script>
-	<script src="/js/[[module]].js"></script>
+	<div ng-include="'/views/[[module]]/body.html'"></div>
+	<script src="[[cdnJs]]/templates.js"></script>
+	<script src="[[cdnJs]]/[[module]].js"></script>
 </body>
 
 </html>

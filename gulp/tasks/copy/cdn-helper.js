@@ -6,11 +6,11 @@ var config = require('../../config');
 var cdnReplacer = {
 	css : {
 		reg : config.jsdelivr.cssReg,
-		tpl : swig.compile('<link rel="stylesheet" href="//cdn.jsdelivr.net/g/{{ cdns }}" />')
+		tpl : swig.compile('<link rel="stylesheet" href="https://cdn.jsdelivr.net/g/{{ cdns }}" />')
 	},
 	js : {
 		reg : config.jsdelivr.jsReg,
-		tpl : swig.compile('<script src="//cdn.jsdelivr.net/g/{{ cdns }}"></script>')
+		tpl : swig.compile('<script src="https://cdn.jsdelivr.net/g/{{ cdns }}"></script>')
 	}
 };
 
@@ -28,7 +28,7 @@ var helper = {
 	},
 
 	toStaticfilesCDN : function() {
-		return replace(/\/\/cdnjs\.cloudflare\.com\/ajax\/libs/g, '//dn-cdnjscn.qbox.me/ajax/libs');
+		return replace(/\/\/cdnjs\.cloudflare\.com\/ajax\/libs/g, 'https://dn-cdnjscn.qbox.me/ajax/libs');
 	}
 };
 

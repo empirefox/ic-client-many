@@ -1,0 +1,17 @@
+<div class="ngdialog-message">
+	<h3 sidenav-ignore translate="PAGE.ROOMS.DEL_ROOM.TITLE"></h3>
+	<p translate="PAGE.ROOMS.DEL_ROOM.WARNING"></p>
+	<p>
+		<span ng-bind="::ngDialogData.room.name"></span>
+	</p>
+</div>
+<form>
+	<div class="ngdialog-buttons">
+		<button type="submit" class="ngdialog-button ngdialog-button-primary" ng-click="confirm()">
+			<span ng-bind="'BTN.OK'|translate"></span>
+		</button>
+		<button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog()">
+			<span ng-bind="'BTN.NO'|translate"></span>
+		</button>
+	</div>
+</form>

@@ -1,6 +1,6 @@
-<div ng-controller="RoomsMainCtrl">
+<div class="container" ng-controller="RoomsMainCtrl">
 	<div class="col-md-10">
-		<div ng-init="roomNavId='room'+$index" ng-repeat="room in CtrlClient.rooms" class="col-md-12">
+		<div ng-init="roomNavId='room'+$index" ng-repeat="room in CtrlClient.rooms" class="col-md-12 room">
 			<div class="page-header">
 				<div>
 					<a type="button" class="btn btn-link" ng-click="CtrlClient.chatTarget=room;visible=true" tooltip="{{'PAGE.ROOMS.CHAT.OPEN'|translate}}">
@@ -11,6 +11,10 @@
 						<button ng-click="Dialog.openManageRoomNameDialog(room)" type="button" class="btn btn-link">
 							<i class="fa fa-pencil"></i>
 							<span ng-bind="'PAGE.ROOMS.OPEN_SET_ROOM'|translate"></span>
+						</button>
+						<button ng-click="Dialog.openManageDelRoomDialog(room)" type="button" class="btn btn-danger">
+							<i class="fa fa-exclamation-triangle"></i>
+							<span ng-bind="'PAGE.ROOMS.OPEN_DEL_ROOM'|translate"></span>
 						</button>
 						<button ng-click="Dialog.openManageNewInviteUrlDialog(room)" type="button" class="btn btn-default btn-success">
 							<i class="fa fa-share-alt"></i>
@@ -31,7 +35,7 @@
 				<div>
 					<a type="button" class="btn btn-link" ng-click="connect(room,camera)" tooltip="{{'PAGE.ROOMS.CAM.PLAY'|translate}}">
 						<h4 ng-attr-id="{{roomNavId+'camera'+$index}}" ng-bind="camera.id" class="room-title"></h4>
-						<i ng-if="!Streams.map[camera.id] && camera.online" class="fa fa-play-circle-o fa-3x"></i>
+						<i ng-if="!Streams.map[camera.id] && camera.online && !camera.playing" class="fa fa-play-circle-o fa-3x"></i>
 					</a>
 					<div class="pull-right">
 						<button ng-if="Streams.map[camera.id]" ng-click="disconnect(room,camera)" tooltip="{{'PAGE.ROOMS.CAM.STOP'|translate}}" type="button" class="btn btn-danger">

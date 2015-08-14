@@ -8,21 +8,20 @@
 		Remove this if you use the .htaccess -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-	<title ng-bind="'PAGE_NAME.INDEX'|translate"></title>
-	<meta name="author" content="savage">
+	<title translate="PAGE_NAME.INDEX"></title>
+	<meta name="author" content="empirefox@gmail.com">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
-	<link rel="shortcut icon" href="/favicon.ico">
-	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+	<link rel="shortcut icon" href="[[cdnImg]]/favicon.ico">
+	<link rel="apple-touch-icon" href="[[cdnImg]]/apple-touch-icon.png">
 
 	<!-- jsdelivr-css -->
 
 	<!-- head:css -->
 	<!-- endinject -->
-	<link rel="stylesheet" href="/css/[[module]].css" />
-	<script src="/js_3rd/colorful-background-css-generator.min.js"></script>
+	<link rel="stylesheet" href="[[cdnCss]]/[[module]].css" />
 
 	<!-- head:js -->
 	<!-- only importantFile.js will be injected here -->
@@ -33,46 +32,15 @@
 
 <body>
 	<div ng-controller="IndexCtrl" class="start-container">
-		<button id="startButton" class="btn btn-success btn-lg center-block start-btn"
-		data-anijs="if: mouseover, do: shake animated"
-		ng-bind="'PAGE.INDEX.START'|translate" ng-click="start()"></button>
+		<button id="startButton" class="btn btn-success btn-lg center-block start-btn" data-anijs="if: mouseover, do: shake animated" ng-bind="'PAGE.INDEX.START'|translate" ng-click="start()"></button>
+		<span class="index-desc" translate="PAGE.INDEX.DESC"></span>
 	</div>
-		<div data-anijs="if: mouseover, do: tada animated, to: #startButton">
-			<nav-bar></nav-bar>
-		</div>
-	<div id="container" random-color>
-		<div id="body">
-		</div>
-		<footer id="footer" class="hidden-xs">
-			<div class="row" style="text-align: center;">
-				<div class="col-md-12" style="text-align: center;" ng-bind="'PAGE.INDEX.BROWSER_TIP'|translate"></div>
-			</div>
-			<div class="row">
-				<div class="col-md-6 col-sm-6" style="text-align: center;">
-					<a target="_blank" href="http://www.firefox.com.cn/download/" title="Firefox">
-						<img src="http://goodluck.qiniudn.com/firefox_256x256.png" style="max-width: 100%;" width="60">
-					</a>
-					<p>
-						<a target="_blank" href="http://www.firefox.com.cn/download/" class="dl" ng-bind="'PAGE.INDEX.DOWNLOAD'|translate"></a>
-					</p>
-					<p ng-bind="'PAGE.INDEX.FIREFOX'|translate"></p>
-				</div>
-				<div class="col-md-6 col-sm-6" style="text-align: center;">
-					<a target="_blank" href="http://www.google.cn/intl/zh-CN/chrome/browser/" title="Chrome">
-						<img src="http://goodluck.qiniudn.com/chrome_256x256.png" style="max-width: 100%;" width="60">
-					</a>
-					<p>
-						<a target="_blank" href="http://www.google.com/chrome" class="dl" ng-bind="'PAGE.INDEX.DOWNLOAD'|translate"></a>
-					</p>
-					<p ng-bind="'PAGE.INDEX.CHROME'|translate"></p>
-				</div>
-			</div>
-		</footer>
+	<div data-anijs="if: mouseover, do: tada animated, to: #startButton">
+		<nav-bar></nav-bar>
 	</div>
-
-	<script src="/ng/sys-data.js"></script>
-	<script src="/js/templates.js"></script>
-	<script src="/js/[[module]].js"></script>
+	<div ng-include="'/views/[[module]]/body.html'" id="container" random-color></div>
+	<script src="[[cdnJs]]/templates.js"></script>
+	<script src="[[cdnJs]]/[[module]].js"></script>
 </body>
 
 </html>

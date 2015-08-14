@@ -8,6 +8,8 @@ var StreamQueue = require('streamqueue');
 var toStaticfilesCDN = require('./cdn-helper').toStaticfilesCDN;
 var pages = require('../../config').pages;
 var config = require('../../config').scripts;
+var env = require('../../config').env;
+var swig = $.swig;
 
 function addCopyPageJsTask(pagename) {
   gulp.task('copy:' + pagename + '.js', function() {
@@ -15,7 +17,7 @@ function addCopyPageJsTask(pagename) {
     var resource = require('../../resource/' + pagename + '.json').local;
 
     return new StreamQueue({
-        objectMode: true
+        objectMode: true,
       }).
       // third libs that are not in cdn
     queue(gulp.src(resource.js)).
@@ -38,8 +40,20 @@ gulp.task('copy:scripts:tpl', function() {
     filename: 'templates.js',
     standalone: true,
     module: 'l2m-tpl',
-    root: '/views'
-  })).pipe(gulp.dest(config.dest));
+    root: '/views',
+  })).
+  pipe($.header('window.ApiData=' + JSON.stringify(env.ApiData) + ';')).
+  pipe(swig({
+    defaults: {
+      varControls: ['[[', ']]'],
+    },
+    data: env,
+  })).
+  pipe($.rename({
+      extname: '.js',
+    })).
+    // pipe($.uglify()).
+  pipe(gulp.dest(config.dest));
 });
 
 var tasks = ['copy:scripts:tpl'];

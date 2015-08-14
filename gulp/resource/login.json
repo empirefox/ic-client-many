@@ -9,6 +9,7 @@
       "bower_components/angular-translate/angular-translate.js",
       "bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js",
       "bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
+      "bower_components/angular-jwt/dist/angular-jwt.js",
       "bower_components/ngDialog/js/ngDialog.js",
       "bower_components/angularjs-toaster/toaster.js"
     ],
@@ -16,6 +17,7 @@
     "css": [
       "bower_components/bootstrap/dist/css/bootstrap.css",
       "bower_components/font-awesome/css/font-awesome.css",
+      "bower_components/font-diao/fontdiao/css/fontdiao.css",
       "bower_components/ngDialog/css/ngDialog.css",
       "bower_components/ngDialog/css/ngDialog-theme-plain.css",
       "bower_components/angularjs-toaster/toaster.css"

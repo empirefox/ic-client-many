@@ -41,17 +41,16 @@ angular.module('app.i18n.en_US', ['pascalprecht.translate']).config(['$translate
         },
         JOIN: {
           DESC: 'Join an exist room',
-          INVITE_CODE: 'Invite code',
+          INVITE_CODE: 'Invite code(Valid in 5 minutes)',
           FORM: {
-            ENTER_ROOM: 'Enter the room id:',
             ENTER_CODE: 'Enter the invite code:',
-            ROOM: 'Room:',
             CODE: 'Code:',
             URL: 'Full Url',
           }
         },
         ROOMS: {
           OPEN_SET_ROOM: 'Set room name',
+          OPEN_DEL_ROOM: 'Delete room',
           OPEN_INVITE_CODE: 'Share with friend',
           OPEN_SET_CAM: 'Manage camera',
           OPEN_NEW_IPCAM: 'New Camera',
@@ -65,6 +64,10 @@ angular.module('app.i18n.en_US', ['pascalprecht.translate']).config(['$translate
             OLD_NAME_IS: 'Old name is: ',
             NEW_NAME: 'Enter the new room name:',
           },
+          DEL_ROOM: {
+            TITLE: 'Delete Room',
+            WARNING: 'Are you sure deleting this Room?',
+          },
           SET_IPCAM: {
             TITLE: 'Edit the ipcam',
             ID: 'Id',
@@ -76,14 +79,14 @@ angular.module('app.i18n.en_US', ['pascalprecht.translate']).config(['$translate
           },
           DEL_IPCAM: {
             TITLE: 'Delete ipcam',
-            WARNING:'Are you sure deleting this camera?',
+            WARNING: 'Are you sure deleting this camera?',
           },
           CHAT: {
             OPEN: 'Send message to room',
           },
         },
         INDEX: {
-          DESC: 'Home Page',
+          DESC: 'Focus on home monitoring integration',
           START: 'Start Now!',
           BROWSER_TIP: 'These browsers will give you comfortable experience',
           DOWNLOAD: 'Download',

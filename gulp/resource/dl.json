@@ -10,6 +10,7 @@
       "bower_components/angular-translate/angular-translate.js",
       "bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js",
       "bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
+      "bower_components/angular-jwt/dist/angular-jwt.js",
       "bower_components/ngDialog/js/ngDialog.js",
       "bower_components/angularjs-toaster/toaster.js"
     ],

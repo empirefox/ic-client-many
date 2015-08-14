@@ -14,6 +14,18 @@ angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl', 'app.servi
       });
     };
 
+    service.openManageDelRoomDialog = function(room) {
+      ngDialog.openConfirm({
+        template: '/views/rooms/dialogs/ManageDelRoom.html',
+        data: {
+          room: room,
+        },
+        className: 'ngdialog-theme-plain',
+      }).then(function() {
+        CtrlClient.exec('ManageDelRoom', room.id);
+      });
+    };
+
     service.openManageNewInviteUrlDialog = function(room) {
       ngDialog.open({
         template: '/views/join/dialogs/ManageNewInviteUrl.html',
@@ -22,7 +34,7 @@ angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl', 'app.servi
 
         resolve: {
           invite: function() {
-            return Invite.getCode(room);
+            return Invite.getInvite(room);
           }
         },
 

@@ -1,4 +1,9 @@
 var swig = require('swig');
+var utils = require('./utils');
+var env = require('./envs/env-' + utils.getEnvName() + '.json');
+
+env.apiOrigin = env.ApiData.HttpProto + '://' + env.ApiData.ApiDomain + env.ApiData.HttpPort ? (':' + env.ApiData.HttpPort) : '';
+
 var r = new swig.Swig({
   locals: {
     src: 'src',
@@ -11,6 +16,7 @@ var r = new swig.Swig({
 }).render;
 
 var config = {
+  env: env,
   render: r,
   port: 8080,
   dest: r('{{ dest }}'),
@@ -42,17 +48,6 @@ var config = {
   jsdelivr: {
     cssReg: /<!--\s*jsdelivr-css\s*-->/g,
     jsReg: /<!--\s*jsdelivr-js\s*-->/g,
-  },
-
-  sass: {
-    src: r('{{ src }}/sass/*.{sass,scss}'),
-    dest: r('{{ dest }}'),
-    settings: {
-      // Required if you want to use SASS syntax
-      // See https://github.com/dlmanning/gulp-sass/issues/81
-      sourceComments: 'map',
-      imagePath: '/images', // Used by the image-url helper
-    },
   },
   images: {
     src: r("{{ src }}/images/**"),

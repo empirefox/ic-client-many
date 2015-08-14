@@ -1,0 +1,15 @@
+{
+  "cdnJs": "/js",
+  "cdnCss": "/css",
+  "cdnImg": "img",
+  "ApiData": {
+    "ApiDomain": "127.0.0.1",
+    "DevProd": {
+      "IsDev": true,
+      "HttpProto": "http",
+      "HttpPort": "9998",
+      "WsProto": "ws",
+      "WsPort": "9998"
+    }
+  }
+}

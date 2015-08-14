@@ -2,6 +2,7 @@
   "cdn": {
     "js": [
       "bower_components/jquery/dist/jquery.js",
+      "bower_components/colorful-background-css-generator/dist/colorful-background-css-generator.js",
       "bower_components/angular/angular.js",
       "bower_components/angular-animate/angular-animate.js",
       "bower_components/angular-cookies/angular-cookies.js",
@@ -9,6 +10,7 @@
       "bower_components/angular-translate/angular-translate.js",
       "bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js",
       "bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
+      "bower_components/angular-jwt/dist/angular-jwt.js",
       "bower_components/anijs/dist/anijs.js",
       "bower_components/ngDialog/js/ngDialog.js",
       "bower_components/angularjs-toaster/toaster.js"

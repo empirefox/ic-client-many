@@ -1,24 +1,21 @@
 .sidebar {
-	position: fixed;
-	top: 0px;
-	color: #2C3E50;
+  position: fixed;
+  margin-top: 60px;
+  color: #2C3E50;
 }
-
 video {
-	max-height: 100%;
-	max-width: 100%;
-	margin: auto;
-	position: relative;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
+  max-height: 100%;
+  max-width: 100%;
+  margin: auto;
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
-
+.room {
+  margin-top: 60px;
+}
 .room-title {
-	display: inline-block;
-}
-
-.sidebar {
-	top: 100px;
+  display: inline-block;
 }

@@ -1,17 +1,21 @@
 'use strict';
 
-angular.module('app.system', ['app.constants.system']).factory('AppSystem', [
-  '$window', 'SystemData',
-  function($window, SystemData) {
-    var wsProto = SystemData.DevProd.WsProto;
-    var wsPrefix = wsProto + '://' + SystemData.SubDomain + ':' + SystemData.DevProd.WsPort;
+angular.module('app.system', []).factory('AppSystem', [
+  '$window',
+  function($window) {
+    // From templates by gulp
+    var ApiData = window.ApiData;
+    var wsProto = ApiData.DevProd.WsProto;
+    var wsPrefix = wsProto + '://' + ApiData.ApiDomain + ':' + ApiData.DevProd.WsPort;
+    var httpPort = ApiData.DevProd.HttpPort ? ':' + ApiData.DevProd.HttpPort : '';
+    var apiOrigin = ApiData.DevProd.HttpProto + '://' + ApiData.ApiDomain + httpPort;
 
     return {
+      apiOrigin: apiOrigin,
       wsPrefix: wsPrefix,
-      ctrlUrl: wsPrefix + '/many/ctrl',
-      signalingUrl: wsPrefix + '/many/signaling',
-      localRoomFrameUrl: 'http://127.0.0.1:12301/iframeLocal.html',
-      httpPrefix: SystemData.DevProd.HttpProto + '://' + $window.location.host,
+      ctrlUrl: wsPrefix + '/mws/ctrl',
+      signalingUrl: wsPrefix + '/mws/signaling',
+      httpPrefix: ApiData.DevProd.HttpProto + '://' + $window.location.host,
     };
   }
 ]);

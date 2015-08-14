@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('app.service.pcfactory', ['app.service.streams', 'app.system']).factory('PCFactory', [
-  '$window', 'Streams', 'AppSystem',
-  function($window, Streams, AppSystem) {
+angular.module('app.service.pcfactory', ['app.service.streams', 'app.system', 'app.service.auth']).factory('PCFactory', [
+  '$window', 'Streams', 'AppSystem', 'AuthToken',
+  function($window, Streams, AppSystem, AuthToken) {
     function newPeerConn(cid, ws) {
       var pc = new RTCPeerConnection({
         constraints: {
@@ -43,13 +43,13 @@ angular.module('app.service.pcfactory', ['app.service.streams', 'app.system']).f
     service.createPeerConn = function(room, camera) {
       var pc;
       var target = room + '/' + camera;
-      var ws = new WebSocket(AppSystem.signalingUrl + '/' + target + '/' + Math.random().toString(36).slice(2));
+      var ws = new WebSocket(AppSystem.signalingUrl);
 
       ws.onopen = function() {
-        wss[target] = ws;
-        pc = newPeerConn(camera, ws);
+        AuthToken.send(ws);
       };
       ws.onclose = function() {
+        Streams.remove(camera);
         delete wss[target];
         try {
           pc.close();
@@ -62,11 +62,28 @@ angular.module('app.service.pcfactory', ['app.service.streams', 'app.system']).f
         // console.log('ws.onmessage:', e.data);
         var signal = JSON.parse(e.data);
         switch (signal.type) {
+          case 'Login':
+            if (signal.content) {
+              ws.send(JSON.stringify({
+                room: room,
+                camera: camera,
+                reciever: Math.random().toString(36).slice(2),
+              }));
+            } else {
+              ws.close();
+              console.log('Login failed');
+            }
+            break;
+          case 'Accepted':
+            wss[target] = ws;
+            pc = newPeerConn(camera, ws);
+            break;
           case 'answer':
             pc.addAnswerSDP(signal);
             break;
           case 'candidate':
             pc.addICE(signal);
+            break;
         }
       };
     };

@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.system']).factory(
-  'CtrlClient', ['$window', 'toaster', '$websocket', 'AppSystem',
-    function($window, toaster, $websocket, AppSystem) {
+angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.system', 'app.service.auth']).factory(
+  'CtrlClient', ['$window', '$http', 'toaster', '$websocket', 'AppSystem', 'AuthToken',
+    function($window, $http, toaster, $websocket, AppSystem, AuthToken) {
       var ctrlStream = $websocket(AppSystem.ctrlUrl);
 
       var service = {
@@ -46,9 +46,28 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
 
       // Response from one, not from server
       var onResponse = function(response) {
-        switch (response.type) {
+        switch (response.to) {
           case 'ManageSetRoomName':
-            angular.extend(service.rooms, response.content);
+            var setter = response.content;
+            service.rooms.some(function(room) {
+              if (room.id === setter.id) {
+                angular.extend(room, setter);
+                return true;
+              }
+            });
+            break;
+          case 'ManageDelRoom':
+            var id = response.content;
+            var delIndex;
+            var found = service.rooms.some(function(room, i) {
+              if (room.id === id) {
+                delIndex = i;
+                return true;
+              }
+            });
+            if (found) {
+              service.rooms.splice(delIndex, 1);
+            }
             break;
           case 'ManageGetIpcam':
             // indect by endpoint in dialog
@@ -59,13 +78,24 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
         }
       };
 
+      ctrlStream.onOpen(function() {
+        AuthToken.send(ctrlStream);
+      });
+
       ctrlStream.onMessage(function(raw) {
+        // console.log(raw.data);
         var data = JSON.parse(raw.data);
         if (!data.content) {
           // console.log('wrong data:', data);
           return;
         }
         switch (data.type) {
+          case 'Login':
+            if (data.content) {
+              service.getUsername();
+              service.getCameraList();
+            }
+            break;
           case 'Userinfo':
             service.username = data.content;
             break;
@@ -92,7 +122,7 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
             break;
           case 'Response':
             // raw content
-            onResponse(data.content);
+            onResponse(data);
             break;
           case 'Info':
             // TODO change content to pop option object
@@ -102,11 +132,6 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
             console.log('Unexpected data from server', data);
         }
       });
-
-      // init
-      service.getUsername();
-      service.getCameraList();
-
       return service;
     }
   ]);

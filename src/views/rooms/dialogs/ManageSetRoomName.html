@@ -10,7 +10,7 @@
 		<label>
 			<span ng-bind="'PAGE.ROOMS.SET_ROOM.NEW_NAME'|translate"></span>
 			<span class="text-danger" ng-show="!confirmValue">*</span>
-			<input ng-model="confirmValue" type="text" class="form-control" placeholder="name" required>
+			<input name="name" ng-maxlength="120" ng-model="confirmValue" type="text" class="form-control" placeholder="name" required>
 		</label>
 	</div>
 	<div class="ngdialog-buttons">

@@ -41,17 +41,16 @@ angular.module('app.i18n.zh_CN', ['pascalprecht.translate']).config(['$translate
         },
         JOIN: {
           DESC: '加入已有监控室',
-          INVITE_CODE: '邀请码',
+          INVITE_CODE: '邀请码（5分钟内有效）',
           FORM: {
-            ENTER_ROOM: '填写监控室标志:',
             ENTER_CODE: '填写邀请码:',
-            ROOM: '监控室标志:',
             CODE: '邀请码:',
             URL: '邀请链接',
           },
         },
         ROOMS: {
           OPEN_SET_ROOM: '设置监控室名称',
+          OPEN_DEL_ROOM: '移除监控室',
           OPEN_INVITE_CODE: '邀请',
           OPEN_SET_CAM: '设置摄像头',
           OPEN_NEW_IPCAM: '添加摄像头',
@@ -65,25 +64,29 @@ angular.module('app.i18n.zh_CN', ['pascalprecht.translate']).config(['$translate
             OLD_NAME_IS: '旧的名称: ',
             NEW_NAME: '填写新的名称:',
           },
+          DEL_ROOM: {
+            TITLE: '删除监控室',
+            WARNING: '您确定要删除吗?',
+          },
           SET_IPCAM: {
             TITLE: '编辑摄像头',
             ID: '名称',
             URL: '监控室连接摄像头的url',
             TURN_OFF: '关闭状态',
           },
-          NEW_IPCAM:{
+          NEW_IPCAM: {
             TITLE: '添加新的摄像头',
           },
           DEL_IPCAM: {
             TITLE: '删除摄像头',
-            WARNING:'您确定要删除吗?',
+            WARNING: '您确定要删除吗?',
           },
           CHAT: {
             OPEN: '发送消息到监控室',
           },
         },
         INDEX: {
-          DESC: '首页',
+          DESC: '专注家庭监控整合',
           START: '开始体验!',
           BROWSER_TIP: '为保证登录后各项功能正常运行,请使用下列现代浏览器',
           DOWNLOAD: '下载',

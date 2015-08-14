@@ -1,0 +1,15 @@
+{
+  "cdnJs": "http://7xl28u.com1.z0.glb.clouddn.com/r2/js",
+  "cdnCss": "http://7xl28u.com1.z0.glb.clouddn.com/r2/css",
+  "cdnImg": "http://7xl28u.com1.z0.glb.clouddn.com/r2/img",
+  "ApiData": {
+    "ApiDomain": "ic-api.herokuapp.com",
+    "DevProd": {
+      "IsDev": false,
+      "HttpProto": "https",
+      "HttpPort": "",
+      "WsProto": "wss",
+      "WsPort": "443"
+    }
+  }
+}
