@@ -90,8 +90,8 @@ angular.module('app.i18n.zh_CN', ['pascalprecht.translate']).config(['$translate
           START: '开始体验!',
           BROWSER_TIP: '为保证登录后各项功能正常运行,请使用下列现代浏览器',
           DOWNLOAD: '下载',
-          FIREFOX: 'Mozilla Firefox | 全球最安全 功能齐全 体验最好的浏览器',
-          CHROME: 'Google Chrome | 谷歌公司出品 快速便捷',
+          FIREFOX: 'Mozilla Firefox(>=38.0) | 全球最安全 功能齐全 体验最好的浏览器',
+          CHROME: 'Google Chrome(>=43.0) | 谷歌出品 快速便捷',
         },
         LOGOFF: {
           CONFIRM: '需要确认才能销毁您的账户',
@@ -99,7 +99,7 @@ angular.module('app.i18n.zh_CN', ['pascalprecht.translate']).config(['$translate
           MESSAGE: '当您继续操作后，您的所有数据将永久删除.'
         },
         DOWNLOAD: {
-          DESC: '当前仅提供linux平台客户端，其它平台客户端稍后提供',
+          DESC: '当前仅提供linux平台客户端，其它平台客户端稍后提供. 欢迎提出建议到empirefox@gmail.com',
           PUB_TIME: '发布时间',
           BIT: '位',
           OS: '操作系统',

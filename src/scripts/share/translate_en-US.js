@@ -90,8 +90,8 @@ angular.module('app.i18n.en_US', ['pascalprecht.translate']).config(['$translate
           START: 'Start Now!',
           BROWSER_TIP: 'These browsers will give you comfortable experience',
           DOWNLOAD: 'Download',
-          FIREFOX: 'Mozilla Firefox',
-          CHROME: 'Google Chrome',
+          FIREFOX: 'Mozilla Firefox(>=38.0)',
+          CHROME: 'Google Chrome(>=43.0)',
         },
         LOGOFF: {
           CONFIRM: 'Need Confirm to Destroy Your Account',
@@ -99,7 +99,7 @@ angular.module('app.i18n.en_US', ['pascalprecht.translate']).config(['$translate
           MESSAGE: 'All data will be deleted permanently, when your continue this action.'
         },
         DOWNLOAD: {
-          DESC: 'Only linux client provided now',
+          DESC: 'Only linux client provided now. Welcome any suggest to empirefox@gmail.com',
           PUB_TIME: 'Publish Time',
           BIT: 'bit',
           OS: 'Operation System',

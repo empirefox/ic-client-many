@@ -19,7 +19,7 @@ angular.module('dl.client.data', []).factory('ClientData', ['$q', function($q) {
     'zh_CN': {
       name: 'IC监控室',
       version: '1.1.0',
-      desc: '这是监控中心的客户端，运行在与摄像头相同的内网中.',
+      desc: '这是监控中心的客户端，运行在与IP摄像头相同的内网中. 运行后，您将可以安全远程查看内网监控. 您的家人可以参与到监控室.',
     },
   }];
   return {

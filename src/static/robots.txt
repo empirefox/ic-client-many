@@ -2,5 +2,6 @@
 
 # Allow crawling of all content
 User-agent: *
-Allow: /
-Allow: /index.html
+Disallow: /token.html
+Disallow: /token-one.html
+Disallow: /account.html

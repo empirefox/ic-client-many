@@ -10,19 +10,19 @@
 					<div class="pull-right" ng-if="room.isOwner">
 						<button ng-click="Dialog.openManageRoomNameDialog(room)" type="button" class="btn btn-link">
 							<i class="fa fa-pencil"></i>
-							<span ng-bind="'PAGE.ROOMS.OPEN_SET_ROOM'|translate"></span>
+							<span class="hidden-xs" ng-bind="'PAGE.ROOMS.OPEN_SET_ROOM'|translate"></span>
 						</button>
 						<button ng-click="Dialog.openManageDelRoomDialog(room)" type="button" class="btn btn-danger">
-							<i class="fa fa-exclamation-triangle"></i>
-							<span ng-bind="'PAGE.ROOMS.OPEN_DEL_ROOM'|translate"></span>
+							<i class="fa fa-trash"></i>
+							<span class="hidden-xs" ng-bind="'PAGE.ROOMS.OPEN_DEL_ROOM'|translate"></span>
 						</button>
 						<button ng-click="Dialog.openManageNewInviteUrlDialog(room)" type="button" class="btn btn-default btn-success">
 							<i class="fa fa-share-alt"></i>
-							<span ng-bind="'PAGE.ROOMS.OPEN_INVITE_CODE'|translate"></span>
+							<span class="hidden-xs" ng-bind="'PAGE.ROOMS.OPEN_INVITE_CODE'|translate"></span>
 						</button>
 						<button ng-click="Dialog.openManageNewIpcamDialog(room)" type="button" class="btn btn-default btn-success">
 							<i class="fa fa-plus"></i>
-							<span ng-bind="'PAGE.ROOMS.OPEN_NEW_IPCAM'|translate"></span>
+							<span class="hidden-xs" ng-bind="'PAGE.ROOMS.OPEN_NEW_IPCAM'|translate"></span>
 						</button>
 					</div>
 					<p>
@@ -46,11 +46,11 @@
 						<!-- camera.disabled used when setting camera. see dialog-factory.js -->
 						<button type="button" class="btn btn-link" ng-disabled="camera.disabled" ng-click="Dialog.openManageIpcamDialog(room,camera)">
 							<i class="fa fa-pencil"></i>
-							<span ng-bind="'PAGE.ROOMS.OPEN_SET_CAM'|translate"></span>
+							<span class="hidden-xs" ng-bind="'PAGE.ROOMS.OPEN_SET_CAM'|translate"></span>
 						</button>
 						<button type="button" class="btn btn-default btn-warning" ng-click="Dialog.openManageDelIpcamDialog(room,camera)">
 							<i class="fa fa-trash"></i>
-							<span ng-bind="'PAGE.ROOMS.OPEN_DEL_CAM'|translate"></span>
+							<span class="hidden-xs" ng-bind="'PAGE.ROOMS.OPEN_DEL_CAM'|translate"></span>
 						</button>
 					</div>
 					<p>

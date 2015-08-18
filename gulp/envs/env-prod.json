@@ -6,7 +6,7 @@
     "ApiDomain": "ic-api.herokuapp.com",
     "DevProd": {
       "IsDev": false,
-      "HttpProto": "https",
+      "HttpProto": "http",
       "HttpPort": "",
       "WsProto": "wss",
       "WsPort": "443"
