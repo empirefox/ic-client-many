@@ -7,15 +7,15 @@ angular.module('app.system', []).factory('AppSystem', [
     var ApiData = window.ApiData;
     var wsProto = ApiData.DevProd.WsProto;
     var wsPrefix = wsProto + '://' + ApiData.ApiDomain + ':' + ApiData.DevProd.WsPort;
-    var httpPort = ApiData.DevProd.HttpPort ? ':' + ApiData.DevProd.HttpPort : '';
-    var apiOrigin = ApiData.DevProd.HttpProto + '://' + ApiData.ApiDomain + httpPort;
+    var apiPort = ApiData.DevProd.ApiPort ? ':' + ApiData.DevProd.ApiPort : '';
+    var apiOrigin = ApiData.DevProd.ApiProto + '://' + ApiData.ApiDomain + apiPort;
 
     return {
       apiOrigin: apiOrigin,
       wsPrefix: wsPrefix,
       ctrlUrl: wsPrefix + '/mws/ctrl',
       signalingUrl: wsPrefix + '/mws/signaling',
-      httpPrefix: ApiData.DevProd.HttpProto + '://' + $window.location.host,
+      httpPrefix: ApiData.DevProd.SiteProto + '://' + $window.location.host,
     };
   }
 ]);

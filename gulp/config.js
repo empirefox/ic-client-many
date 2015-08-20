@@ -2,7 +2,7 @@ var swig = require('swig');
 var utils = require('./utils');
 var env = require('./envs/env-' + utils.getEnvName() + '.json');
 
-env.apiOrigin = env.ApiData.HttpProto + '://' + env.ApiData.ApiDomain + env.ApiData.HttpPort ? (':' + env.ApiData.HttpPort) : '';
+env.apiOrigin = env.ApiData.ApiProto + '://' + env.ApiData.ApiDomain + env.ApiData.ApiPort ? (':' + env.ApiData.ApiPort) : '';
 
 var r = new swig.Swig({
   locals: {

@@ -6,8 +6,9 @@
     "ApiDomain": "127.0.0.1",
     "DevProd": {
       "IsDev": true,
-      "HttpProto": "http",
-      "HttpPort": "9998",
+      "SiteProto": "http",
+      "ApiProto": "http",
+      "ApiPort": "9998",
       "WsProto": "ws",
       "WsPort": "9998"
     }

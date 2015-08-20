@@ -3,14 +3,14 @@
 angular.module('app.service.pcfactory', ['app.service.streams', 'app.system', 'app.service.auth']).factory('PCFactory', [
   '$window', 'Streams', 'AppSystem', 'AuthToken',
   function($window, Streams, AppSystem, AuthToken) {
-    function newPeerConn(cid, ws) {
+    function newPeerConn(camera, ws) {
       var pc = new RTCPeerConnection({
         constraints: {
           mandatory: {
             OfferToReceiveAudio: true,
             OfferToReceiveVideo: true,
           },
-          optional: []
+          optional: [],
         },
 
         onICE: function(candidate) {
@@ -23,10 +23,10 @@ angular.module('app.service.pcfactory', ['app.service.streams', 'app.system', 'a
           ws.send(JSON.stringify(candidate));
         },
         onRemoteStream: function(stream) {
-          Streams.add(cid, stream);
+          Streams.add(camera, stream);
         },
         onRemoteStreamEnded: function() {
-          Streams.remove(cid);
+          Streams.remove(camera);
         },
 
         onOfferSDP: function(offerSDP) {
@@ -41,8 +41,12 @@ angular.module('app.service.pcfactory', ['app.service.streams', 'app.system', 'a
     var wss = {};
 
     service.createPeerConn = function(room, camera) {
+      if (camera.playing) {
+        return;
+      }
+      camera.playing = true;
       var pc;
-      var target = room + '/' + camera;
+      var target = room.id + '/' + camera.id;
       var ws = new WebSocket(AppSystem.signalingUrl);
 
       ws.onopen = function() {
@@ -65,8 +69,8 @@ angular.module('app.service.pcfactory', ['app.service.streams', 'app.system', 'a
           case 'Login':
             if (signal.content) {
               ws.send(JSON.stringify({
-                room: room,
-                camera: camera,
+                room: room.id,
+                camera: camera.id,
                 reciever: Math.random().toString(36).slice(2),
               }));
             } else {
@@ -89,13 +93,13 @@ angular.module('app.service.pcfactory', ['app.service.streams', 'app.system', 'a
     };
 
     service.closePeerConn = function(room, camera) {
-      var target = room + '/' + camera;
+      var target = room.id + '/' + camera.id;
       var ws = wss[target];
       if (ws) {
+        delete wss[target];
         if (ws.readyState < 2) {
           ws.close();
         }
-        delete wss[target];
       }
     };
 
