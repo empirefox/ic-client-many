@@ -21,6 +21,7 @@ function addCopyPageTask(pagename) {
           cdnCss: config.env.cdnCss,
           cdnImg: config.env.cdnImg,
           module: pagename,
+          commonDestName: config.scripts.commonDestName,
         },
       })).
       // add jsdelivr css

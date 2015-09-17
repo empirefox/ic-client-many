@@ -1,8 +1,11 @@
+'use strict';
+
 var gulp = require('gulp');
 var Lazy = require("lazy.js");
 var $ = require('gulp-load-plugins')();
 var angularFilesort = $.angularFilesort;
-var angularDependency = $.angularDependency;
+var ngDeps = $.angularDependency;
+var htmlmin = $.htmlMinifier;
 var runSequence = require('run-sequence');
 var StreamQueue = require('streamqueue');
 var toStaticfilesCDN = require('./cdn-helper').toStaticfilesCDN;
@@ -10,6 +13,14 @@ var pages = require('../../config').pages;
 var config = require('../../config').scripts;
 var env = require('../../config').env;
 var swig = $.swig;
+
+var exclude = ["ng", "ngAnimate", "ngCookies", "ngLocale", "ngSanitize", "pascalprecht.translate",
+  "ui.bootstrap", "ui.bootstrap.tpls", "angular-loading-bar", "chieffancypants.loadingBar",
+  "angular.filter", "angular-jwt", "angular-jwt.interceptor", "angular-jwt.jwt", "ngDialog", "toaster",
+  "ngWebSocket", "angular-websocket", "angularMoment", "irontec.simpleChat", "app.tpl"
+];
+var commonModule = 'app.common';
+var commons = ['app.system', 'app.service.detect', 'app.i18n', 'app.navs', 'app.service.auth', 'app.service.login.auto', 'app.service.path'];
 
 function addCopyPageJsTask(pagename) {
   gulp.task('copy:' + pagename + '.js', function() {
@@ -22,41 +33,53 @@ function addCopyPageJsTask(pagename) {
       // third libs that are not in cdn
     queue(gulp.src(resource.js)).
       // local src filterd by pagename|modulename
-    queue(gulp.src(config.src).pipe(angularDependency(pagename))).
+    queue(gulp.src(config.src).pipe(ngDeps(pagename, Lazy([exclude, commonModule, commons]).flatten().toArray()))).
       // done
     done().
       // sort files
       //		.pipe(angularFilesort())
       // concat
     pipe($.concat(pagename + '.js')).pipe(toStaticfilesCDN()).
-    pipe($.uglify()).
+      // pipe($.uglify()).
     pipe(gulp.dest(config.dest));
   });
 }
 
-gulp.task('copy:scripts:tpl', function() {
+gulp.task('copy:scripts:common', function() {
+  let commonScripts = gulp.src(config.src).pipe(ngDeps(commonModule, exclude)).
+  pipe($.concat('common.js')).
+  pipe($.header('window.ApiData=' + JSON.stringify(env.ApiData) + ';'));
   // all tpl
-  return gulp.src(config.tpl).pipe($.angularTemplatecache({
+  let tplScripts = gulp.src(config.tpl).
+  pipe(htmlmin({
+    collapseWhitespace: true,
+    conservativeCollapse: true,
+  })).
+  pipe($.angularTemplatecache({
     filename: 'templates.js',
     standalone: true,
-    module: 'l2m-tpl',
+    module: 'app.tpl',
     root: '/views',
   })).
-  pipe($.header('window.ApiData=' + JSON.stringify(env.ApiData) + ';')).
+  pipe($.rename({
+    extname: '.js',
+  })).
   pipe(swig({
     defaults: {
       varControls: ['[[', ']]'],
     },
     data: env,
-  })).
-  pipe($.rename({
-      extname: '.js',
-    })).
+  }));
+
+  return new StreamQueue({
+    objectMode: true,
+  }).queue(tplScripts, commonScripts).done().
+  pipe($.concat(config.commonDestName)).
     // pipe($.uglify()).
   pipe(gulp.dest(config.dest));
 });
 
-var tasks = ['copy:scripts:tpl'];
+var tasks = ['copy:scripts:common'];
 pages.forEach(function(page) {
   addCopyPageJsTask(page);
   tasks.push('copy:' + page + '.js');

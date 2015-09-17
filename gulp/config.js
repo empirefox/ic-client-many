@@ -24,6 +24,7 @@ var config = {
   scripts: {
     src: r('{{ src }}/scripts/**/*.js'),
     tpl: r('{{ src }}/{{ views }}/**/*.html'),
+    commonDestName: 'common.js',
     dest: r('{{ dest }}/js'),
   },
   stylus: {

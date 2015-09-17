@@ -72,7 +72,8 @@ angular.module('app.i18n.zh_CN', ['pascalprecht.translate']).config(['$translate
             TITLE: '编辑摄像头',
             ID: '名称',
             URL: '监控室连接摄像头的url',
-            TURN_OFF: '关闭状态',
+            AUDIO_OFF: '关闭音频',
+            TURN_OFF: '关闭摄像头',
           },
           NEW_IPCAM: {
             TITLE: '添加新的摄像头',
@@ -86,12 +87,18 @@ angular.module('app.i18n.zh_CN', ['pascalprecht.translate']).config(['$translate
           },
         },
         INDEX: {
-          DESC: '专注家庭监控整合',
+          SITE_NAME: '云监控中心',
+          SITE_DESC: '专注家庭监控整合',
           START: '开始体验!',
-          BROWSER_TIP: '为保证登录后各项功能正常运行,请使用下列现代浏览器',
-          DOWNLOAD: '下载',
-          FIREFOX: 'Mozilla Firefox(>=38.0) | 全球最安全 功能齐全 体验最好的浏览器',
-          CHROME: 'Google Chrome(>=43.0) | 谷歌出品 快速便捷',
+          UNSUPPORTED: '您的浏览器有点不给力，请使用以下浏览器:',
+          FIREFOX: 'Mozilla Firefox(>=39) | 火狐浏览器',
+          CHROME: 'Google Chrome(>=44) | 谷歌浏览器',
+          OPERA: 'Opera(>=31) | 欧朋浏览器',
+          FEATURE: {
+            FREE: '免费',
+            SECURE: '安全',
+            EASY: '易用',
+          },
         },
         LOGOFF: {
           CONFIRM: '需要确认才能销毁您的账户',

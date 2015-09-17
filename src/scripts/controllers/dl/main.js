@@ -14,7 +14,7 @@ angular.module('dl.ctrl.main', ['dl.client.data', 'angular.filter', 'app.service
     });
 
     $scope.supportedOs = Detector.supportedOs;
-    $scope.currentOs = Detector.OSName || Detector.supportedOs[0];
+    $scope.currentOs = Detector.osName || Detector.supportedOs[0];
     $scope.setOs = function(os) {
       $scope.currentOs = os;
     };

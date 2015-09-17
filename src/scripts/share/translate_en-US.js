@@ -72,7 +72,8 @@ angular.module('app.i18n.en_US', ['pascalprecht.translate']).config(['$translate
             TITLE: 'Edit the ipcam',
             ID: 'Id',
             URL: 'Url',
-            TURN_OFF: 'Turn off',
+            AUDIO_OFF: 'Audio off',
+            TURN_OFF: 'Camera off',
           },
           NEW_IPCAM: {
             TITLE: 'Add new ipcam',
@@ -86,12 +87,18 @@ angular.module('app.i18n.en_US', ['pascalprecht.translate']).config(['$translate
           },
         },
         INDEX: {
-          DESC: 'Focus on home monitoring integration',
+          SITE_NAME: 'GogogoCam',
+          SITE_DESC: 'Focus on home monitoring integration',
           START: 'Start Now!',
-          BROWSER_TIP: 'These browsers will give you comfortable experience',
-          DOWNLOAD: 'Download',
-          FIREFOX: 'Mozilla Firefox(>=38.0)',
-          CHROME: 'Google Chrome(>=43.0)',
+          UNSUPPORTED: 'Your browser is old and does not support our feathure. Please use the ones list below:',
+          FIREFOX: 'Mozilla Firefox(>=39)',
+          CHROME: 'Google Chrome(>=44)',
+          OPERA: 'Opera(>=31)',
+          FEATURE: {
+            FREE: 'Free',
+            SECURE: 'Secure',
+            EASY: 'Easy',
+          },
         },
         LOGOFF: {
           CONFIRM: 'Need Confirm to Destroy Your Account',

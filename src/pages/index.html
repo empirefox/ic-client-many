@@ -28,18 +28,30 @@
 	<!-- endinject -->
 
 	<!-- jsdelivr-js -->
+
+	<meta property="og:url" content="https://www.gogogocam.com" />
+	<meta property="og:tooltakes" content="a solution on home camera integration" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="GogogoCam" />
+	<meta property="og:image" content="[[cdnImg]]/meta-thumb-en.png" />
+	<meta property="og:description" content="Focus on home camera integration freely and easily." />
+
+	<meta property="twitter:url" content="https://www.gogogocam.com" />
+	<meta property="twitter:card" content="summary" />
+	<meta property="twitter:description" content="Focus on home camera integration freely and easily." />
+	<meta property="twitter:creator" content="@tooltakes" />
+	<meta property="twitter:title" content="GogogoCam" />
+
+	<html itemscope itemtype="http://schema.org/Product">
+	<meta itemprop="name" content="GogogoCam">
+	<meta itemprop="description" content="Focus on home camera integration freely and easily.">
+	<meta itemprop="image" content="[[cdnImg]]/meta-thumb-en.png">
 </head>
 
 <body>
-	<div ng-controller="IndexCtrl" class="start-container">
-		<button id="startButton" class="btn btn-success btn-lg center-block start-btn" data-anijs="if: mouseover, do: shake animated" ng-bind="'PAGE.INDEX.START'|translate" ng-click="start()"></button>
-		<span class="index-desc" translate="PAGE.INDEX.DESC"></span>
-	</div>
-	<div data-anijs="if: mouseover, do: tada animated, to: #startButton">
-		<nav-bar></nav-bar>
-	</div>
-	<div ng-include="'/views/[[module]]/body.html'" id="container" random-color></div>
-	<script src="[[cdnJs]]/templates.js"></script>
+	<nav-bar></nav-bar>
+	<div ng-include="'/views/[[module]]/body.html'"></div>
+	<script src="[[cdnJs]]/[[commonDestName]]"></script>
 	<script src="[[cdnJs]]/[[module]].js"></script>
 </body>
 

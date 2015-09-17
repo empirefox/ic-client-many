@@ -1,7 +1,7 @@
 {
-  "cdnJs": "https://dn-icv3r1.qbox.me/r4/js",
-  "cdnCss": "https://dn-icv3r1.qbox.me/r4/css",
-  "cdnImg": "https://dn-icv3r1.qbox.me/r4/img",
+  "cdnJs": "https://dn-icv3r1.qbox.me/r5/js",
+  "cdnCss": "https://dn-icv3r1.qbox.me/r5/css",
+  "cdnImg": "https://dn-icv3r1.qbox.me/r5/img",
   "ApiData": {
     "ApiDomain": "ic-api.herokuapp.com",
     "DevProd": {

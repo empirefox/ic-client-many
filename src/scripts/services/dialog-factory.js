@@ -79,7 +79,9 @@ angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl', 'app.servi
         template: '/views/rooms/dialogs/ManageNewIpcam.html',
         data: {
           room: room,
-          ipcam: {},
+          ipcam: {
+            audioOff: true,
+          },
         },
         className: 'ngdialog-theme-plain',
       }).then(function(camera) {

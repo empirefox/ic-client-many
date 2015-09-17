@@ -38,7 +38,7 @@
 						<i ng-if="!Streams.map[camera.id] && camera.online && !camera.playing" class="fa fa-play-circle-o fa-3x"></i>
 					</a>
 					<div class="pull-right">
-						<button ng-if="Streams.map[camera.id]" ng-click="disconnect(room,camera)" tooltip="{{'PAGE.ROOMS.CAM.STOP'|translate}}" type="button" class="btn btn-danger">
+						<button ng-if="camera.playing" ng-click="disconnect(room,camera)" tooltip="{{'PAGE.ROOMS.CAM.STOP'|translate}}" type="button" class="btn btn-danger">
 							<i class="fa fa-times-circle-o fa-lg"></i>
 						</button>
 					</div>

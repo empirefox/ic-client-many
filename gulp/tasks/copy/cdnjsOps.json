@@ -6,45 +6,39 @@
   "cdnjs:angular.js:angular-route.min.js",
   "cdnjs:angular.js:angular-sanitize.min.js",
   "cdnjs:angular.js:angular.min.js",
-  "cdnjs:angular-moment", {
+
+  "cdnjs:angular-translate",
+  "cdnjs:angular-translate-storage-local",
+  "cdnjs:angular-translate-storage-cookie",
+
+  "cdnjs:angular-filter",
+  "cdnjs:angular-moment",
+  "cdnjs:font-awesome",
+  "cdnjs:textAngular",
+
+  "cdnjs:angular-loading-bar:loading-bar.min.js",
+  "cdnjs:angular-loading-bar:loading-bar.min.css", {
     "file": "**/angular-locale_zh-cn.js",
     "package": "angular-i18n",
     "cdn": "cdnjs:angular.js:i18n/angular-locale_zh-cn.js"
   }, {
-    "file": "**/angular-translate/*.js",
-    "package": "angular-translate",
-    "cdn": "//cdnjs.cloudflare.com/ajax/libs/angular-translate/${ version }/${ filenameMin }"
-  }, {
-    "file": "**/angular-translate-storage-cookie/*.js",
-    "package": "angular-translate-storage-cookie",
-    "cdn": "//cdnjs.cloudflare.com/ajax/libs/angular-translate-storage-cookie/${ version }/${ filenameMin }"
-  }, {
-    "file": "**/angular-translate-storage-local/*.js",
-    "package": "angular-translate-storage-local",
-    "cdn": "//cdnjs.cloudflare.com/ajax/libs/angular-translate-storage-local/${ version }/${ filenameMin }"
-  }, {
-    "file": "**/ui-bootstrap-tpls*.js",
     "package": "angular-bootstrap",
-    "cdn": "cdnjs:angular-ui-bootstrap:ui-bootstrap-tpls.min.js"
+    "cdn": "cdnjs:angular-ui-bootstrap"
   }, {
-    "file": "**/angular-filter/**/*.js",
-    "package": "angular-filter",
-    "cdn": "//cdnjs.cloudflare.com/ajax/libs/angular-filter/${ version }/${ filenameMin }"
-  }, {
-    "file": "**/angularjs-toaster/*.js",
+    "file": "**/angularjs-toaster/*.{js,css}",
     "cdn": "cdnjs:angularjs-toaster:${ filenameMin }"
   }, {
-    "file": "**/angularjs-toaster/*.css",
-    "cdn": "cdnjs:angularjs-toaster:${ filenameMin }"
-  },
-  "cdnjs:font-awesome", {
-    "file": "**/ngDialog/css/*.css",
+    "file": "**/ngDialog.js",
     "package": "ngDialog",
-    "cdn": "//cdnjs.cloudflare.com/ajax/libs/ng-dialog/${ version }/css/${ filenameMin }"
+    "cdn": "cdnjs:ng-dialog:js/${ filenameMin }"
   }, {
-    "file": "**/ngDialog/js/*.js",
+    "file": "**/ngDialog*.css",
     "package": "ngDialog",
-    "cdn": "//cdnjs.cloudflare.com/ajax/libs/ng-dialog/${ version }/js/${ filenameMin }"
+    "cdn": "cdnjs:ng-dialog:css/${ filenameMin }"
+  }, {
+    "file": "**/anijs.js",
+    "package": "anijs",
+    "cdn": "cdnjs:AniJS:anijs-min.js"
   }, {
     "file": "**/spectrum/spectrum.js",
     "cdn": "cdnjs:spectrum:js/${ filenameMin }"
@@ -73,28 +67,21 @@
     "file": "**/codemirror.css",
     "cdn": "cdnjs:codemirror:${ filenameMin }"
   }, {
-    "file": "**/string.js",
     "package": "string",
-    "cdn": "cdnjs:string.js"
+    "cdn": "cdnjs:string.js:string.js"
   }, {
-    "file": "**/bootstrap/**/bootstrap.css",
     "package": "bootstrap",
     "cdn": "cdnjs:twitter-bootstrap:css/bootstrap.min.css"
-  }, {
-    "file": "**/textAngular.min.js",
-    "package": "textAngular",
-    "cdn": "cdnjs:textAngular:${ filenameMin }"
-  }, {
-    "file": "**/anijs/**/*.js",
-    "package": "anijs",
-    "cdn": "//cdnjs.cloudflare.com/ajax/libs/AniJS/${ version }/anijs-min.js"
   }, {
     "file": "**/angular-jwt/**/*.js",
     "package": "angular-jwt",
     "cdn": "https://cdn.rawgit.com/auth0/angular-jwt/${ version }/dist/${ filenameMin }"
   }, {
     "file": "**/RTCPeerConnection-v1.5.js",
-    "cdn": "https://cdn.rawgit.com/muaz-khan/WebRTC-Experiment/332e1e8d503a18636fce3a89b7e3606030189cf9/RTCPeerConnection/RTCPeerConnection-v1.5.js"
+    "cdn": "https://cdn.rawgit.com/muaz-khan/WebRTC-Experiment/46efeda0b460bae9021f365d71f216012b512571/RTCPeerConnection/RTCPeerConnection-v1.5.js"
+  }, {
+    "file": "**/DetectRTC.js",
+    "cdn": "https://cdn.webrtc-experiment.com/${ filenameMin }"
   }, {
     "file": "**/angular-websocket/**/*.js",
     "package": "angular-websocket",
@@ -104,6 +91,13 @@
     "package": "font-diao",
     "cdn": "https://cdn.rawgit.com/lexrus/fontdiao/${ version }/fontdiao/css/${ filename }"
   }, {
+    "file": "**/font-awesome-animation.css",
+    "package": "font-awesome-animation",
+    "cdn": "https://cdn.rawgit.com/l-lin/font-awesome-animation/v${ version }/dist/${ filename }"
+  }, {
+    "file": "**/patternbolt.css",
+    "cdn": "https://cdn.rawgit.com/buseca/patternbolt/dd2f4ccd31cf6007fde0c7b72072b4ed93496543/PatternBolt/css/patternbolt.css"
+  }, {
     "file": "**/abs-chat/**/*.js",
     "package": "abs-chat",
     "cdn": "https://cdn.rawgit.com/empirefox/angular-bootstrap-simple-chat/e467de698d0a5596d1e57f7bc51994455a14f601/src/scripts/${ filename }"
@@ -111,8 +105,5 @@
     "file": "**/abs-chat/**/*.css",
     "package": "abs-chat",
     "cdn": "https://cdn.rawgit.com/empirefox/angular-bootstrap-simple-chat/e467de698d0a5596d1e57f7bc51994455a14f601/src/css/${ filename }"
-  }, {
-    "file": "**/colorful-background-css-generator.js",
-    "cdn": "https://cdn.rawgit.com/webcore-it/colorful-background-css-generator/f795b0c840c9b8853ca9bc0bcfe5ad7a06b76400/dist/${ filenameMin }"
   }
 ]
