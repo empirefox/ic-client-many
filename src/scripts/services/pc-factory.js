@@ -6,8 +6,11 @@ angular.module('app.service.pcfactory', ['app.service.streams', 'app.system', 'a
     function newPeerConn(camera, ws) {
       var pc = new RTCPeerConnection({
         constraints: {
-          OfferToReceiveAudio: true,
-          OfferToReceiveVideo: true,
+          optional: [],
+          mandatory: {
+            OfferToReceiveAudio: true,
+            OfferToReceiveVideo: true,
+          },
         },
 
         onICE: function(candidate) {
