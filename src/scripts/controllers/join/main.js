@@ -7,13 +7,18 @@ angular.module('join.ctrl.main', ['toaster', 'app.service.invite']).controller('
       var invite = $scope.full && Invite.parseInvite($scope.full);
       return invite && Invite.anwser(invite).then(function() {
         toaster.pop('success', 'success', 'Join room success');
-        $window.location.assign('/rooms.html');
+        $location.url('/rooms.html');
+        $location.replace();
       }, function() {
         toaster.pop('error', 'error', 'Failed to join room');
+        if ($location.hash()) {
+          $location.hash(null);
+          $location.replace();
+        }
       });
     };
 
-    $scope.full = $location.search().j;
+    $scope.full = $location.hash();
     $scope.join();
   }
 ]);

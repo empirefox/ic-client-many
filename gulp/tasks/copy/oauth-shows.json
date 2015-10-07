@@ -1,0 +1,27 @@
+ {
+   "mock": {
+     "AuthURL": "http://127.0.0.1:14000/authorize",
+     "Icon": "fa fa-sign-in"
+   },
+   "baidu": {
+     "AuthURL": "https://openapi.baidu.com/oauth/2.0/authorize",
+     "Scope": "basic",
+     "Icon": "fa icon-CN_baidu"
+   },
+   "qq": {
+     "AuthURL": "https://graph.qq.com/oauth2.0/authorize",
+     "Scope": "get_user_info",
+     "Icon": "fa icon-CN_tencent_QQ"
+   },
+   "facebook": {},
+   "google": {},
+   "github": {},
+   "instagram": {},
+   "linkedin": {},
+   "twitter": {},
+   "live": {
+     "Btn": "btn-microsoft",
+     "Icon": "fa fa-windows"
+   },
+   "yahoo": {}
+ }

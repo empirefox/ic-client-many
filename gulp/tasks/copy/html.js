@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
+var env = require('./env');
 var cdnjsOps = require('./cdnjsOps.json');
 var cdnHelper = require('./cdn-helper');
 var config = require('../../config');
@@ -13,13 +14,13 @@ function addCopyPageTask(pagename) {
       // replace module with pagename
     pipe(swig({
         defaults: {
-          varControls: ['[[', ']]']
+          varControls: ['[[', ']]'],
         },
         data: {
-          apiOrigin: config.env.apiOrigin,
-          cdnJs: config.env.cdnJs,
-          cdnCss: config.env.cdnCss,
-          cdnImg: config.env.cdnImg,
+          apiOrigin: env.ApiData.ApiOrigin,
+          cdnJs: env.cdnJs,
+          cdnCss: env.cdnCss,
+          cdnImg: env.cdnImg,
           module: pagename,
           commonDestName: config.scripts.commonDestName,
         },
@@ -30,20 +31,21 @@ function addCopyPageTask(pagename) {
     pipe(cdnHelper.toJsdelivrJs(resource.jsdelivr.js)).
       // inject css files to html
     pipe($.inject(gulp.src(resource.cdn.css, {
-        read: false
+        read: false,
       }), {
-        name: 'head'
+        name: 'head',
       })).
       // inject js files to html
     pipe($.inject(gulp.src(resource.cdn.js, {
-        read: false
+        read: false,
       }), {
-        name: 'head'
+        name: 'head',
       })).
       // replace local file to cdn url
     pipe($.cdnizer({
+        fallbackScript: '',
         fallbackTest: null,
-        files: cdnjsOps
+        files: cdnjsOps,
       })).
       // replace with Staticfiles cdn
     pipe(cdnHelper.toStaticfilesCDN()).

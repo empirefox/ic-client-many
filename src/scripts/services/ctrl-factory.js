@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.system', 'app.service.auth']).factory(
-  'CtrlClient', ['$window', '$http', 'toaster', '$websocket', 'AppSystem', 'AuthToken',
-    function($window, $http, toaster, $websocket, AppSystem, AuthToken) {
-      var ctrlStream = $websocket(AppSystem.ctrlUrl);
+angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.system', 'app.service.satellizer']).factory(
+  'CtrlClient', ['$window', '$http', 'toaster', '$websocket', 'AppSystem', '$auth', 'SatellizerService',
+    function($window, $http, toaster, $websocket, AppSystem, $auth, SatellizerService) {
+      var ctrlStream = $websocket(AppSystem.CtrlUrl);
 
       var service = {
         rooms: {},
@@ -36,37 +36,38 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
         }
       };
 
+      // TODO rename
       service.getCameraList = function() {
-        service.get('CameraList');
-      };
-
-      service.getUsername = function() {
-        service.get('Userinfo');
+        service.get('UserCameras');
       };
 
       // Response from one, not from server
       var onResponse = function(response) {
         switch (response.to) {
           case 'ManageSetRoomName':
-            var setter = response.content;
-            service.rooms.some(function(room) {
-              if (room.id === setter.id) {
-                angular.extend(room, setter);
-                return true;
-              }
-            });
+            if (service.rooms) {
+              var setter = response.content;
+              service.rooms.some(function(room) {
+                if (room.id === setter.id) {
+                  angular.extend(room, setter);
+                  return true;
+                }
+              });
+            }
             break;
           case 'ManageDelRoom':
-            var id = response.content;
-            var delIndex;
-            var found = service.rooms.some(function(room, i) {
-              if (room.id === id) {
-                delIndex = i;
-                return true;
+            if (service.rooms) {
+              var id = response.content;
+              var delIndex;
+              var found = service.rooms.some(function(room, i) {
+                if (room.id === id) {
+                  delIndex = i;
+                  return true;
+                }
+              });
+              if (found) {
+                service.rooms.splice(delIndex, 1);
               }
-            });
-            if (found) {
-              service.rooms.splice(delIndex, 1);
             }
             break;
           case 'ManageGetIpcam':
@@ -78,8 +79,17 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
         }
       };
 
+      // TODO fix it
       ctrlStream.onOpen(function() {
-        AuthToken.send(ctrlStream);
+        if ($auth.isAuthenticated()) {
+          ctrlStream.send($auth.getToken());
+        } else {
+          SatellizerService.openLoginDialog().then(function() {
+            ctrlStream.send($auth.getToken());
+          }).catch(function() {
+            $window.location.assign('/');
+          });
+        }
       });
 
       ctrlStream.onMessage(function(raw) {
@@ -92,27 +102,49 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
         switch (data.type) {
           case 'Login':
             if (data.content) {
-              service.getUsername();
               service.getCameraList();
             }
             break;
-          case 'Userinfo':
-            service.username = data.content;
-            break;
           case 'RoomOffline':
             service.rooms.forEach(function(room) {
-              if (room.id === data.content) {
-                delete room.cameras;
+              if (room.ID === data.content) {
+                delete room.Cameras;
               }
             });
             break;
-          case 'CameraList':
-            service.rooms = data.content.reverse();
-            service.rooms.forEach(function(room) {
-              if (room.cameras) {
-                room.cameras = room.cameras.reverse();
-              }
-            });
+          case 'Rooms':
+            if (data.content) {
+              var aid = SatellizerService.getUser().AccountId;
+              service.rooms = data.content.forEach(function(room) {
+                if (room.OwnerId === aid) {
+                  room.IsOwner = true;
+                }
+              });
+              service.rooms.sort(function(a, b) {
+                return a.UpdatedAt.localeCompare(b.UpdatedAt);
+              });
+            }
+            break;
+          case 'Room':
+            if (service.rooms) {
+              service.rooms.some(function(room) {
+                if (room.ID === data.id) {
+                  room.Cameras = data.content;
+                  return true;
+                }
+              });
+            }
+            break;
+          case 'RoomViews':
+            if (data.content) {
+              var roomViews = {};
+              data.content.forEach(function(rv) {
+                roomViews[rv.OneId] = rv.ViewByViewer;
+              });
+              service.rooms.forEach(function(room) {
+                room.View = roomViews[room.ID];
+              });
+            }
             break;
           case 'Chat':
             service.chats.push({

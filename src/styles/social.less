@@ -1,0 +1,23 @@
+/*
+ * Social Buttons for Bootstrap
+ *
+ * Copyright 2013-2015 Panayiotis Lipiridis
+ * Licensed under the MIT License
+ *
+ * https://github.com/lipis/bootstrap-social
+ */
+
+@import "./node_modules/bootstrap/less/mixins.less";
+
+.btn-social(@color-bg, @color: #fff) {
+  background-color: @color-bg;
+  .button-variant(@color, @color-bg, rgba(0,0,0,.2));
+}
+
+.btn-weibo         { .btn-social(#f63232); }
+.btn-qq            { .btn-social(#418ae2); }
+.btn-renren        { .btn-social(#2f6797); }
+.btn-baidu         { .btn-social(#b21f24); }
+.btn-douban        { .btn-social(#2278cf); }
+.btn-wechat        { .btn-social(#73db42); }
+.btn-mock          { .btn-social(#4CAE4C); }

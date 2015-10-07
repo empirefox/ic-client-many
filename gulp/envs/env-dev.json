@@ -3,14 +3,10 @@
   "cdnCss": "/css",
   "cdnImg": "img",
   "ApiData": {
-    "ApiDomain": "127.0.0.1",
-    "DevProd": {
-      "IsDev": true,
-      "SiteProto": "http",
-      "ApiProto": "http",
-      "ApiPort": "9998",
-      "WsProto": "ws",
-      "WsPort": "9998"
-    }
+    "SiteProto": "http://",
+    "ApiOrigin": "http://127.0.0.1:9998",
+    "WsPrefix": "ws://127.0.0.1:9998",
+    "CtrlUrl": "ws://127.0.0.1:9998/mws/ctrl",
+    "SignalingUrl": "ws://127.0.0.1:9998/mws/signaling"
   }
 }

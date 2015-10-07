@@ -1,0 +1,9 @@
+<div class="panel">
+  <div class="panel-body">
+    <h2 class="text-center" translate="PAGE.LOGIN.TITLE"></h2>
+    <a class="btn btn-block btn-social" ng-class="prd.Btn" ng-click="authenticate(prd.Name)" ng-repeat="prd in providers">
+      <i ng-class="prd.Icon"></i>
+      <span ng-bind="prd.Text|translate"></span>
+    </a>
+  </div>
+</div>

@@ -1,16 +1,20 @@
 'use strict';
 
-angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl', 'app.service.invite']).factory('Dialog', [
+angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl', 'app.service.invite', 'app.service.satellizer']).factory('Dialog', [
   '$window', 'ngDialog', 'CtrlClient', 'Invite',
   function($window, ngDialog, CtrlClient, Invite) {
     var service = {};
+
     service.openManageRoomNameDialog = function(room) {
       ngDialog.openConfirm({
         template: '/views/rooms/dialogs/ManageSetRoomName.html',
         data: room,
         className: 'ngdialog-theme-plain',
+        resolve: {
+          loginRequired: 'loginRequired',
+        },
       }).then(function(value) {
-        CtrlClient.exec('ManageSetRoomName', room.id, value);
+        CtrlClient.exec('ManageSetRoomName', room.ID, value);
       });
     };
 
@@ -21,8 +25,11 @@ angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl', 'app.servi
           room: room,
         },
         className: 'ngdialog-theme-plain',
+        resolve: {
+          loginRequired: 'loginRequired',
+        },
       }).then(function() {
-        CtrlClient.exec('ManageDelRoom', room.id);
+        CtrlClient.exec('ManageDelRoom', room.ID);
       });
     };
 
@@ -33,9 +40,10 @@ angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl', 'app.servi
         showClose: true,
 
         resolve: {
+          loginRequired: 'loginRequired',
           invite: function() {
             return Invite.getInvite(room);
-          }
+          },
         },
 
         controller: ['$scope', 'invite',
@@ -64,14 +72,17 @@ angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl', 'app.servi
             ipcam: data,
           },
           className: 'ngdialog-theme-plain',
+          resolve: {
+            loginRequired: 'loginRequired',
+          },
         }).then(function(value) {
           value.target = cameraId;
-          CtrlClient.exec('ManageSetIpcam', room.id, value);
+          CtrlClient.exec('ManageSetIpcam', room.ID, value);
         }).finally(function() {
           camera.disabled = false;
         });
       };
-      CtrlClient.exec('ManageGetIpcam', room.id, camera.id);
+      CtrlClient.exec('ManageGetIpcam', room.ID, camera.id);
     };
 
     service.openManageNewIpcamDialog = function(room) {
@@ -84,9 +95,12 @@ angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl', 'app.servi
           },
         },
         className: 'ngdialog-theme-plain',
+        resolve: {
+          loginRequired: 'loginRequired',
+        },
       }).then(function(camera) {
         console.log(camera);
-        CtrlClient.exec('ManageSetIpcam', room.id, camera);
+        CtrlClient.exec('ManageSetIpcam', room.ID, camera);
       });
     };
 
@@ -98,8 +112,11 @@ angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl', 'app.servi
           ipcam: ipcam,
         },
         className: 'ngdialog-theme-plain',
+        resolve: {
+          loginRequired: 'loginRequired',
+        },
       }).then(function(camera) {
-        CtrlClient.exec('ManageDelIpcam', room.id, camera.id);
+        CtrlClient.exec('ManageDelIpcam', room.ID, camera.id);
       });
     };
 

@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('app.service.pcfactory', ['app.service.streams', 'app.system', 'app.service.auth']).factory('PCFactory', [
-  '$window', 'Streams', 'AppSystem', 'AuthToken',
-  function($window, Streams, AppSystem, AuthToken) {
+angular.module('app.service.pcfactory', ['app.service.streams', 'app.system', 'app.service.satellizer']).factory('PCFactory', [
+  '$window', 'Streams', 'AppSystem', '$auth', 'SatellizerService',
+  function($window, Streams, AppSystem, $auth, SatellizerService) {
     function newPeerConn(camera, ws) {
       var pc = new RTCPeerConnection({
         constraints: {
@@ -46,11 +46,19 @@ angular.module('app.service.pcfactory', ['app.service.streams', 'app.system', 'a
       }
       camera.playing = true;
       var pc;
-      var target = room.id + '/' + camera.id;
-      var ws = new WebSocket(AppSystem.signalingUrl);
+      var target = room.ID + '/' + camera.id;
+      var ws = new WebSocket(AppSystem.SignalingUrl);
 
       ws.onopen = function() {
-        AuthToken.send(ws);
+        if ($auth.isAuthenticated()) {
+          ws.send($auth.getToken());
+        } else {
+          SatellizerService.openLoginDialog().then(function() {
+            ws.send($auth.getToken());
+          }).catch(function() {
+            $window.location.assign('/');
+          });
+        }
       };
       ws.onclose = function() {
         Streams.remove(camera);
@@ -69,7 +77,7 @@ angular.module('app.service.pcfactory', ['app.service.streams', 'app.system', 'a
           case 'Login':
             if (signal.content) {
               ws.send(JSON.stringify({
-                room: room.id,
+                room: room.ID,
                 camera: camera.id,
                 reciever: Math.random().toString(36).slice(2),
               }));
@@ -93,7 +101,7 @@ angular.module('app.service.pcfactory', ['app.service.streams', 'app.system', 'a
     };
 
     service.closePeerConn = function(room, camera) {
-      var target = room.id + '/' + camera.id;
+      var target = room.ID + '/' + camera.id;
       var ws = wss[target];
       if (ws) {
         delete wss[target];

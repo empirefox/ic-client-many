@@ -1,10 +1,5 @@
-<div ng-controller="LoginMainCtrl" class="container">
-  <h4 ng-bind="'PAGE.LOGIN.DESC'|translate"></h4>
-  <hr />
-  <ul class="bs-oauth-list">
-    <li ng-repeat="oauth in OauthFactory.oauths" ng-click="OauthFactory.doLogin(oauth)">
-      <span ng-class="oauth.css" aria-hidden="true"></span>
-      <span ng-bind="oauth.text|translate" class="bs-oauth-text"></span>
-    </li>
-  </ul>
+<div class="container" ng-controller="SatellizerLoginCtrl">
+  <div class="row">
+    <div ng-include="'/views/login/LoginPanel.html'"></div>
+  </div>
 </div>

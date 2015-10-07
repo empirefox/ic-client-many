@@ -1,14 +1,16 @@
 'use strict';
 
-angular.module('index.ctrl.main', ['app.service.auth', 'app.service.detect']).controller('IndexCtrl', [
-  '$scope', '$window', 'AuthToken', 'Detector',
-  function($scope, $window, AuthToken, Detector) {
+angular.module('index.ctrl.main', ['app.service.satellizer', 'app.service.detect']).controller('IndexCtrl', [
+  '$scope', '$window', '$auth', 'Detector', 'SatellizerService',
+  function($scope, $window, $auth, Detector, SatellizerService) {
     $scope.Detector = Detector;
     $scope.start = function() {
-      if (AuthToken.ok()) {
+      if ($auth.isAuthenticated()) {
         $window.location.assign('/rooms.html');
       } else {
-        $window.location.assign('/login.html');
+        SatellizerService.openLoginDialog().then(function() {
+          $window.location.assign('/rooms.html');
+        });
       }
     };
   }

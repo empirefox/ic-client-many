@@ -8,18 +8,18 @@ angular.module('app.service.invite', ['app.system']).factory('Invite', [
     };
     var service = {
       getInvite: function(room) {
-        return $http.post(AppSystem.apiOrigin + '/many/invite-code', {
+        return $http.post(AppSystem.ApiOrigin + '/many/invite-code', {
           room: room.id,
         }).then(function(response) {
           var code = genCode(response.data);
           return {
             code: code,
-            url: AppSystem.httpPrefix + '/j/' + code,
+            url: AppSystem.SiteProto + '/join.html#' + code,
           };
         });
       },
       parseInvite: function(full) {
-        full = full.replace(AppSystem.httpPrefix + '/j/', '');
+        full = full.replace(AppSystem.SiteProto + '/join.html#', '');
         var pos = full.indexOf('_');
         if (pos === -1) {
           return;
@@ -30,7 +30,7 @@ angular.module('app.service.invite', ['app.system']).factory('Invite', [
         };
       },
       anwser: function(invite) {
-        return $http.post(AppSystem.apiOrigin + '/many/invite-join', invite).then(function(response) {
+        return $http.post(AppSystem.ApiOrigin + '/many/invite-join', invite).then(function(response) {
           return response.data;
         });
       },

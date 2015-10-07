@@ -11,17 +11,19 @@
       "bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js",
       "bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
       "bower_components/angular-loading-bar/build/loading-bar.js",
-      "bower_components/angular-jwt/dist/angular-jwt.js",
+      "bower_components/satellizer/satellizer.js",
       "bower_components/anijs/dist/anijs.js",
       "bower_components/ngDialog/js/ngDialog.js",
       "bower_components/angularjs-toaster/toaster.js",
-      "bower_components/WebRTC-Experiment/DetectRTC/DetectRTC.js",
+      "bower_components/detectrtc/DetectRTC.js",
       "bower_components/letterbolt/letters.js"
     ],
 
     "css": [
       "bower_components/bootstrap/dist/css/bootstrap.css",
       "bower_components/font-awesome/css/font-awesome.css",
+      "bower_components/font-diao/fontdiao/css/fontdiao.css",
+      "bower_components/bootstrap-social/bootstrap-social.css",
       "bower_components/font-awesome-animation/dist/font-awesome-animation.css",
       "bower_components/angular-loading-bar/build/loading-bar.css",
       "bower_components/ngDialog/css/ngDialog.css",

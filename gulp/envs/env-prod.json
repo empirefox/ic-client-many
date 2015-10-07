@@ -1,16 +1,12 @@
 {
-  "cdnJs": "https://dn-icv3r1.qbox.me/r5/js",
-  "cdnCss": "https://dn-icv3r1.qbox.me/r5/css",
-  "cdnImg": "https://dn-icv3r1.qbox.me/r5/img",
+  "cdnJs": "https://dn-icv3r1.qbox.me/r6/js",
+  "cdnCss": "https://dn-icv3r1.qbox.me/r6/css",
+  "cdnImg": "https://dn-icv3r1.qbox.me/r6/img",
   "ApiData": {
-    "ApiDomain": "ic-api.herokuapp.com",
-    "DevProd": {
-      "IsDev": false,
-      "SiteProto": "http",
-      "ApiProto": "https",
-      "ApiPort": "",
-      "WsProto": "wss",
-      "WsPort": "443"
-    }
+    "SiteProto": "https://",
+    "ApiOrigin": "https://ic-api.herokuapp.com",
+    "WsPrefix": "wss://ic-api.herokuapp.com",
+    "CtrlUrl": "wss://ic-api.herokuapp.com/mws/ctrl",
+    "SignalingUrl": "wss://ic-api.herokuapp.com/mws/signaling"
   }
 }

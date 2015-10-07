@@ -13,7 +13,9 @@
 
   "cdnjs:angular-filter",
   "cdnjs:angular-moment",
+  "cdnjs:bootstrap-social",
   "cdnjs:font-awesome",
+  "cdnjs:satellizer",
   "cdnjs:textAngular",
 
   "cdnjs:angular-loading-bar:loading-bar.min.js",
@@ -27,6 +29,10 @@
   }, {
     "file": "**/angularjs-toaster/*.{js,css}",
     "cdn": "cdnjs:angularjs-toaster:${ filenameMin }"
+  }, {
+    "file": "**/satellizer.js",
+    "package": "satellizer",
+    "cdn": "//cdnjs.cloudflare.com/ajax/libs/satellizer/${ version }/${ filenameMin }"
   }, {
     "file": "**/ngDialog.js",
     "package": "ngDialog",
@@ -81,7 +87,8 @@
     "cdn": "https://cdn.rawgit.com/muaz-khan/WebRTC-Experiment/46efeda0b460bae9021f365d71f216012b512571/RTCPeerConnection/RTCPeerConnection-v1.5.js"
   }, {
     "file": "**/DetectRTC.js",
-    "cdn": "https://cdn.webrtc-experiment.com/${ filenameMin }"
+    "package": "detectrtc",
+    "cdn": "https://cdn.rawgit.com/muaz-khan/DetectRTC/1.0.9/${ filenameMin }"
   }, {
     "file": "**/angular-websocket/**/*.js",
     "package": "angular-websocket",

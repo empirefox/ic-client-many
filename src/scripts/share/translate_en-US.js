@@ -31,12 +31,20 @@ angular.module('app.i18n.en_US', ['pascalprecht.translate']).config(['$translate
           ENTER_ROOM_NAME: 'Local room found, enter the room name here:',
         },
         LOGIN: {
-          DESC: 'Choose your favorite login site',
+          TITLE: 'Log in',
           OAUTH: {
-            QQ: 'Login with QQ',
-            BAIDU: 'Login with Baidu',
-            WEIBO: 'Login with Weibo',
-            MOCK: 'Login with Mock',
+            qq: 'Sign in with QQ',
+            baidu: 'Sign in with Baidu',
+            weibo: 'Sign in with Weibo',
+            mock: 'Sign in with Mock',
+            facebook: 'Sign in with Facebook',
+            google: 'Sign in with Google',
+            github: 'Sign in with GitHub',
+            instagram: 'Sign in with Instagram',
+            linkedin: 'Sign in with LinkedIn',
+            twitter: 'Sign in with Twitter',
+            live: 'Sign in with Live',
+            yahoo: 'Sign in with Yahoo',
           }
         },
         JOIN: {

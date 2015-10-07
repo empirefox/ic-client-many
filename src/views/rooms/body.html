@@ -4,10 +4,10 @@
 			<div class="page-header">
 				<div>
 					<a type="button" class="btn btn-link" ng-click="CtrlClient.chatTarget=room;visible=true" tooltip="{{'PAGE.ROOMS.CHAT.OPEN'|translate}}">
-						<h3 ng-attr-id="{{roomNavId}}" ng-bind="room.name" class="room-title"></h3>
+						<h3 ng-attr-id="{{roomNavId}}" ng-bind="room.Name" class="room-title"></h3>
 						<i class="fa fa-comments fa-3x"></i>
 					</a>
-					<div class="pull-right" ng-if="room.isOwner">
+					<div class="pull-right" ng-if="room.IsOwner">
 						<button ng-click="Dialog.openManageRoomNameDialog(room)" type="button" class="btn btn-link">
 							<i class="fa fa-pencil"></i>
 							<span class="hidden-xs" ng-bind="'PAGE.ROOMS.OPEN_SET_ROOM'|translate"></span>
@@ -26,12 +26,12 @@
 						</button>
 					</div>
 					<p>
-						<small ng-if="room.createdTime" am-time-ago="room.createdTime"></small>
+						<small ng-if="room.CreatedTime" am-time-ago="room.CreatedTime"></small>
 						<p>
 				</div>
-				<p ng-if="room.desc" ng-bind="room.desc"></p>
+				<p ng-if="room.Desc" ng-bind="room.Desc"></p>
 			</div>
-			<div ng-if="camera.online||room.isOwner" ng-repeat="camera in room.cameras">
+			<div ng-if="camera.online||room.IsOwner" ng-repeat="camera in room.Cameras">
 				<div>
 					<a type="button" class="btn btn-link" ng-click="connect(room,camera)" tooltip="{{'PAGE.ROOMS.CAM.PLAY'|translate}}">
 						<h4 ng-attr-id="{{roomNavId+'camera'+$index}}" ng-bind="camera.id" class="room-title"></h4>
@@ -42,7 +42,7 @@
 							<i class="fa fa-times-circle-o fa-lg"></i>
 						</button>
 					</div>
-					<div class="pull-right" ng-if="room.isOwner">
+					<div class="pull-right" ng-if="room.IsOwner">
 						<!-- camera.disabled used when setting camera. see dialog-factory.js -->
 						<button type="button" class="btn btn-link" ng-disabled="camera.disabled" ng-click="Dialog.openManageIpcamDialog(room,camera)">
 							<i class="fa fa-pencil"></i>

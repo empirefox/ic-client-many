@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.navs', ['ngDialog', 'toaster', 'app.i18n', 'app.system', 'app.service.auth']).directive('navBar', [
+angular.module('app.navs', ['ngDialog', 'toaster', 'app.i18n', 'app.system', 'app.service.satellizer']).directive('navBar', [
   '$translate', 'NavsService',
   function($translate, NavsService) {
     return {
@@ -13,13 +13,15 @@ angular.module('app.navs', ['ngDialog', 'toaster', 'app.i18n', 'app.system', 'ap
     };
   }
 ]).factory('NavsService', [
-  '$injector', '$window', '$q', 'ngDialog', 'NavList', 'AuthToken',
-  function($injector, $window, $q, ngDialog, NavList, AuthToken) {
+  '$injector', '$window', '$q', 'ngDialog', 'NavList', '$auth', 'SatellizerService',
+  function($injector, $window, $q, ngDialog, NavList, $auth, SatellizerService) {
     var path = window.location.pathname;
 
     function visit(nav) {
-      if (nav.authOnly && !AuthToken.ok()) {
-        $window.location.assign('/login.html');
+      if (nav.authOnly && !$auth.isAuthenticated()) {
+        SatellizerService.openLoginDialog().then(function() {
+          confirm(nav);
+        });
       } else {
         confirm(nav);
       }
@@ -46,7 +48,7 @@ angular.module('app.navs', ['ngDialog', 'toaster', 'app.i18n', 'app.system', 'ap
 
     function seperate(needSeperate) {
       if (needSeperate) {
-        var authed = AuthToken.ok();
+        var authed = $auth.isAuthenticated();
         return NavList.filter(function(nav) {
           return !((nav.authOnly && !authed) || (nav.unauthedOnly && authed));
         });
@@ -117,10 +119,10 @@ angular.module('app.navs', ['ngDialog', 'toaster', 'app.i18n', 'app.system', 'ap
   authOnly: true,
   right: false,
   dialog: 'ConfirmLogoff',
-  afterConfirm: ['$http', '$window', 'AuthToken', 'toaster', 'AppSystem',
-    function($http, $window, AuthToken, toaster, AppSystem) {
-      $http.delete(AppSystem.apiOrigin + '/many/logoff').success(function() {
-        AuthToken.put('');
+  afterConfirm: ['$http', '$window', 'SatellizerService', 'toaster', 'AppSystem',
+    function($http, $window, SatellizerService, toaster, AppSystem) {
+      $http.delete(AppSystem.ApiOrigin + '/many/logoff').success(function() {
+        SatellizerService.logout();
         $window.location.assign('/');
       }).error(function(err) {
         toaster.pop('info', 'info', err);
@@ -136,8 +138,8 @@ angular.module('app.navs', ['ngDialog', 'toaster', 'app.i18n', 'app.system', 'ap
   authOnly: true,
   right: false,
   hideXs: false,
-  afterConfirm: ['$window', 'AuthToken', function($window, AuthToken) {
-    AuthToken.put('');
+  afterConfirm: ['$window', 'SatellizerService', function($window, SatellizerService) {
+    SatellizerService.logout();
     $window.location.assign('/');
   }],
 }, {
