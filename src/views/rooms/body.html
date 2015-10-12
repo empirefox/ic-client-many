@@ -3,7 +3,7 @@
 		<div ng-init="roomNavId='room'+$index" ng-repeat="room in CtrlClient.rooms" class="col-md-12 room">
 			<div class="page-header">
 				<div>
-					<a type="button" class="btn btn-link" ng-click="CtrlClient.chatTarget=room;visible=true" tooltip="{{'PAGE.ROOMS.CHAT.OPEN'|translate}}">
+					<a type="button" class="btn btn-link" ng-click="CtrlClient.chatTarget=room;visible=true" uib-tooltip="{{'PAGE.ROOMS.CHAT.OPEN'|translate}}">
 						<h3 ng-attr-id="{{roomNavId}}" ng-bind="room.Name" class="room-title"></h3>
 						<i class="fa fa-comments fa-3x"></i>
 					</a>
@@ -31,14 +31,14 @@
 				</div>
 				<p ng-if="room.Desc" ng-bind="room.Desc"></p>
 			</div>
-			<div ng-if="camera.online||room.IsOwner" ng-repeat="camera in room.Cameras">
+			<div ng-if="camera.Online||room.IsOwner" ng-repeat="camera in room.Cameras">
 				<div>
-					<a type="button" class="btn btn-link" ng-click="connect(room,camera)" tooltip="{{'PAGE.ROOMS.CAM.PLAY'|translate}}">
-						<h4 ng-attr-id="{{roomNavId+'camera'+$index}}" ng-bind="camera.id" class="room-title"></h4>
-						<i ng-if="!Streams.map[camera.id] && camera.online && !camera.playing" class="fa fa-play-circle-o fa-3x"></i>
+					<a type="button" class="btn btn-link" ng-click="connect(room,camera)" uib-tooltip="{{'PAGE.ROOMS.CAM.PLAY'|translate}}">
+						<h4 ng-attr-id="{{roomNavId+'camera'+$index}}" ng-bind="camera.Id" class="room-title"></h4>
+						<i ng-if="!Streams.map[camera.Id] && camera.Online && !camera.playing" class="fa fa-play-circle-o fa-3x"></i>
 					</a>
 					<div class="pull-right">
-						<button ng-if="camera.playing" ng-click="disconnect(room,camera)" tooltip="{{'PAGE.ROOMS.CAM.STOP'|translate}}" type="button" class="btn btn-danger">
+						<button ng-if="camera.playing" ng-click="disconnect(room,camera)" uib-tooltip="{{'PAGE.ROOMS.CAM.STOP'|translate}}" type="button" class="btn btn-danger">
 							<i class="fa fa-times-circle-o fa-lg"></i>
 						</button>
 					</div>
@@ -54,10 +54,10 @@
 						</button>
 					</div>
 					<p>
-						<small ng-if="camera.desc" am-time-ago="camera.desc"></small>
+						<small ng-if="camera.Desc" am-time-ago="camera.Desc"></small>
 						<p>
 				</div>
-				<video ng-if="Streams.map[camera.id]" rtc-video="Streams.map[camera.id]" class="center-block" autoplay></video>
+				<video ng-if="Streams.map[camera.Id]" rtc-video="Streams.map[camera.Id]" class="center-block" autoplay></video>
 			</div>
 		</div>
 	</div>

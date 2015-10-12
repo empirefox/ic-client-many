@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.system', 'app.service.satellizer']).factory(
-  'CtrlClient', ['$window', '$http', 'toaster', '$websocket', 'AppSystem', '$auth', 'SatellizerService',
-    function($window, $http, toaster, $websocket, AppSystem, $auth, SatellizerService) {
+  'CtrlClient', ['$injector', '$window', '$http', 'toaster', '$websocket', 'AppSystem', '$auth', 'SatellizerService',
+    function($injector, $window, $http, toaster, $websocket, AppSystem, $auth, SatellizerService) {
       var ctrlStream = $websocket(AppSystem.CtrlUrl);
 
       var service = {
-        rooms: {},
+        rooms: [],
         chats: [],
 
         get: function(name) {
@@ -45,10 +45,10 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
       var onResponse = function(response) {
         switch (response.to) {
           case 'ManageSetRoomName':
-            if (service.rooms) {
-              var setter = response.content;
+            var setter = response.content;
+            if (service.rooms && setter) {
               service.rooms.some(function(room) {
-                if (room.id === setter.id) {
+                if (room.ID === setter.ID) {
                   angular.extend(room, setter);
                   return true;
                 }
@@ -57,10 +57,9 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
             break;
           case 'ManageDelRoom':
             if (service.rooms) {
-              var id = response.content;
               var delIndex;
               var found = service.rooms.some(function(room, i) {
-                if (room.id === id) {
+                if (room.ID === response.content) {
                   delIndex = i;
                   return true;
                 }
@@ -81,70 +80,61 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
 
       // TODO fix it
       ctrlStream.onOpen(function() {
-        if ($auth.isAuthenticated()) {
-          ctrlStream.send($auth.getToken());
-        } else {
-          SatellizerService.openLoginDialog().then(function() {
-            ctrlStream.send($auth.getToken());
-          }).catch(function() {
-            $window.location.assign('/');
-          });
-        }
+        $injector.get('loginWs')(ctrlStream);
       });
 
       ctrlStream.onMessage(function(raw) {
         // console.log(raw.data);
         var data = JSON.parse(raw.data);
-        if (!data.content) {
-          // console.log('wrong data:', data);
-          return;
-        }
         switch (data.type) {
-          case 'Login':
-            if (data.content) {
-              service.getCameraList();
-            }
+          case 'LoginOk':
+            service.getCameraList();
+            break;
+          case 'LoginFailed':
+            toaster.pop('info', 'info', 'Auth failed');
+            SatellizerService.logout();
+            $injector.get('loginWs')(ctrlStream);
             break;
           case 'RoomOffline':
-            service.rooms.forEach(function(room) {
+            data.content && service.rooms.forEach(function(room) {
               if (room.ID === data.content) {
                 delete room.Cameras;
               }
             });
             break;
           case 'Rooms':
-            if (data.content) {
+            if (Array.isArray(data.content)) {
               var aid = SatellizerService.getUser().AccountId;
-              service.rooms = data.content.forEach(function(room) {
+              data.content.forEach(function(room) {
                 if (room.OwnerId === aid) {
                   room.IsOwner = true;
                 }
               });
-              service.rooms.sort(function(a, b) {
+              service.rooms = data.content.sort(function(a, b) {
                 return a.UpdatedAt.localeCompare(b.UpdatedAt);
               });
             }
             break;
           case 'Room':
-            if (service.rooms) {
-              service.rooms.some(function(room) {
-                if (room.ID === data.id) {
-                  room.Cameras = data.content;
-                  return true;
-                }
-              });
-            }
+            data.content && service.rooms.some(function(room) {
+              if (room.ID === data.id) {
+                room.Cameras = Object.keys(data.content).map(function(key) {
+                  return data.content[key];
+                }).sort(function(a, b) {
+                  return a.UpdatedAt.localeCompare(b.UpdatedAt);
+                });
+                return true;
+              }
+            });
             break;
           case 'RoomViews':
-            if (data.content) {
-              var roomViews = {};
-              data.content.forEach(function(rv) {
-                roomViews[rv.OneId] = rv.ViewByViewer;
-              });
-              service.rooms.forEach(function(room) {
-                room.View = roomViews[room.ID];
-              });
-            }
+            var roomViews = {};
+            Array.isArray(data.content) && data.content.forEach(function(rv) {
+              roomViews[rv.OneId] = rv.ViewByViewer;
+            });
+            service.rooms.forEach(function(room) {
+              room.View = roomViews[room.ID];
+            });
             break;
           case 'Chat':
             service.chats.push({

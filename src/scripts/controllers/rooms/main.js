@@ -9,7 +9,7 @@ controller('RoomsMainCtrl', ['$scope', 'CtrlClient', 'Streams', 'PCFactory', 'Di
 
     $scope.connect = function(room, camera) {
       // online is a server ipcam status
-      if (!camera.playing && camera.online) {
+      if (!camera.playing && camera.Online) {
         PCFactory.createPeerConn(room, camera);
       }
     };

@@ -9,17 +9,17 @@ angular.module('app.service.invite', ['app.system']).factory('Invite', [
     var service = {
       getInvite: function(room) {
         return $http.post(AppSystem.ApiOrigin + '/many/invite-code', {
-          room: room.id,
+          room: room.ID,
         }).then(function(response) {
           var code = genCode(response.data);
           return {
             code: code,
-            url: AppSystem.SiteProto + '/join.html#' + code,
+            url: AppSystem.SiteProto + window.location.host + '/join.html#' + code,
           };
         });
       },
       parseInvite: function(full) {
-        full = full.replace(AppSystem.SiteProto + '/join.html#', '');
+        full = full.trim().replace(AppSystem.SiteProto + window.location.host + '/join.html#', '');
         var pos = full.indexOf('_');
         if (pos === -1) {
           return;

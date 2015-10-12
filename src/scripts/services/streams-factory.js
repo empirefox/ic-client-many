@@ -8,7 +8,7 @@ angular.module('app.service.streams', []).factory('Streams', ['$rootScope',
     };
 
     service.add = function(camera, stream) {
-      var cid = camera.id;
+      var cid = camera.Id;
       var old = service.map[cid];
       service.map[cid] = URL.createObjectURL(stream);
       if (old) {
@@ -20,7 +20,7 @@ angular.module('app.service.streams', []).factory('Streams', ['$rootScope',
       }
     };
     service.remove = function(camera) {
-      var cid = camera.id;
+      var cid = camera.Id;
       var url = service.map[cid];
       camera.playing = false;
       if (url) {

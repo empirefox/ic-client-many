@@ -61,7 +61,7 @@ angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl', 'app.servi
       }
       camera.disabled = true;
       CtrlClient.ManageGetIpcamCallback = function(data) {
-        var cameraId = data.id;
+        var cameraId = data.Id;
         if (!cameraId) {
           return;
         }
@@ -82,7 +82,7 @@ angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl', 'app.servi
           camera.disabled = false;
         });
       };
-      CtrlClient.exec('ManageGetIpcam', room.ID, camera.id);
+      CtrlClient.exec('ManageGetIpcam', room.ID, camera.Id);
     };
 
     service.openManageNewIpcamDialog = function(room) {
@@ -116,7 +116,7 @@ angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl', 'app.servi
           loginRequired: 'loginRequired',
         },
       }).then(function(camera) {
-        CtrlClient.exec('ManageDelIpcam', room.ID, camera.id);
+        CtrlClient.exec('ManageDelIpcam', room.ID, camera.Id);
       });
     };
 

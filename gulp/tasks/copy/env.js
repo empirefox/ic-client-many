@@ -6,7 +6,7 @@ var oauthShows = require('./oauth-shows.json');
 var env = require('../../envs/env-' + utils.getEnvName() + '.json');
 
 var res = request('GET', env.ApiData.ApiOrigin + '/oauth/oauths');
-env.ApiData.Providers = JSON.parse(res.getBody()).map(function(sp) {
+env.ApiData.Providers = JSON.parse(res.getBody()).map((sp) => {
   let lp = oauthShows[sp.Name];
   if (!lp) {
     console.log('Provider not found in oauth-shows.json:', sp.Name);

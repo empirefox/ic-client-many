@@ -13,13 +13,13 @@ angular.module('app.navs', ['ngDialog', 'toaster', 'app.i18n', 'app.system', 'ap
     };
   }
 ]).factory('NavsService', [
-  '$injector', '$window', '$q', 'ngDialog', 'NavList', '$auth', 'SatellizerService',
-  function($injector, $window, $q, ngDialog, NavList, $auth, SatellizerService) {
+  '$injector', '$window', '$q', 'ngDialog', 'NavList', '$auth',
+  function($injector, $window, $q, ngDialog, NavList, $auth) {
     var path = window.location.pathname;
 
     function visit(nav) {
       if (nav.authOnly && !$auth.isAuthenticated()) {
-        SatellizerService.openLoginDialog().then(function() {
+        $injector.get('loginRequired').then(function() {
           confirm(nav);
         });
       } else {

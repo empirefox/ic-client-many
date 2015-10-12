@@ -1,12 +1,13 @@
 'use strict';
 angular.module('app.service.satellizer', ['satellizer', 'toaster', 'app.system']).factory('SatellizerService', [
-  '$auth', 'SatellizerStorage', 'ngDialog',
-  function($auth, SatellizerStorage, ngDialog) {
+  '$q', '$auth', 'SatellizerStorage', 'ngDialog',
+  function($q, $auth, SatellizerStorage, ngDialog) {
     var service = {};
     service.getUser = function() {
       return JSON.parse(SatellizerStorage.get('user'));
     };
     service.openLoginDialog = function() {
+      service.logout();
       return ngDialog.openConfirm({
         template: '/views/login/dialogs/Login.html',
         className: 'ngdialog-theme-plain',
@@ -19,33 +20,50 @@ angular.module('app.service.satellizer', ['satellizer', 'toaster', 'app.system']
     };
     service.logout = function() {
       SatellizerStorage.remove('user');
-      $auth.logout();
+      return $auth.logout();
     };
 
     return service;
   }
 
 ]).factory('skipIfLoggedIn', ['$q', '$auth', function skipIfLoggedIn($q, $auth) {
-  var deferred = $q.defer();
   if ($auth.isAuthenticated()) {
-    deferred.reject();
+    return $q.reject('already_authed');
   } else {
-    deferred.resolve();
+    return $q.when();
   }
-  return deferred.promise;
 
 }]).factory('loginRequired', ['$q', '$auth', 'SatellizerService', function loginRequired($q, $auth, SatellizerService) {
-  var deferred = $q.defer();
   if ($auth.isAuthenticated()) {
-    deferred.resolve();
+    return $q.when();
   } else {
-    return SatellizerService.openLoginDialog();
+    return SatellizerService.openLoginDialog().catch(function(err) {
+      if (err === 'already_authed') {
+        return $q.when();
+      } else {
+        return $q.reject(err);
+      }
+    });
   }
-  return deferred.promise;
+
+}]).factory('loginWs', ['$auth', '$injector', function($auth, $injector) {
+  return function(ws) {
+    ws = ws || this;
+    $injector.get('loginRequired').then(function() {
+      if (ws.readyState > 1) {
+        window.location.assign('/login.html');
+      } else {
+        ws.send($auth.getToken());
+      }
+    }).catch(function() {
+      console.log('goto home');
+      window.location.assign('/login.html');
+    });
+  };
 
 }]).controller('SatellizerLoginCtrl', [
-  '$scope', '$auth', 'SatellizerStorage', 'AppSystem', 'toaster',
-  function($scope, $auth, SatellizerStorage, AppSystem, toaster) {
+  '$scope', '$window', '$location', '$auth', 'SatellizerStorage', 'AppSystem', 'toaster',
+  function($scope, $window, $location, $auth, SatellizerStorage, AppSystem, toaster) {
     $scope.providers = AppSystem.Providers;
     $scope.authenticate = function(provider) {
       $auth.authenticate(provider).then(function(response) {
@@ -53,6 +71,9 @@ angular.module('app.service.satellizer', ['satellizer', 'toaster', 'app.system']
         toaster.pop('success', '', 'You have successfully signed in with ' + provider);
         if (angular.isFunction($scope.confirm)) {
           $scope.confirm();
+        }
+        if ($scope.redirect || $location.path() === '/login.html') {
+          $window.location.assign('/rooms.html');
         }
       }).catch(function(response) {
         SatellizerStorage.remove('user');

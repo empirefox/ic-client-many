@@ -13,6 +13,7 @@ var toStaticfilesCDN = require('./cdn-helper').toStaticfilesCDN;
 var pages = require('../../config').pages;
 var config = require('../../config').scripts;
 var swig = $.swig;
+var ngcompile = require('ng-node-compile');
 
 var exclude = ["ng", "ngAnimate", "ngCookies", "ngLocale", "ngSanitize", "pascalprecht.translate",
   "ui.bootstrap", "ui.bootstrap.tpls", "angular-loading-bar", "chieffancypants.loadingBar", "satellizer",
@@ -42,6 +43,32 @@ function addCopyPageJsTask(pagename) {
     pipe(gulp.dest(config.dest));
   });
 }
+
+gulp.task('copy:scripts:export', () => {
+  let ngEnviorment = new ngcompile([{
+    name: 'satellizer',
+    path: './bower_components/satellizer/satellizer.js',
+  }, {
+    name: 'pascalprecht.translate',
+    path: './bower_components/angular-translate/angular-translate.js',
+  }, {
+    name: 'app.i18n.zh_CN',
+    path: 'src/scripts/share/translate_zh-CN.js',
+  }, {
+    name: 'app.i18n.en_US',
+    path: 'src/scripts/share/translate_en-US.js',
+  }], './bower_components/angular/angular.js');
+  let $injector = window.angular.injector(['ng', 'satellizer', 'app.i18n.zh_CN', 'app.i18n.en_US']);
+  $injector.invoke((SatellizerConfig, I18nZhCN) => {
+    let ApiDataJson = JSON.stringify({
+      Providers: env.ApiData.Providers,
+      Satellizers: SatellizerConfig.providers,
+      Translates: I18nZhCN.PAGE.LOGIN.OAUTH,
+    });
+    require('fs').writeFileSync(config.dest + '/api-data.js', `var ApiData=${ApiDataJson};`);
+    require('fs').writeFileSync(config.dest + '/api-data.json', `${ApiDataJson}`);
+  });
+});
 
 gulp.task('copy:scripts:common', function() {
   // ApiData and Providers
@@ -86,7 +113,7 @@ gulp.task('copy:scripts:common', function() {
   pipe(gulp.dest(config.dest));
 });
 
-var tasks = ['copy:scripts:common'];
+var tasks = ['copy:scripts:common', 'copy:scripts:export'];
 pages.forEach(function(page) {
   addCopyPageJsTask(page);
   tasks.push('copy:' + page + '.js');

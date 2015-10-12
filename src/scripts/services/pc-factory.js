@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('app.service.pcfactory', ['app.service.streams', 'app.system', 'app.service.satellizer']).factory('PCFactory', [
-  '$window', 'Streams', 'AppSystem', '$auth', 'SatellizerService',
-  function($window, Streams, AppSystem, $auth, SatellizerService) {
+  '$injector', '$window', 'Streams', 'AppSystem', '$auth', 'SatellizerService',
+  function($injector, $window, Streams, AppSystem, $auth, SatellizerService) {
     function newPeerConn(camera, ws) {
       var pc = new RTCPeerConnection({
         constraints: {
@@ -46,20 +46,13 @@ angular.module('app.service.pcfactory', ['app.service.streams', 'app.system', 'a
       }
       camera.playing = true;
       var pc;
-      var target = room.ID + '/' + camera.id;
+      var target = room.ID + '/' + camera.Id;
       var ws = new WebSocket(AppSystem.SignalingUrl);
 
       ws.onopen = function() {
-        if ($auth.isAuthenticated()) {
-          ws.send($auth.getToken());
-        } else {
-          SatellizerService.openLoginDialog().then(function() {
-            ws.send($auth.getToken());
-          }).catch(function() {
-            $window.location.assign('/');
-          });
-        }
+        $injector.get('loginWs')(ws);
       };
+
       ws.onclose = function() {
         Streams.remove(camera);
         delete wss[target];
@@ -74,17 +67,18 @@ angular.module('app.service.pcfactory', ['app.service.streams', 'app.system', 'a
         // console.log('ws.onmessage:', e.data);
         var signal = JSON.parse(e.data);
         switch (signal.type) {
-          case 'Login':
-            if (signal.content) {
-              ws.send(JSON.stringify({
-                room: room.ID,
-                camera: camera.id,
-                reciever: Math.random().toString(36).slice(2),
-              }));
-            } else {
+          case 'LoginOk':
+            ws.send(JSON.stringify({
+              room: room.ID,
+              camera: camera.Id,
+              reciever: Math.random().toString(36).slice(2),
+            }));
+            break;
+          case 'LoginFailed':
+            SatellizerService.logout();
+            $injector.get('loginWs')(ws).catch(function() {
               ws.close();
-              console.log('Login failed');
-            }
+            });
             break;
           case 'Accepted':
             wss[target] = ws;
@@ -101,7 +95,7 @@ angular.module('app.service.pcfactory', ['app.service.streams', 'app.system', 'a
     };
 
     service.closePeerConn = function(room, camera) {
-      var target = room.ID + '/' + camera.id;
+      var target = room.ID + '/' + camera.Id;
       var ws = wss[target];
       if (ws) {
         delete wss[target];

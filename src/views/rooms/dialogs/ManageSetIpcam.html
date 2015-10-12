@@ -2,7 +2,7 @@
 	<h3 sidenav-ignore ng-bind="'PAGE.ROOMS.SET_IPCAM.TITLE'|translate"></h3>
 	<p>
 		<span ng-bind="::ngDialogData.room.Name"></span>/
-		<span ng-bind="::ngDialogData.ipcam.id"></span>
+		<span ng-bind="::ngDialogData.ipcam.Id"></span>
 	</p>
 </div>
 <form name="mangeSetIpcam">
@@ -10,25 +10,25 @@
 		<label>
 			<span ng-bind="'PAGE.ROOMS.SET_IPCAM.ID'|translate"></span>
 			<span class="text-danger" ng-hide="mangeSetIpcam.id.$valid">*</span>
-			<input ng-model="ngDialogData.ipcam.id" ng-maxlength="12" required type="text" class="form-control" name="id">
+			<input ng-model="ngDialogData.ipcam.Id" ng-maxlength="12" required type="text" class="form-control" name="Id">
 		</label>
 	</div>
 	<div class="form-group">
 		<label>
 			<span ng-bind="'PAGE.ROOMS.SET_IPCAM.URL'|translate"></span>
 			<span class="text-danger" ng-hide="mangeSetIpcam.url.$valid">*</span>
-			<input ng-model="ngDialogData.ipcam.url" required type="text" class="form-control" name="url">
+			<input ng-model="ngDialogData.ipcam.Url" required type="text" class="form-control" name="Url">
 		</label>
 	</div>
 	<div class="checkbox">
 		<label>
-			<input ng-model="ngDialogData.ipcam.audioOff" type="checkbox" name="audioOff">
+			<input ng-model="ngDialogData.ipcam.AudioOff" type="checkbox" name="AudioOff">
 			<span ng-bind="'PAGE.ROOMS.SET_IPCAM.AUDIO_OFF'|translate"></span>
 		</label>
 	</div>
 	<div class="checkbox">
 		<label>
-			<input ng-model="ngDialogData.ipcam.off" type="checkbox" name="off">
+			<input ng-model="ngDialogData.ipcam.Off" type="checkbox" name="Off">
 			<span ng-bind="'PAGE.ROOMS.SET_IPCAM.TURN_OFF'|translate"></span>
 		</label>
 	</div>
