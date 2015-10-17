@@ -3,10 +3,11 @@
     "bower": ">=1.5.2",
     "bower-path": ">=1.0.1",
     "cdnjs-cdn-data": ">=0.1.2",
-    "cheerio": ">=0.18.0",
     "del": ">=2.0.2",
     "express": ">=4.10.6",
     "file-reader": ">=0.2.2",
+    "freeice": ">=2.2.0",
+    "fs-jetpack": ">=0.7.0",
     "glob": ">=5.0.14",
     "gulp": ">=3.9.0",
     "gulp-angular-builder": ">=0.5.2",
@@ -37,6 +38,7 @@
     "gulp-uglify": ">=1.4.1",
     "gulp-util": ">=3.0.5",
     "jasmine-jquery": ">=2.0.5",
+    "jjg-ping": ">=1.0.1",
     "jshint-stylish": ">=1.0.1",
     "karma": ">=0.13.9",
     "karma-chrome-launcher": ">=0.1.12",
@@ -47,7 +49,7 @@
     "karma-phantomjs-launcher": ">=0.2.1",
     "karma-spec-reporter": ">=0.0.19",
     "lazy.js": ">=0.4.2",
-    "ng-node-compile": "^2.0.52",
+    "ng-node-compile": ">=2.0.52",
     "nib": ">=1.0.4",
     "protractor": ">=2.2.0",
     "request": ">=2.61.0",
@@ -60,9 +62,6 @@
     "vinyl-source-stream": ">=0.1.1",
     "yargs": ">=3.25.0"
   },
-  "engines": {
-    "node": ">=0.10.0"
-  },
   "homepage": "http://www.luck2.me/",
   "license": {
     "type": "MIT",
@@ -71,6 +70,7 @@
   "name": "l2m-frontend",
   "private": true,
   "scripts": {
+    "stuns": "$(echo `whereis node` | cut -d ':' -f2) ./stuns.js",
     "test": "gulp"
   },
   "version": "4.3.0"

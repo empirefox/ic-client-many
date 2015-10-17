@@ -4,26 +4,32 @@ var utils = require('../../utils');
 
 var oauthShows = require('./oauth-shows.json');
 var env = require('../../envs/env-' + utils.getEnvName() + '.json');
+try {
+  var res = request('GET', env.ApiData.ApiOrigin + '/oauth/oauths');
+  env.ApiData.Providers = JSON.parse(res.getBody()).map((sp) => {
+    let lp = oauthShows[sp.Name];
+    if (!lp) {
+      console.log('Provider not found in oauth-shows.json:', sp.Name);
+    }
+    Object.assign(sp, lp);
+    sp.Path = '/o/p/' + sp.Name;
+    sp.Text = 'PAGE.LOGIN.OAUTH.' + sp.Name;
+    // sp.Url = env.ApiData.ApiOrigin + sp.Path;
+    if (!sp.Btn) {
+      // use default bootstrap-social Btn
+      sp.Btn = 'btn-' + sp.Name;
+    }
+    if (!sp.Icon) {
+      // use default font-awesome Icon
+      sp.Icon = 'fa fa-' + sp.Name;
+    }
+    return sp;
+  });
+} catch (e) {
+  console.log('env.js', e);
+}
 
-var res = request('GET', env.ApiData.ApiOrigin + '/oauth/oauths');
-env.ApiData.Providers = JSON.parse(res.getBody()).map((sp) => {
-  let lp = oauthShows[sp.Name];
-  if (!lp) {
-    console.log('Provider not found in oauth-shows.json:', sp.Name);
-  }
-  Object.assign(sp, lp);
-  sp.Path = '/o/p/' + sp.Name;
-  sp.Text = 'PAGE.LOGIN.OAUTH.' + sp.Name;
-  // sp.Url = env.ApiData.ApiOrigin + sp.Path;
-  if (!sp.Btn) {
-    // use default bootstrap-social Btn
-    sp.Btn = 'btn-' + sp.Name;
-  }
-  if (!sp.Icon) {
-    // use default font-awesome Icon
-    sp.Icon = 'fa fa-' + sp.Name;
-  }
-  return sp;
-});
+env.ApiData.LoginUrl = '/login.html';
+env.ApiData.Stuns = require('./stuns.json').map(s => 'stun:' + s);
 
 module.exports = env;

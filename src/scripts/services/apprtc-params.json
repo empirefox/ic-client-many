@@ -1,0 +1,15 @@
+{
+    "version_info": "{\"gitHash\": \"56a6925855265c45ecb78ae734ae0384b3ce5e15\", \"branch\": \"checkForGetTracks\", \"time\": \"Tue Sep 29 13:50:40 2015 +0200\"}",
+    "error_messages": [],
+    "bypass_join_confirmation": "false",
+    "media_constraints": "{\"audio\": true, \"video\": true}",
+    "include_loopback_js": "",
+    "turn_url": "https://computeengineondemand.appspot.com/turn?username=577164549&key=4080218913",
+    "is_loopback": "false",
+    "wss_url": "wss://apprtc-ws.webrtc.org:443/ws",
+    "pc_constraints": "{\"optional\": []}",
+    "pc_config": "{\"iceServers\": []}",
+    "wss_post_url": "https://apprtc-ws.webrtc.org:443",
+    "turn_transports": "",
+    "offer_constraints": "{\"optional\": [], \"mandatory\": {}}"
+}

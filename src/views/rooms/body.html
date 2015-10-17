@@ -1,10 +1,10 @@
 <div class="container" ng-controller="RoomsMainCtrl">
 	<div class="col-md-10">
-		<div ng-init="roomNavId='room'+$index" ng-repeat="room in CtrlClient.rooms" class="col-md-12 room">
+		<div ng-repeat="room in RoomsRtc.rooms" class="col-md-12 room">
 			<div class="page-header">
 				<div>
 					<a type="button" class="btn btn-link" ng-click="CtrlClient.chatTarget=room;visible=true" uib-tooltip="{{'PAGE.ROOMS.CHAT.OPEN'|translate}}">
-						<h3 ng-attr-id="{{roomNavId}}" ng-bind="room.Name" class="room-title"></h3>
+						<h3 ng-bind="room.Name" class="room-title"></h3>
 						<i class="fa fa-comments fa-3x"></i>
 					</a>
 					<div class="pull-right" ng-if="room.IsOwner">
@@ -26,38 +26,30 @@
 						</button>
 					</div>
 					<p>
-						<small ng-if="room.CreatedTime" am-time-ago="room.CreatedTime"></small>
-						<p>
+						<small ng-if="room.UpdatedAt" am-time-ago="room.UpdatedAt"></small>
+					</p>
 				</div>
 				<p ng-if="room.Desc" ng-bind="room.Desc"></p>
 			</div>
 			<div ng-if="camera.Online||room.IsOwner" ng-repeat="camera in room.Cameras">
 				<div>
-					<a type="button" class="btn btn-link" ng-click="connect(room,camera)" uib-tooltip="{{'PAGE.ROOMS.CAM.PLAY'|translate}}">
-						<h4 ng-attr-id="{{roomNavId+'camera'+$index}}" ng-bind="camera.Id" class="room-title"></h4>
-						<i ng-if="!Streams.map[camera.Id] && camera.Online && !camera.playing" class="fa fa-play-circle-o fa-3x"></i>
+					<h4 ng-if="!room.IsOwner" ng-bind="camera.Id" class="room-title"></h4>
+					<!-- camera.disabled used when setting camera. see dialog-factory.js -->
+					<a ng-if="room.IsOwner" type="button" class="btn btn-link" ng-disabled="camera.disabled" ng-click="Dialog.openManageIpcamDialog(room,camera)">
+						<i class="fa fa-pencil"></i>
+						<h4 ng-bind="camera.Id" class="room-title"></h4>
 					</a>
-					<div class="pull-right">
-						<button ng-if="camera.playing" ng-click="disconnect(room,camera)" uib-tooltip="{{'PAGE.ROOMS.CAM.STOP'|translate}}" type="button" class="btn btn-danger">
-							<i class="fa fa-times-circle-o fa-lg"></i>
-						</button>
-					</div>
 					<div class="pull-right" ng-if="room.IsOwner">
-						<!-- camera.disabled used when setting camera. see dialog-factory.js -->
-						<button type="button" class="btn btn-link" ng-disabled="camera.disabled" ng-click="Dialog.openManageIpcamDialog(room,camera)">
-							<i class="fa fa-pencil"></i>
-							<span class="hidden-xs" ng-bind="'PAGE.ROOMS.OPEN_SET_CAM'|translate"></span>
-						</button>
 						<button type="button" class="btn btn-default btn-warning" ng-click="Dialog.openManageDelIpcamDialog(room,camera)">
 							<i class="fa fa-trash"></i>
 							<span class="hidden-xs" ng-bind="'PAGE.ROOMS.OPEN_DEL_CAM'|translate"></span>
 						</button>
 					</div>
 					<p>
-						<small ng-if="camera.Desc" am-time-ago="camera.Desc"></small>
-						<p>
+						<small ng-if="camera.UpdatedAt" am-time-ago="camera.UpdatedAt"></small>
+					</p>
 				</div>
-				<video ng-if="Streams.map[camera.Id]" rtc-video="Streams.map[camera.Id]" class="center-block" autoplay></video>
+				<rtc-videojs room="room" camera="camera"></rtc-videojs>
 			</div>
 		</div>
 	</div>

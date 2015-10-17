@@ -64,6 +64,7 @@ gulp.task('copy:scripts:export', () => {
       Providers: env.ApiData.Providers,
       Satellizers: SatellizerConfig.providers,
       Translates: I18nZhCN.PAGE.LOGIN.OAUTH,
+      Stuns: require('./stuns.json'),
     });
     require('fs').writeFileSync(config.dest + '/api-data.js', `var ApiData=${ApiDataJson};`);
     require('fs').writeFileSync(config.dest + '/api-data.json', `${ApiDataJson}`);

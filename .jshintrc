@@ -84,9 +84,6 @@
         "console",
         "$",
         "S",
-        "detector",
-        "RTCPeerConnection",
-        "ColorfulBackgroundLayer",
-        "ColorfulBackgroundGenerator"
+        "detector"
     ]
 }

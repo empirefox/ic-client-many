@@ -1,12 +1,11 @@
 'use strict';
 
-angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.system', 'app.service.satellizer']).factory(
-  'CtrlClient', ['$injector', '$window', '$http', 'toaster', '$websocket', 'AppSystem', '$auth', 'SatellizerService',
-    function($injector, $window, $http, toaster, $websocket, AppSystem, $auth, SatellizerService) {
+angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.system', 'app.service.satellizer', 'rooms.service.rooms']).factory(
+  'CtrlClient', ['$injector', '$window', '$http', 'toaster', '$websocket', 'AppSystem', '$auth', 'SatellizerService', 'RoomsRtc',
+    function($injector, $window, $http, toaster, $websocket, AppSystem, $auth, SatellizerService, RoomsRtc) {
       var ctrlStream = $websocket(AppSystem.CtrlUrl);
 
       var service = {
-        rooms: [],
         chats: [],
 
         get: function(name) {
@@ -45,34 +44,17 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
       var onResponse = function(response) {
         switch (response.to) {
           case 'ManageSetRoomName':
-            var setter = response.content;
-            if (service.rooms && setter) {
-              service.rooms.some(function(room) {
-                if (room.ID === setter.ID) {
-                  angular.extend(room, setter);
-                  return true;
-                }
-              });
-            }
+            // setter
+            RoomsRtc.setRoomName(response.content);
             break;
           case 'ManageDelRoom':
-            if (service.rooms) {
-              var delIndex;
-              var found = service.rooms.some(function(room, i) {
-                if (room.ID === response.content) {
-                  delIndex = i;
-                  return true;
-                }
-              });
-              if (found) {
-                service.rooms.splice(delIndex, 1);
-              }
-            }
+            RoomsRtc.delRoom(response.content);
             break;
           case 'ManageGetIpcam':
             // indect by endpoint in dialog
             if (service.ManageGetIpcamCallback) {
               service.ManageGetIpcamCallback(response.content);
+              service.ManageGetIpcamCallback = null;
             }
             break;
         }
@@ -96,45 +78,16 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
             $injector.get('loginWs')(ctrlStream);
             break;
           case 'RoomOffline':
-            data.content && service.rooms.forEach(function(room) {
-              if (room.ID === data.content) {
-                delete room.Cameras;
-              }
-            });
+            RoomsRtc.setOffline(data.content);
             break;
           case 'Rooms':
-            if (Array.isArray(data.content)) {
-              var aid = SatellizerService.getUser().AccountId;
-              data.content.forEach(function(room) {
-                if (room.OwnerId === aid) {
-                  room.IsOwner = true;
-                }
-              });
-              service.rooms = data.content.sort(function(a, b) {
-                return a.UpdatedAt.localeCompare(b.UpdatedAt);
-              });
-            }
+            RoomsRtc.setRooms(data.content);
             break;
           case 'Room':
-            data.content && service.rooms.some(function(room) {
-              if (room.ID === data.id) {
-                room.Cameras = Object.keys(data.content).map(function(key) {
-                  return data.content[key];
-                }).sort(function(a, b) {
-                  return a.UpdatedAt.localeCompare(b.UpdatedAt);
-                });
-                return true;
-              }
-            });
+            RoomsRtc.setCameras(data.id, data.content);
             break;
           case 'RoomViews':
-            var roomViews = {};
-            Array.isArray(data.content) && data.content.forEach(function(rv) {
-              roomViews[rv.OneId] = rv.ViewByViewer;
-            });
-            service.rooms.forEach(function(room) {
-              room.View = roomViews[room.ID];
-            });
+            RoomsRtc.setRoomViews(data.content);
             break;
           case 'Chat':
             service.chats.push({

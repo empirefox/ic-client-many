@@ -39,7 +39,8 @@
     "ngDialog": "0.5.5",
     "satellizer": "0.12.5",
     "string": "3.3.1",
-    "WebRTC-Experiment": "muaz-khan/WebRTC-Experiment",
+    "video.js": "5.0.0",
+    "apprtc": "webrtc/apprtc#3168981efed7629fabee731a5ee74d3716b50652",
     "abs-chat": "empirefox/angular-bootstrap-simple-chat#e467de698d0a5596d1e57f7bc51994455a14f601",
     "patternbolt": "buseca/patternbolt#gh-pages"
   },

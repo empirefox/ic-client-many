@@ -17,8 +17,12 @@
       "bower_components/angularjs-toaster/toaster.js",
       "bower_components/abs-chat/src/scripts/index.js",
       "bower_components/angular-websocket/angular-websocket.js",
+      "bower_components/apprtc/src/web_app/js/adapter.js",
+      "bower_components/apprtc/src/web_app/js/sdputils.js",
+      "bower_components/apprtc/src/web_app/js/peerconnectionclient.js",
       "bower_components/detectrtc/DetectRTC.js",
-      "bower_components/WebRTC-Experiment/RTCPeerConnection/RTCPeerConnection-v1.5.js"
+      "bower_components/video.js/dist/video.js",
+      "bower_components/video.js/dist/lang/zh-CN.js"
     ],
 
     "css": [
@@ -31,7 +35,8 @@
       "bower_components/ngDialog/css/ngDialog-theme-plain.css",
       "bower_components/angularjs-toaster/toaster.css",
       "bower_components/abs-chat/src/css/style.css",
-      "bower_components/abs-chat/src/css/themes.css"
+      "bower_components/abs-chat/src/css/themes.css",
+      "bower_components/video.js/dist/video-js.css"
     ]
   },
 

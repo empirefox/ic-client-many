@@ -23,6 +23,18 @@
 	<!-- endinject -->
 	<link rel="stylesheet" href="[[cdnCss]]/common.css" />
 	<link rel="stylesheet" href="[[cdnCss]]/[[module]].css" />
+	<script type="text/javascript">
+		window.HELP_IMPROVE_VIDEOJS = false;
+
+		function parseJSON(json) {
+			try {
+				return JSON.parse(json);
+			} catch (e) {
+				(trace || console.log)('Error parsing json: ' + json);
+			}
+			return null;
+		}
+	</script>
 
 	<!-- head:js -->
 	<!-- only importantFile.js will be injected here -->
