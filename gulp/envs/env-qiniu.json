@@ -1,7 +1,7 @@
 {
-  "cdnJs": "/js",
-  "cdnCss": "/css",
-  "cdnImg": "img",
+  "cdnJs": "https://dn-icv3r1.qbox.me/r6/js",
+  "cdnCss": "https://dn-icv3r1.qbox.me/r6/css",
+  "cdnImg": "https://dn-icv3r1.qbox.me/r6/img",
   "ApiData": {
     "SiteProto": "https://",
     "ApiOrigin": "https://gocamv1.mybluemix.net",

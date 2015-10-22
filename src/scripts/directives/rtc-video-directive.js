@@ -23,7 +23,6 @@ angular.module('rooms.directive.rtc-videojs', ['pascalprecht.translate']).direct
             'remainingTimeDisplay': false,
             'progressControl': false,
           },
-          'aspectRatio': scope.camera.Width + ':' + scope.camera.Height,
           'language': $translate.use(),
         };
 
@@ -33,6 +32,7 @@ angular.module('rooms.directive.rtc-videojs', ['pascalprecht.translate']).direct
         var init = function() {
           element.html('<video class="video-js vjs-default-skin vjs-big-play-centered col-md-10 col-sm-12"></video>');
           video = element.find('video')[0];
+          options.aspectRatio = scope.camera.Width + ':' + scope.camera.Height;
           player = videojs(video, options, function() {
             var call_ = scope.room.calls[scope.camera.Id];
             if (call_) {

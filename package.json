@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "bower": ">=1.5.2",
+    "bower": ">=1.6.2",
     "bower-path": ">=1.0.1",
     "cdnjs-cdn-data": ">=0.1.2",
     "del": ">=2.0.2",
@@ -22,7 +22,7 @@
     "gulp-header": ">=1.7.1",
     "gulp-html-minifier": ">=0.1.6",
     "gulp-imagemin": ">=0.6.2",
-    "gulp-inject": ">=1.5.0",
+    "gulp-inject": ">=3.0.0",
     "gulp-inline-source": "^2.1.0",
     "gulp-jshint": ">=1.10.0",
     "gulp-karma": ">=0.0.4",

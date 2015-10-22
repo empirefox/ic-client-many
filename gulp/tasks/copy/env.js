@@ -2,12 +2,14 @@
 var request = require('sync-request');
 var utils = require('../../utils');
 
-var oauthShows = require('./oauth-shows.json');
+var sequence = ['mock', 'qq', 'baidu', 'google', 'facebook', 'github', 'twitter', 'linkedin', 'instagram', 'live', 'yahoo'];
+var oauthProviders = require('./oauth-providers');
 var env = require('../../envs/env-' + utils.getEnvName() + '.json');
 try {
   var res = request('GET', env.ApiData.ApiOrigin + '/oauth/oauths');
   env.ApiData.Providers = JSON.parse(res.getBody()).map((sp) => {
-    let lp = oauthShows[sp.Name];
+    console.log('Got ApiData...');
+    let lp = oauthProviders[sp.Name];
     if (!lp) {
       console.log('Provider not found in oauth-shows.json:', sp.Name);
     }
@@ -24,7 +26,7 @@ try {
       sp.Icon = 'fa fa-' + sp.Name;
     }
     return sp;
-  });
+  }).sort((a, b) => sequence.indexOf(a.Name) - sequence.indexOf(b.Name));
 } catch (e) {
   console.log('env.js', e);
 }

@@ -105,7 +105,7 @@ angular.module('rooms.service.rooms', ['rooms.service.rtc', 'app.service.satelli
           room.Cameras = Object.keys(cameras).map(function(cameraId) {
             return cameras[cameraId];
           }).sort(function(a, b) {
-            return a.UpdatedAt.localeCompare(b.UpdatedAt);
+            return a.UpdatedAt - b.UpdatedAt;
           });
           return true;
         }

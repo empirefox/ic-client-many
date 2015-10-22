@@ -51,12 +51,11 @@ angular.module('app.service.satellizer', ['satellizer', 'toaster', 'app.system']
     ws = ws || this;
     $injector.get('loginRequired').then(function() {
       if (ws.readyState > 1) {
-        window.location.assign('/login.html');
+        window.location.assign('/rooms.html');
       } else {
         ws.send($auth.getToken());
       }
     }).catch(function() {
-      console.log('goto home');
       window.location.assign('/login.html');
     });
   };
