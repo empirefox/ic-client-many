@@ -24,6 +24,11 @@
 	<link rel="stylesheet" href="[[cdnCss]]/nvs/v2.0/nvs.min.css" />
 	<link rel="stylesheet" href="[[cdnCss]]/common.css" />
 	<link rel="stylesheet" href="[[cdnCss]]/[[module]].css" />
+	<script type="text/javascript">
+		if (window.location.protocol === 'http:') {
+			window.location.assign(window.location.href.replace(/^http\:\/\//, 'https://'));
+		}
+	</script>
 
 	<!-- head:js -->
 	<!-- only importantFile.js will be injected here -->

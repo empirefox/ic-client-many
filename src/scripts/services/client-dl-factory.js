@@ -3,17 +3,17 @@
 angular.module('dl.client.data', []).factory('ClientData', ['$q', function($q) {
   var data = [{
     icon: 'ic-client-50x60.png',
-    size: '47.4MB',
+    size: '38.2MB',
     url: {
       // bit32: 'http://32',
-      bit64: 'http://pan.baidu.com/s/1hqniLko',
+      bit64: 'http://pan.baidu.com/s/1qWILfLa',
     },
     os: 'Linux',
     arch: '64bit',
-    time: 1440097889648,
+    time: 1445589355246,
     'en_US': {
       name: 'IC Room',
-      version: '1.2.0',
+      version: '1.4.0',
       desc: 'This is the client software for ic center of gogogocam.com.',
     },
     'zh_CN': {

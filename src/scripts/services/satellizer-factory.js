@@ -7,6 +7,9 @@ angular.module('app.service.satellizer', ['satellizer', 'toaster', 'app.system']
       return JSON.parse(SatellizerStorage.get('user'));
     };
     service.openLoginDialog = function() {
+      if (window.location.protocol === 'http:') {
+        window.location.assign('https://' + window.location.host + '/login.html');
+      }
       service.logout();
       return ngDialog.openConfirm({
         template: '/views/login/dialogs/Login.html',
