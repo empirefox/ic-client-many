@@ -272,7 +272,7 @@ fieldset[disabled] .btn-baidu.active {
 }
 .btn-douban {
   color: #fff;
-  background-color: #2278cf;
+  background-color: #2AAC5E;
   border-color: rgba(0, 0, 0, 0.2);
 }
 .btn-douban:focus,
@@ -329,11 +329,11 @@ fieldset[disabled] .btn-douban:active,
 .btn-douban.disabled.active,
 .btn-douban[disabled].active,
 fieldset[disabled] .btn-douban.active {
-  background-color: #2278cf;
+  background-color: #2AAC5E;
   border-color: rgba(0, 0, 0, 0.2);
 }
 .btn-douban .badge {
-  color: #2278cf;
+  color: #2AAC5E;
   background-color: #fff;
 }
 .btn-wechat {

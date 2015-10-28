@@ -31,6 +31,7 @@ angular.module('app.i18n.en_US', ['pascalprecht.translate']).constant('I18nEnUS'
     LOGIN: {
       TITLE: 'Log in',
       OAUTH: {
+        douban: 'Sign in with Douban',
         qq: 'Sign in with QQ',
         baidu: 'Sign in with Baidu',
         weibo: 'Sign in with Weibo',

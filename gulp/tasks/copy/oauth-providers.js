@@ -5,6 +5,14 @@ var providers = {
     "AuthURL": "http://127.0.0.1:14000/authorize",
     "Icon": "fa fa-sign-in",
   },
+  "douban": {
+    "AuthURL": "https://www.douban.com/service/auth2/auth",
+    "Icon": "fa icon-CN_douban",
+    popupOptions: {
+      width: 724,
+      height: 457,
+    },
+  },
   "qq": {
     "AuthURL": "https://graph.qq.com/oauth2.0/authorize",
     "Scope": "get_user_info",

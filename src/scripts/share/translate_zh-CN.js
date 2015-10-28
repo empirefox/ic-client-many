@@ -31,6 +31,7 @@ angular.module('app.i18n.zh_CN', ['pascalprecht.translate']).constant('I18nZhCN'
     LOGIN: {
       TITLE: '登录',
       OAUTH: {
+        douban: '使用豆瓣账户登录',
         qq: '使用QQ账户登录',
         baidu: '使用百度账户登录',
         weibo: '使用微博账户登录',
