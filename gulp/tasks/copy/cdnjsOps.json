@@ -19,7 +19,9 @@
   "cdnjs:textAngular",
 
   "cdnjs:angular-loading-bar:loading-bar.min.js",
-  "cdnjs:angular-loading-bar:loading-bar.min.css", {
+  "cdnjs:angular-loading-bar:loading-bar.min.css",
+
+  {
     "file": "**/angular-locale_zh-cn.js",
     "package": "angular-i18n",
     "cdn": "cdnjs:angular.js:i18n/angular-locale_zh-cn.js"
@@ -79,6 +81,10 @@
     "package": "bootstrap",
     "cdn": "cdnjs:twitter-bootstrap:css/bootstrap.min.css"
   }, {
+    "file": "**/font-awesome-animation.css",
+    "package": "font-awesome-animation",
+    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/${ version }/${ filenameMin }"
+  }, {
     "file": "**/lang/*.js",
     "package": "video.js",
     "cdn": "https://vjs.zencdn.net/${ version }/lang/${ filename }"
@@ -108,14 +114,6 @@
     "file": "**/angular-websocket/**/*.js",
     "package": "angular-websocket",
     "cdn": "https://cdn.rawgit.com/gdi2290/angular-websocket/v${ version }/${ filenameMin }"
-  }, {
-    "file": "**/fontdiao.css",
-    "package": "font-diao",
-    "cdn": "https://cdn.rawgit.com/lexrus/fontdiao/${ version }/fontdiao/css/${ filename }"
-  }, {
-    "file": "**/font-awesome-animation.css",
-    "package": "font-awesome-animation",
-    "cdn": "https://cdn.rawgit.com/l-lin/font-awesome-animation/v${ version }/dist/${ filename }"
   }, {
     "file": "**/patternbolt.css",
     "cdn": "https://cdn.rawgit.com/buseca/patternbolt/dd2f4ccd31cf6007fde0c7b72072b4ed93496543/PatternBolt/css/patternbolt.css"
