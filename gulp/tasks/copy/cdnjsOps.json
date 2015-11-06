@@ -83,22 +83,20 @@
   }, {
     "file": "**/font-awesome-animation.css",
     "package": "font-awesome-animation",
-    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/${ version }/${ filenameMin }"
+    "cdn": "//cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/${ version }/${ filenameMin }"
   }, {
-    "file": "**/lang/*.js",
+    "file": "**/video.js/dist/lang/*.js",
     "package": "video.js",
-    "cdn": "https://vjs.zencdn.net/${ version }/lang/${ filename }"
+    "cdn": "cdnjs:video.js:lang/${ filename }"
   }, {
     "file": "**/video.js",
-    "package": "video.js",
-    "cdn": "https://vjs.zencdn.net/${ version }/${ filenameMin }"
+    "cdn": "cdnjs:video.js:${ filenameMin }"
   }, {
     "file": "**/video-js.css",
-    "package": "video.js",
-    "cdn": "https://vjs.zencdn.net/${ version }/${ filenameMin }"
+    "cdn": "cdnjs:video.js:${ filenameMin }"
   }, {
     "file": "**/apprtc/**/*.js",
-    "cdn": "https://cdn.rawgit.com/webrtc/apprtc/3168981efed7629fabee731a5ee74d3716b50652/src/web_app/js/${ filename }"
+    "cdn": "https://cdn.rawgit.com/webrtc/apprtc/9a9f6b21ed7d6e7d1eb60ee00becf272992ee987/src/web_app/js/${ filename }"
   }, {
     "file": "**/angular-jwt/**/*.js",
     "package": "angular-jwt",

@@ -91,7 +91,7 @@ angular.module('app.service.satellizer', ['satellizer', 'toaster', 'app.system']
   $authProvider.signupUrl = '/not/signup';
   $authProvider.unlinkUrl = '/many/unlink/';
 
-  var redirectUri = window.location.origin || window.location.protocol + '//' + window.location.host;
+  var redirectUri = window.location.origin;
   var state = function() {
     return Math.random().toString(36).slice(2);
   };
