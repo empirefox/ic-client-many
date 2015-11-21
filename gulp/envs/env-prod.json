@@ -4,9 +4,9 @@
   "cdnImg": "img",
   "ApiData": {
     "SiteProto": "https://",
-    "ApiOrigin": "https://gocamv1.mybluemix.net",
-    "WsPrefix": "wss://gocamv1.mybluemix.net",
-    "CtrlUrl": "wss://gocamv1.mybluemix.net/mws/ctrl",
-    "SignalingUrl": "wss://gocamv1.mybluemix.net/mws/signaling"
+    "ApiOrigin": "https://gocamcom.daoapp.io",
+    "WsPrefix": "wss://gocamcom.daoapp.io",
+    "CtrlUrl": "wss://gocamcom.daoapp.io/mws/ctrl",
+    "SignalingUrl": "wss://gocamcom.daoapp.io/mws/signaling"
   }
 }
