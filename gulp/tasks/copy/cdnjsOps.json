@@ -96,7 +96,7 @@
     "cdn": "cdnjs:video.js:${ filenameMin }"
   }, {
     "file": "**/apprtc/**/*.js",
-    "cdn": "https://cdn.rawgit.com/webrtc/apprtc/9a9f6b21ed7d6e7d1eb60ee00becf272992ee987/src/web_app/js/${ filename }"
+    "cdn": "https://cdn.rawgit.com/webrtc/apprtc/48ad08844bd1fbc94822d39aa97284b224b5f40c/src/web_app/js/${ filename }"
   }, {
     "file": "**/angular-jwt/**/*.js",
     "package": "angular-jwt",
@@ -107,7 +107,7 @@
   }, {
     "file": "**/DetectRTC.js",
     "package": "detectrtc",
-    "cdn": "https://cdn.rawgit.com/muaz-khan/DetectRTC/1.0.9/${ filenameMin }"
+    "cdn": "https://cdn.rawgit.com/muaz-khan/DetectRTC/1.2.3/${ filenameMin }"
   }, {
     "file": "**/angular-websocket/**/*.js",
     "package": "angular-websocket",

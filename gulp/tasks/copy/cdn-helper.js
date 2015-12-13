@@ -28,8 +28,8 @@ var helper = {
   },
 
   toStaticfilesCDN: function() {
-    // return replace(/\/\/cdnjs\.cloudflare\.com\/ajax\/libs/g, 'https://dn-cdnjscn.qbox.me/ajax/libs');
-    return replace(/\/\/cdnjs\.cloudflare\.com\/ajax\/libs/g, 'https://cdn.bootcss.com');
+    return replace(/\/\/cdnjs\.cloudflare\.com\/ajax\/libs/g, 'https://dn-cdnjscn.qbox.me/ajax/libs');
+    // return replace(/\/\/cdnjs\.cloudflare\.com\/ajax\/libs/g, 'https://cdn.bootcss.com');
   }
 };
 

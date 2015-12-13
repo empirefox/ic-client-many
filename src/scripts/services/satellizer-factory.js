@@ -4,7 +4,10 @@ angular.module('app.service.satellizer', ['satellizer', 'toaster', 'app.system']
   function($q, $auth, SatellizerStorage, ngDialog) {
     var service = {};
     service.getUser = function() {
-      return JSON.parse(SatellizerStorage.get('user'));
+      try {
+        return JSON.parse(SatellizerStorage.get('user'));
+      } catch (e) {}
+      return {};
     };
     service.openLoginDialog = function() {
       if (window.location.protocol === 'http:') {

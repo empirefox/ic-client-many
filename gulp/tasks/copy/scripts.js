@@ -14,6 +14,9 @@ var pages = require('../../config').pages;
 var config = require('../../config').scripts;
 var swig = $.swig;
 var ngcompile = require('ng-node-compile');
+ngcompile.prototype.envReadyCallback = function () {
+  global.Node = window.Node;
+};
 
 var exclude = ["ng", "ngAnimate", "ngCookies", "ngLocale", "ngSanitize", "pascalprecht.translate",
   "ui.bootstrap", "ui.bootstrap.tpls", "angular-loading-bar", "chieffancypants.loadingBar", "satellizer",
