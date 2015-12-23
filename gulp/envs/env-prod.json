@@ -2,7 +2,7 @@
   "cdnJs": "/js",
   "cdnCss": "/css",
   "cdnImg": "img",
-  "proxyAuthServer": "https://gocamcom.dotcloudapp.com",
+  "proxyAuthServer": "https://proxyauth-empirefoxit.rhcloud.com",
   "ApiData": {
     "SiteProto": "https://",
     "ApiOrigin": "https://gocamcom.daoapp.io",

@@ -7,18 +7,15 @@ angular.module('rooms.service.rooms', ['rooms.service.rtc', 'app.service.satelli
     var log = function(event, room, cameraId) {
       trace(event + '', room, cameraId);
     };
-    // port from https://apprtc.appspot.com/params
+    // port from https://appr.tc/params
     var defaultParams_ = {
       wssUrl: AppSystem.SignalingUrl,
       mediaConstraints: {
         audio: false,
         video: false,
       },
-      // there is a default DEFAULT_SDP_CONSTRAINTS_ in PeerConnectionClient
-      offerConstraints: {
-        mandatory: {},
-        optional: [],
-      },
+      // there is a default PeerConnectionClient.DEFAULT_SDP_OFFER_OPTIONS_
+      offerOptions: {},
       peerConnectionConfig: {
         iceServers: [{
           urls: AppSystem.Stuns,

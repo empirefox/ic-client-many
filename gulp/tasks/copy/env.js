@@ -5,9 +5,14 @@ var utils = require('../../utils');
 var sequence = ['mock', 'qq', 'baidu', 'google', 'facebook', 'github', 'twitter', 'linkedin', 'instagram', 'live', 'yahoo'];
 var oauthProviders = require('./oauth-providers');
 var env = require('../../envs/env-' + utils.getEnvName() + '.json');
+
+function syncGet(path) {
+  return JSON.parse(request('GET', env.ApiData.ApiOrigin + path).getBody());
+}
+
 try {
-  var res = request('GET', env.ApiData.ApiOrigin + '/oauth/oauths');
-  env.ApiData.Providers = JSON.parse(res.getBody()).map((sp) => {
+  var proxedPrds = syncGet('/oauth/proxied');
+  env.ApiData.Providers = syncGet('/oauth/oauths').map((sp) => {
     console.log('Got ApiData...');
     let lp = oauthProviders[sp.Name];
     if (!lp) {
@@ -15,7 +20,7 @@ try {
     }
     Object.assign(sp, lp);
     sp.Path = '/o/p/' + sp.Name;
-    if (sp.proxied){
+    if (proxedPrds.indexOf(sp.Name) !== -1) {
       sp.Path = env.proxyAuthServer + sp.Path;
     }
     sp.Text = 'PAGE.LOGIN.OAUTH.' + sp.Name;

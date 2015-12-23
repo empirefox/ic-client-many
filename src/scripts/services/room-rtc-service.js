@@ -3,8 +3,6 @@
 angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service('RoomRtcService', [
   'AppSystem', 'appUtils',
   function(AppSystem, appUtils) {
-    PeerConnectionClient.DEFAULT_SDP_CONSTRAINTS_.mandatory = {};
-
     var SignalingChannel = function(wssUrl) {
       this.wssUrl_ = wssUrl;
       this.websocket_ = null;
@@ -107,7 +105,7 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
     };
 
     SignalingChannel.prototype.send_ = function(message) {
-      trace('C->WSS: ' + message);
+      trace('C->WSS: ' + JSON.stringify(message));
       this.websocket_.send(JSON.stringify(message));
     };
 
@@ -169,6 +167,7 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
       this.startTime = null;
 
       if (this.pcClient_) {
+        // HERE we add bye type
         this.sendSignalingMessage_({
           camera: this.cameraId_,
           type: 'bye',
@@ -249,11 +248,9 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
       this.startTime = window.performance.now();
 
       this.maybeCreatePcClient_();
-      this.params_.offerConstraints.mandatory = {
-        'OfferToReceiveAudio': hasAudio,
-        'OfferToReceiveVideo': hasVideo,
-      };
-      this.pcClient_.startAsCaller(this.params_.offerConstraints);
+      this.params_.offerOptions.offerToReceiveVideo = hasVideo;
+      this.params_.offerOptions.offerToReceiveAudio = hasAudio;
+      this.pcClient_.startAsCaller(this.params_.offerOptions);
     };
 
     Call.prototype.sendSignalingMessage_ = function(message) {

@@ -33,26 +33,17 @@ var providers = {
     getPictrue: (user) => `http://tb.himg.baidu.com/sys/portrait/item/${user.Picture}`,
   },
   "facebook": {
-    proxied: true,
     getPictrue: (oid) => `https://graph.facebook.com/v2.3/${oid}/picture?type=large`,
   },
-  "google": {
-    proxied: true,
-  },
+  "google": {},
   "github": {},
-  "instagram": {
-    proxied: true,
-  },
-  "linkedin": {
-    proxied: true,
-  },
+  "instagram": {},
+  "linkedin": {},
   "live": {
     "Btn": "btn-microsoft",
     "Icon": "fa fa-windows",
   },
-  "yahoo": {
-    proxied: true,
-  },
+  "yahoo": {},
 };
 
 module.exports = providers;
