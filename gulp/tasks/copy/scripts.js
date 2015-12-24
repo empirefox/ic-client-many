@@ -14,7 +14,7 @@ var pages = require('../../config').pages;
 var config = require('../../config').scripts;
 var swig = $.swig;
 var ngcompile = require('ng-node-compile');
-ngcompile.prototype.envReadyCallback = function () {
+ngcompile.prototype.envReadyCallback = function() {
   global.Node = window.Node;
 };
 
@@ -64,6 +64,8 @@ gulp.task('copy:scripts:export', () => {
   let $injector = window.angular.injector(['ng', 'satellizer', 'app.i18n.zh_CN', 'app.i18n.en_US']);
   $injector.invoke((SatellizerConfig, I18nZhCN) => {
     let ApiDataJson = JSON.stringify({
+      ApiOrigin: env.ApiData.ApiOrigin,
+      ProxyAuthServer: env.ApiData.ProxyAuthServer,
       Providers: env.ApiData.Providers,
       Satellizers: SatellizerConfig.providers,
       Translates: I18nZhCN.PAGE.LOGIN.OAUTH,

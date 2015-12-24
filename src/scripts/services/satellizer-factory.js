@@ -99,6 +99,9 @@ angular.module('app.service.satellizer', ['satellizer', 'toaster', 'app.system']
     return Math.random().toString(36).slice(2);
   };
   AppSystem.Providers.forEach(function(sp) {
+    if (sp.Proxied) {
+      sp.Path = AppSystem.ProxyAuthServer + sp.Path;
+    }
     if (SatellizerConfig.providers[sp.Name]) {
       var params = {
         url: sp.Path,

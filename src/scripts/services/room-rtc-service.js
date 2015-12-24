@@ -36,6 +36,7 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
 
           this.websocket_.onerror = function() {
             trace('Signaling channel error.');
+            reject(Error('WebSocket error.'));
           };
           this.websocket_.onclose = function(event) {
             // No reconnect here!
@@ -78,9 +79,6 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
           this.onmessage(message);
         }.bind(this);
 
-        this.websocket_.onerror = function() {
-          reject(Error('WebSocket error.'));
-        };
       }.bind(this));
     };
 
@@ -326,16 +324,33 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
       this.params_ = params;
 
       this.calls = {};
+      this.channel_ = null;
+    };
 
-      this.channel_ = new SignalingChannel(params.wssUrl);
-      this.channel_.gettoken = options.gettoken && this.getToken_.bind(this);
-      this.channel_.validate = options.validate;
+    Room.prototype.online = function() {
+      this.channel_ = new SignalingChannel(this.params_.wssUrl);
+      this.channel_.gettoken = this.options_.gettoken && this.getToken_.bind(this);
+      this.channel_.validate = this.options_.validate;
       this.channel_.onmessage = this.onRecvSignalingChannelMessage_.bind(this);
+      trace('Room online.');
+    };
+
+    Room.prototype.offline = function() {
+      if (this.channel_) {
+        this.channel_.close();
+        this.channel_ = null;
+      }
+      this.clearCalls();
+      trace('Room offline.');
     };
 
     Room.prototype.startCall = function(cameraId, video, hasVideo, hasAudio) {
       if (!cameraId) {
         trace('ERROR: Call to empty camera.');
+        return;
+      }
+      if (!this.channel_) {
+        trace('ERROR: Signaling was down.');
         return;
       }
       this.maybeCreateCall_(cameraId);
@@ -352,7 +367,7 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
       }
     };
 
-    Room.prototype.offline = function() {
+    Room.prototype.clearCalls = function() {
       for (var cameraId in this.calls) {
         if (this.calls.hasOwnProperty(cameraId)) {
           this.calls[cameraId].hangup();

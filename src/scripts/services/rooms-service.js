@@ -93,6 +93,7 @@ angular.module('rooms.service.rooms', ['rooms.service.rtc', 'app.service.satelli
     this.setCameras = function(rid, cameras) {
       cameras && this.rooms.some(function(room) {
         if (room.ID === rid) {
+          room.online();
           Object.keys(room.calls).forEach(function(cameraId) {
             if (!(cameraId in cameras)) {
               room.removeCall(cameraId);

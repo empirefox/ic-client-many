@@ -21,7 +21,7 @@ try {
     Object.assign(sp, lp);
     sp.Path = '/o/p/' + sp.Name;
     if (proxedPrds.indexOf(sp.Name) !== -1) {
-      sp.Path = env.proxyAuthServer + sp.Path;
+      sp.Proxied = true;
     }
     sp.Text = 'PAGE.LOGIN.OAUTH.' + sp.Name;
     // sp.Url = env.ApiData.ApiOrigin + sp.Path;

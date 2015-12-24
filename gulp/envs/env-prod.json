@@ -2,12 +2,12 @@
   "cdnJs": "/js",
   "cdnCss": "/css",
   "cdnImg": "img",
-  "proxyAuthServer": "https://proxyauth-empirefoxit.rhcloud.com",
   "ApiData": {
     "SiteProto": "https://",
     "ApiOrigin": "https://gocamcom.daoapp.io",
     "WsPrefix": "wss://gocamcom.daoapp.io",
     "CtrlUrl": "wss://gocamcom.daoapp.io/mws/ctrl",
-    "SignalingUrl": "wss://gocamcom.daoapp.io/mws/signaling"
+    "SignalingUrl": "wss://gocamcom.daoapp.io/mws/signaling",
+    "ProxyAuthServer": "https://proxyauth-empirefoxit.rhcloud.com"
   }
 }
