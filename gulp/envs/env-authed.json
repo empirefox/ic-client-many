@@ -1,0 +1,13 @@
+{
+  "cdnJs": "/js",
+  "cdnCss": "/css",
+  "cdnImg": "img",
+  "ApiData": {
+    "SiteProto": "http://",
+    "ApiOrigin": "http://127.0.0.1:9998",
+    "WsPrefix": "ws://127.0.0.1:9998",
+    "CtrlUrl": "ws://127.0.0.1:9998/mws/ctrl",
+    "SignalingUrl": "ws://127.0.0.1:9998/mws/signaling",
+    "ProxyAuthServer": "http://127.0.0.1:9997"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "T2M",
+  "ID": 1,
+  "name": "SecIc",
+  "part": {
+    "Id": "camera1",
+    "Url": "rtsp://127.0.0.1/1",
+    "Rec": true,
+    "AudioOff": true,
+    "Online": true,
+    "UpdatedAt": "z"
+  }
+}

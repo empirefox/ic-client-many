@@ -1,0 +1,12 @@
+{
+  "type": "T2M",
+  "ID": 3,
+  "name": "One",
+  "part": {
+    "ID": 3,
+    "UpdatedAt": 8,
+    "Name": "updated_room3",
+    "Enabled": true,
+    "OwnerId": 1
+  }
+}

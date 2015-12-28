@@ -1,0 +1,22 @@
+{
+  "type": "Rooms",
+  "rooms": [{
+    "ID": 1,
+    "UpdatedAt": "z",
+    "Name": "room1",
+    "Enabled": true,
+    "OwnerId": 1
+  }, {
+    "ID": 2,
+    "UpdatedAt": "y",
+    "Name": "room2",
+    "Enabled": true,
+    "OwnerId": 2
+  }, {
+    "ID": 3,
+    "UpdatedAt": "x",
+    "Name": "room3",
+    "Enabled": true,
+    "OwnerId": 1
+  }]
+}

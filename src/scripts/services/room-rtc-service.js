@@ -108,8 +108,8 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
     };
 
 
-    var Call = function(cameraId, channel, params) {
-      this.cameraId_ = cameraId;
+    var Call = function(camera, channel, params) {
+      this.camera_ = camera;
       this.params_ = params;
       this.channel_ = channel;
       this.pcClient_ = null;
@@ -167,7 +167,7 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
       if (this.pcClient_) {
         // HERE we add bye type
         this.sendSignalingMessage_({
-          camera: this.cameraId_,
+          camera: this.camera_.Id,
           type: 'bye',
         });
         this.pcClient_.close();
@@ -240,7 +240,7 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
     Call.prototype.startSignaling_ = function(hasVideo, hasAudio) {
       trace('Starting signaling.');
       if (this.oncallerstarted) {
-        this.oncallerstarted(this.cameraId_);
+        this.oncallerstarted(this.camera_.Id);
       }
 
       this.startTime = window.performance.now();
@@ -252,7 +252,7 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
     };
 
     Call.prototype.sendSignalingMessage_ = function(message) {
-      message.camera = this.cameraId_;
+      message.camera = this.camera_.Id;
       if (this.queue_ === null) {
         this.channel_.send(message);
       } else {
@@ -270,12 +270,12 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
     Call.prototype.onRemoteHangup_ = function() {
       this.hangup();
       if (this.onremotehangup) {
-        this.onremotehangup(this.cameraId_);
+        this.onremotehangup(this.camera_);
       }
     };
     Call.prototype.onRemoteSdpSet_ = function(hasRemoteVideo) {
       if (this.onremotesdpset) {
-        this.onremotesdpset(this.cameraId_, hasRemoteVideo);
+        this.onremotesdpset(this.camera_, hasRemoteVideo);
       }
     };
     Call.prototype.onRemoteStreamAdded_ = function(stream) {
@@ -283,7 +283,7 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
       attachMediaStream(this.video_, this.stream_);
       this.video_.play();
       if (this.onremotestreamadded) {
-        this.onremotestreamadded(this.cameraId_, stream);
+        this.onremotestreamadded(this.camera_, stream);
       }
     };
     Call.prototype.onRemoveStream_ = function(event) {
@@ -292,27 +292,27 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
         this.video_.src = '';
       }
       if (this.onremovestream) {
-        this.onremovestream(this.cameraId_, event.stream);
+        this.onremovestream(this.camera_, event.stream);
       }
     };
     Call.prototype.onSignalingStateChange_ = function() {
       if (this.onsignalingstatechange) {
-        this.onsignalingstatechange(this.cameraId_, this.pcClient_);
+        this.onsignalingstatechange(this.camera_, this.pcClient_);
       }
     };
     Call.prototype.onIceConnectionStateChange_ = function() {
       if (this.oniceconnectionstatechange) {
-        this.oniceconnectionstatechange(this.cameraId_, this.pcClient_);
+        this.oniceconnectionstatechange(this.camera_, this.pcClient_);
       }
     };
     Call.prototype.onNewIceCandidate_ = function(location, candidate) {
       if (this.onnewicecandidate) {
-        this.onnewicecandidate(this.cameraId_, location, candidate);
+        this.onnewicecandidate(this.camera_, location, candidate);
       }
     };
     Call.prototype.onError_ = function(message) {
       if (this.onerror) {
-        this.onerror(this.cameraId_, message);
+        this.onerror(this.camera_, message);
       }
     };
 
@@ -325,6 +325,13 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
 
       this.calls = {};
       this.channel_ = null;
+
+      // All camera ids
+      this.cameraIds = [];
+      // online cameras
+      this.cameras = [];
+      // offline ids
+      this.offlineIds = [];
     };
 
     Room.prototype.online = function() {
@@ -341,11 +348,14 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
         this.channel_ = null;
       }
       this.clearCalls();
+      this.cameraIds = [];
+      this.cameras = [];
+      this.offlineIds = [];
       trace('Room offline.');
     };
 
-    Room.prototype.startCall = function(cameraId, video, hasVideo, hasAudio) {
-      if (!cameraId) {
+    Room.prototype.startCall = function(camera, video, hasVideo, hasAudio) {
+      if (!camera || !camera.Id) {
         trace('ERROR: Call to empty camera.');
         return;
       }
@@ -353,8 +363,8 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
         trace('ERROR: Signaling was down.');
         return;
       }
-      this.maybeCreateCall_(cameraId);
-      var call_ = this.calls[cameraId];
+      this.maybeCreateCall_(camera);
+      var call_ = this.calls[camera.Id];
       call_.bindto(video);
       call_.start(hasVideo, hasAudio);
     };
@@ -374,6 +384,22 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
         }
       }
       this.calls = {};
+    };
+
+    Room.prototype.removeFromOnline = function(cameraId) {
+      this.cameras.some(function(camera, i, cameras) {
+        if (camera.Id === cameraId) {
+          cameras.splice(i, 1);
+          return true;
+        }
+      });
+    };
+
+    Room.prototype.removeFromOffline = function(cameraId) {
+      var idsIdx = this.offlineIds.indexOf(cameraId);
+      if (idsIdx !== -1) {
+        this.offlineIds.splice(idsIdx, 1);
+      }
     };
 
     Room.prototype.getToken_ = function() {
@@ -399,12 +425,12 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
       call_.onReceiveSignalingMessage(JSON.stringify(msg));
     };
 
-    Room.prototype.maybeCreateCall_ = function(cameraId) {
-      if (this.calls[cameraId]) {
+    Room.prototype.maybeCreateCall_ = function(camera) {
+      if (this.calls[camera.Id]) {
         return;
       }
       // call_ is camera
-      var call_ = this.calls[cameraId] = new Call(cameraId, this.channel_, this.params_);
+      var call_ = this.calls[camera.Id] = new Call(camera, this.channel_, this.params_);
 
       call_.onremotehangup = this.onRemoteHangup_.bind(this);
       call_.onremotesdpset = this.onRemoteSdpSet_.bind(this);
@@ -445,50 +471,50 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
       // }.bind(this));
     };
 
-    Room.prototype.onRemoteHangup_ = function(cameraId) {
-      delete this.calls[cameraId];
+    Room.prototype.onRemoteHangup_ = function(camera) {
+      delete this.calls[camera.Id];
       if (this.options_.onremotehangup) {
-        this.options_.onremotehangup(this, cameraId);
+        this.options_.onremotehangup(this, camera);
       }
     };
-    Room.prototype.onRemoteSdpSet_ = function(cameraId, hasRemoteVideo) {
+    Room.prototype.onRemoteSdpSet_ = function(camera, hasRemoteVideo) {
       if (this.options_.onremotesdpset) {
-        this.options_.onremotesdpset(this, cameraId, hasRemoteVideo);
+        this.options_.onremotesdpset(this, camera, hasRemoteVideo);
       }
     };
-    Room.prototype.onRemoteStreamAdded_ = function(cameraId, stream) {
+    Room.prototype.onRemoteStreamAdded_ = function(camera, stream) {
       if (this.options_.onremotestreamadded) {
-        this.options_.onremotestreamadded(this, cameraId, stream);
+        this.options_.onremotestreamadded(this, camera, stream);
       }
     };
-    Room.prototype.onRemoveStream_ = function(cameraId, stream) {
+    Room.prototype.onRemoveStream_ = function(camera, stream) {
       if (this.options_.onremovestream) {
-        this.options_.onremovestream(this, cameraId, stream);
+        this.options_.onremovestream(this, camera, stream);
       }
     };
-    Room.prototype.onSignalingStateChange_ = function(cameraId, pc) {
+    Room.prototype.onSignalingStateChange_ = function(camera, pc) {
       if (this.options_.onsignalingstatechange) {
-        this.options_.onsignalingstatechange(this, cameraId, pc);
+        this.options_.onsignalingstatechange(this, camera, pc);
       }
     };
-    Room.prototype.onIceConnectionStateChange_ = function(cameraId, pc) {
+    Room.prototype.onIceConnectionStateChange_ = function(camera, pc) {
       if (this.options_.oniceconnectionstatechange) {
-        this.options_.oniceconnectionstatechange(this, cameraId, pc);
+        this.options_.oniceconnectionstatechange(this, camera, pc);
       }
     };
-    Room.prototype.onNewIceCandidate_ = function(cameraId, location, candidate) {
+    Room.prototype.onNewIceCandidate_ = function(camera, location, candidate) {
       if (this.options_.onnewicecandidate) {
-        this.options_.onnewicecandidate(this, cameraId, location, candidate);
+        this.options_.onnewicecandidate(this, camera, location, candidate);
       }
     };
-    Room.prototype.onError_ = function(cameraId, message) {
+    Room.prototype.onError_ = function(camera, message) {
       if (this.options_.onerror) {
-        this.options_.onerror(this, cameraId, message);
+        this.options_.onerror(this, camera, message);
       }
     };
-    Room.prototype.onCallerStarted_ = function(cameraId) {
+    Room.prototype.onCallerStarted_ = function(camera) {
       if (this.options_.oncallerstarted) {
-        this.options_.oncallerstarted(this, cameraId);
+        this.options_.oncallerstarted(this, camera);
       }
     };
 

@@ -16,6 +16,8 @@
   "cdnjs:bootstrap-social",
   "cdnjs:font-awesome",
   "cdnjs:satellizer",
+  "cdnjs:modernizr",
+  "cdnjs:detectizr",
   "cdnjs:textAngular",
 
   "cdnjs:angular-loading-bar:loading-bar.min.js",

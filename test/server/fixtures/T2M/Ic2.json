@@ -1,0 +1,14 @@
+{
+  "type": "T2M",
+  "ID": 1,
+  "name": "Ic",
+  "part": {
+    "Id": "camera2",
+    "Online": true,
+    "HasVideo": true,
+    "HasAudio": true,
+    "Width": 230,
+    "Height": 150,
+    "UpdatedAt": "y"
+  }
+}

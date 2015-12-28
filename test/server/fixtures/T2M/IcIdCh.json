@@ -1,0 +1,9 @@
+{
+  "type": "T2M",
+  "ID": 1,
+  "name": "IcIdCh",
+  "part": {
+    "Old": "camera2",
+    "New": "updated_camera2"
+  }
+}

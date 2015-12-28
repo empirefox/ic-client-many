@@ -4,8 +4,8 @@
 angular.module('rooms.service.rooms', ['rooms.service.rtc', 'app.service.satellizer']).service('RoomsRtc', [
   'AppSystem', 'RoomRtcService', '$auth', 'SatellizerService',
   function(AppSystem, RoomRtcService, $auth, SatellizerService) {
-    var log = function(event, room, cameraId) {
-      trace(event + '', room, cameraId);
+    var log = function(event, room, camera) {
+      trace(event + '', room.ID, camera.Id);
     };
     // port from https://appr.tc/params
     var defaultParams_ = {
@@ -32,32 +32,32 @@ angular.module('rooms.service.rooms', ['rooms.service.rtc', 'app.service.satelli
       this.cameraId = 'Id';
     };
 
-    RtcOptions.prototype.onremotehangup = function(room, cameraId) {
-      log('onremotehangup', room, cameraId);
+    RtcOptions.prototype.onremotehangup = function(room, camera) {
+      log('onremotehangup', room, camera);
     };
-    RtcOptions.prototype.onremotesdpset = function(room, cameraId, hasRemoteVideo) {
-      log('onremotesdpset', room, cameraId, hasRemoteVideo);
+    RtcOptions.prototype.onremotesdpset = function(room, camera, hasRemoteVideo) {
+      log('onremotesdpset', room, camera, hasRemoteVideo);
     };
-    RtcOptions.prototype.onremotestreamadded = function(room, cameraId, stream) {
-      log('onremotestreamadded', room, cameraId, stream);
+    RtcOptions.prototype.onremotestreamadded = function(room, camera, stream) {
+      log('onremotestreamadded', room, camera, stream);
     };
-    RtcOptions.prototype.onremovestream = function(room, cameraId, stream) {
-      log('onremovestream', room, cameraId, stream);
+    RtcOptions.prototype.onremovestream = function(room, camera, stream) {
+      log('onremovestream', room, camera, stream);
     };
-    RtcOptions.prototype.onsignalingstatechange = function(room, cameraId, pc) {
-      log('onsignalingstatechange', room, cameraId, pc);
+    RtcOptions.prototype.onsignalingstatechange = function(room, camera, pc) {
+      log('onsignalingstatechange', room, camera, pc);
     };
-    RtcOptions.prototype.oniceconnectionstatechange = function(room, cameraId, pc) {
-      log('oniceconnectionstatechange', room, cameraId, pc);
+    RtcOptions.prototype.oniceconnectionstatechange = function(room, camera, pc) {
+      log('oniceconnectionstatechange', room, camera, pc);
     };
-    RtcOptions.prototype.onnewicecandidate = function(room, cameraId, location, candidate) {
-      log('onnewicecandidate', room, cameraId, location, candidate);
+    RtcOptions.prototype.onnewicecandidate = function(room, camera, location, candidate) {
+      log('onnewicecandidate', room, camera, location, candidate);
     };
-    RtcOptions.prototype.onerror = function(room, cameraId, message) {
-      trace('onerror: ' + room.Name + '/' + cameraId + message);
+    RtcOptions.prototype.onerror = function(room, camera, message) {
+      trace('onerror: ' + room.Name + '/' + camera + message);
     };
-    RtcOptions.prototype.oncallerstarted = function(room, cameraId) {
-      log('oncallerstarted', room, cameraId);
+    RtcOptions.prototype.oncallerstarted = function(room, camera) {
+      log('oncallerstarted', room, camera);
     };
 
     RtcOptions.prototype.gettoken = function() {
@@ -73,8 +73,38 @@ angular.module('rooms.service.rooms', ['rooms.service.rtc', 'app.service.satelli
       return false;
     };
 
+    // this.rooms is binded to view
+    // it is Room type
     this.rooms = [];
     this.callbacks = new RtcOptions();
+
+    this.findRoom = function(rid, cb) {
+      return rid && this.rooms.some(function(room, i, rooms) {
+        if (room.ID === rid) {
+          cb(room, i, rooms);
+          return true;
+        }
+      });
+    };
+
+    this.online = function(rid) {
+      this.findRoom(rid, function(room) {
+        room.online();
+      });
+    };
+
+    this.offline = function(rid) {
+      this.findRoom(rid, function(room) {
+        room.offline();
+      });
+    };
+
+    this.xRoom = function(rid) {
+      this.findRoom(rid, function(room, i, rooms) {
+        room.offline();
+        rooms.splice(i, 1);
+      });
+    };
 
     this.setRooms = function(rooms) {
       if (Array.isArray(rooms)) {
@@ -84,30 +114,10 @@ angular.module('rooms.service.rooms', ['rooms.service.rtc', 'app.service.satelli
             room.IsOwner = true;
           }
           return RoomRtcService.createRtcRoom(room, this.callbacks);
-        }, this).sort(function(a, b) {
+        }, this).sort(function(b, a) {
           return a.UpdatedAt.localeCompare(b.UpdatedAt);
         });
       }
-    };
-
-    this.setCameras = function(rid, cameras) {
-      cameras && this.rooms.some(function(room) {
-        if (room.ID === rid) {
-          room.online();
-          Object.keys(room.calls).forEach(function(cameraId) {
-            if (!(cameraId in cameras)) {
-              room.removeCall(cameraId);
-            }
-          });
-
-          room.Cameras = Object.keys(cameras).map(function(cameraId) {
-            return cameras[cameraId];
-          }).sort(function(a, b) {
-            return a.UpdatedAt - b.UpdatedAt;
-          });
-          return true;
-        }
-      });
     };
 
     this.setRoomViews = function(views) {
@@ -120,33 +130,107 @@ angular.module('rooms.service.rooms', ['rooms.service.rtc', 'app.service.satelli
       });
     };
 
-    this.setOffline = function(rid) {
-      rid && this.rooms.some(function(room) {
-        if (room.ID === rid) {
-          room.offline();
-          delete room.Cameras;
-          return true;
+    this.setRoomPart = function(data) {
+      this.findRoom(data.ID, function(room) {
+        //{"type": "RoomPart", "ID": oneId, "name": k, "part": part}
+        switch (data.name) {
+          case 'One':
+            // from server
+            // TODO add other attributes in openManageRoomNameDialog
+            angular.extend(room, data.part);
+            break;
+
+          case 'IcIds':
+            // string array
+            room.cameraIds = data.part;
+            room.offlineIds = data.part.slice(0);
+            break;
+
+          case 'Ic':
+            this.setCamera(room, data.part);
+            break;
+
+          case 'IcIdCh':
+            this.changeCameraId(room, data.part.New, data.part.Old);
+            break;
+
+          case 'XIc':
+            this.xCamera(room, data.part);
+            break;
+
+          default:
+            console.log('Unexpected room part', data);
+
         }
+      }.bind(this));
+    };
+
+    this.setCamera = function(room, camera) {
+      if (room.cameraIds.indexOf(camera.Id) === -1) {
+        room.cameraIds.push(camera.Id);
+      }
+
+      if (!camera.Online) {
+        room.removeCall(camera.Id);
+        room.removeFromOnline(camera.Id);
+
+        if (room.offlineIds.indexOf(camera.Id) === -1) {
+          room.offlineIds.push(camera.Id);
+        }
+      } else {
+        var exist = room.cameras.some(function(rc) {
+          if (rc.Id === camera.Id) {
+            angular.extend(rc, camera);
+            return true;
+          }
+        });
+        if (!exist) {
+          room.cameras.push(camera);
+        }
+        room.removeFromOffline(camera.Id);
+      }
+
+      room.cameras.sort(function(a, b) {
+        return a.UpdatedAt - b.UpdatedAt;
       });
     };
 
-    this.setRoomName = function(setter) {
-      this.rooms && setter && this.rooms.some(function(room) {
-        if (room.ID === setter.ID) {
-          angular.extend(room, setter);
+    this.changeCameraId = function(room, now, old) {
+      var idsIdx = room.cameraIds.indexOf(old);
+      if (idsIdx !== -1) {
+        room.cameraIds[idsIdx] = now;
+      }
+
+      idsIdx = room.offlineIds.indexOf(old);
+      if (idsIdx !== -1) {
+        room.offlineIds[idsIdx] = now;
+      }
+
+      room.cameras.some(function(rc) {
+        if (rc.Id === old) {
+          rc.Id = now;
           return true;
         }
       });
+
+      var exist = room.calls[old];
+      if (exist) {
+        delete room.calls[old];
+        room.calls[now] = exist;
+      }
     };
 
-    this.delRoom = function(rid) {
-      this.rooms && rid && this.rooms.some(function(room, i, rooms) {
-        if (room.ID === rid) {
-          room.offline();
-          rooms.splice(i, 1);
-          return true;
-        }
-      });
+    this.xCamera = function(room, cid) {
+      room.removeCall(cid);
+      room.removeFromOnline(cid);
+      room.removeFromOffline(cid);
+
+      var idsIdx = room.cameraIds.indexOf(cid);
+      if (idsIdx !== -1) {
+        room.cameraIds.splice(idsIdx, 1);
+      }
+
     };
+
   }
 ]);

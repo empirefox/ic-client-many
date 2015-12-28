@@ -80,7 +80,7 @@
         "module",
         "exports",
         "require",
-        "AniJS",
+        "Detectizr",
         "console",
         "$",
         "S",

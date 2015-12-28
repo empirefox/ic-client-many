@@ -14,7 +14,8 @@
       "bower_components/satellizer/satellizer.js",
       "bower_components/ngDialog/js/ngDialog.js",
       "bower_components/angularjs-toaster/toaster.js",
-      "bower_components/detectrtc/DetectRTC.js"
+      "bower_components/modernizr/modernizr.js",
+      "bower_components/detectizr/dist/detectizr.js"
     ],
 
     "css": [

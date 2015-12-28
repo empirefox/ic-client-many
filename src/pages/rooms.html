@@ -7,6 +7,7 @@
 	<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
 		Remove this if you use the .htaccess -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="Content-Security-Policy" content="[[csp()]]">
 
 	<title translate="PAGE_NAME.ROOMS"></title>
 	<meta name="author" content="empirefox@gmail.com">
@@ -16,6 +17,7 @@
 	<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
 	<link rel="shortcut icon" href="[[cdnImg]]/favicon.ico">
 	<link rel="apple-touch-icon" href="[[cdnImg]]/apple-touch-icon.png">
+	<script src="[[cdnJs]]/room-deps.js"></script>
 
 	<!-- jsdelivr-css -->
 
@@ -24,18 +26,6 @@
 	<link rel="stylesheet" href="[[cdnCss]]/nvs/v2.0/nvs.min.css" />
 	<link rel="stylesheet" href="[[cdnCss]]/common.css" />
 	<link rel="stylesheet" href="[[cdnCss]]/[[module]].css" />
-	<script type="text/javascript">
-		window.HELP_IMPROVE_VIDEOJS = false;
-
-		function parseJSON(json) {
-			try {
-				return JSON.parse(json);
-			} catch (e) {
-				(trace || console.log)('Error parsing json: ' + json);
-			}
-			return null;
-		}
-	</script>
 
 	<!-- head:js -->
 	<!-- only importantFile.js will be injected here -->

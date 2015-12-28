@@ -1,13 +1,28 @@
-var gulp = require('gulp');
-var $ = require('gulp-load-plugins')();
-var env = require('./env');
-var cdnjsOps = require('./cdnjsOps.json');
-var cdnHelper = require('./cdn-helper');
-var config = require('../../config');
-var swig = $.swig;
+'use strict';
+
+let gulp = require('gulp');
+let $ = require('gulp-load-plugins')();
+let cspBuilder = require("content-security-policy-builder");
+let env = require('./env');
+let cdnjsOps = require('./cdnjsOps.json');
+let cdnHelper = require('./cdn-helper');
+let config = require('../../config');
+let swig = $.swig;
+
+let csp = cspBuilder({
+  directives: {
+    'default-src': [`'self'`, `'unsafe-eval'`, 'https://dn-cdnjscn.qbox.me', 'https://cdn.rawgit.com'],
+    'connect-src': [env.ApiData.ApiOrigin, env.ApiData.WsPrefix],
+    'style-src': [`'self'`, `'unsafe-inline'`, 'https://dn-cdnjscn.qbox.me', 'https://cdn.rawgit.com'],
+    'font-src': [`'self'`, 'https:', 'data:'],
+    'img-src': [`'self'`, 'https:', 'data:'],
+    'child-src': `'none'`,
+    'object-src': `'none'`,
+  },
+});
 
 function addCopyPageTask(pagename) {
-  var resource = require('../../resource/' + pagename + '.json');
+  let resource = require('../../resource/' + pagename + '.json');
 
   gulp.task('copy:' + pagename + '.html', function() {
     return gulp.src('./src/pages/' + pagename + '.html').
@@ -17,6 +32,7 @@ function addCopyPageTask(pagename) {
           varControls: ['[[', ']]'],
         },
         data: {
+          csp: () => csp,
           apiOrigin: env.ApiData.ApiOrigin,
           cdnJs: env.cdnJs,
           cdnCss: env.cdnCss,
@@ -54,7 +70,7 @@ function addCopyPageTask(pagename) {
   });
 }
 
-var tasks = [];
+let tasks = [];
 config.pages.forEach(function(page) {
   addCopyPageTask(page);
   tasks.push('copy:' + page + '.html');

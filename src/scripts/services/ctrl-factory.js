@@ -35,28 +35,24 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
         }
       };
 
-      // TODO rename
-      service.getCameraList = function() {
-        service.get('UserCameras');
-      };
-
-      // Response from one, not from server
-      var onResponse = function(response) {
-        switch (response.to) {
-          case 'ManageSetRoomName':
-            // setter
-            RoomsRtc.setRoomName(response.content);
-            break;
-          case 'ManageDelRoom':
-            RoomsRtc.delRoom(response.content);
-            break;
-          case 'ManageGetIpcam':
+      var onT2M = function(data) {
+        //{"type": "T2M", "ID": oneId, "name": k, "part": part}
+        switch (data.name) {
+          case 'SecIc':
             // indect by endpoint in dialog
             if (service.ManageGetIpcamCallback) {
-              service.ManageGetIpcamCallback(response.content);
+              service.ManageGetIpcamCallback(data.part);
               service.ManageGetIpcamCallback = null;
             }
             break;
+          case 'NoIc':
+            service.ManageGetIpcamCallback = null;
+            break;
+          case 'Info':
+            toaster.pop('info', 'info', data.part);
+            break;
+          default:
+            RoomsRtc.setRoomPart(data);
         }
       };
 
@@ -66,38 +62,45 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
       });
 
       ctrlStream.onMessage(function(raw) {
-        // console.log(raw.data);
+        console.log(raw.data);
         var data = JSON.parse(raw.data);
         switch (data.type) {
           case 'LoginOk':
-            service.getCameraList();
+            // TODO start a update token loop?
             break;
           case 'LoginFailed':
             toaster.pop('info', 'info', 'Auth failed');
             SatellizerService.logout();
             $injector.get('loginWs')(ctrlStream);
             break;
+          case 'RoomOnline':
+            //{"ID":%d,"type":"RoomOnline"}
+            RoomsRtc.online(data.ID);
+            break;
           case 'RoomOffline':
-            RoomsRtc.setOffline(data.content);
+            //{"type":"RoomOffline","ID":%d}
+            RoomsRtc.offline(data.ID);
+            break;
+          case 'XRoom':
+            //{"type":"XRoom","ID":%d}
+            RoomsRtc.xRoom(data.ID);
             break;
           case 'Rooms':
-            RoomsRtc.setRooms(data.content);
-            break;
-          case 'Room':
-            RoomsRtc.setCameras(data.id, data.content);
+            //{"type": "Rooms", "rooms": ones}
+            RoomsRtc.setRooms(data.rooms);
             break;
           case 'RoomViews':
-            RoomsRtc.setRoomViews(data.content);
+            // [{OneId:ddd, ViewByViewer:"", CreatedAt:ddd},{}]
+            RoomsRtc.setRoomViews(data.views);
+            break;
+          case 'T2M':
+            onT2M(data);
             break;
           case 'Chat':
             service.chats.push({
               username: data.content.from,
               content: data.content.content,
             });
-            break;
-          case 'Response':
-            // raw content
-            onResponse(data);
             break;
           case 'Info':
             // TODO change content to pop option object

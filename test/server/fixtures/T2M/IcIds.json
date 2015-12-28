@@ -1,0 +1,6 @@
+{
+  "type": "T2M",
+  "ID": 1,
+  "name": "IcIds",
+  "part": ["camera1", "camera2", "camera3"]
+}

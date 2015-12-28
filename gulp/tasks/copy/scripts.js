@@ -1,35 +1,35 @@
 'use strict';
 
-var gulp = require('gulp');
-var env = require('./env');
-var Lazy = require("lazy.js");
-var $ = require('gulp-load-plugins')();
-var angularFilesort = $.angularFilesort;
-var ngDeps = $.angularDependency;
-var htmlmin = $.htmlMinifier;
-var runSequence = require('run-sequence');
-var StreamQueue = require('streamqueue');
-var toStaticfilesCDN = require('./cdn-helper').toStaticfilesCDN;
-var pages = require('../../config').pages;
-var config = require('../../config').scripts;
-var swig = $.swig;
-var ngcompile = require('ng-node-compile');
-ngcompile.prototype.envReadyCallback = function() {
-  global.Node = window.Node;
-};
+let fs = require('fs');
+let gulp = require('gulp');
+let env = require('./env');
+let Lazy = require("lazy.js");
+let $ = require('gulp-load-plugins')();
+let angularFilesort = $.angularFilesort;
+let ngDeps = $.angularDependency;
+let htmlmin = $.htmlMinifier;
+let runSequence = require('run-sequence');
+let StreamQueue = require('streamqueue');
+let toStaticfilesCDN = require('./cdn-helper').toStaticfilesCDN;
+let pages = require('../../config').pages;
+let config = require('../../config').scripts;
+let utils = require('../../utils');
+let swig = $.swig;
+let ngcompile = require('ng-node-compile');
+ngcompile.prototype.envReadyCallback = () => global.Node = window.Node;
 
-var exclude = ["ng", "ngAnimate", "ngCookies", "ngLocale", "ngSanitize", "pascalprecht.translate",
+let exclude = ["ng", "ngAnimate", "ngCookies", "ngLocale", "ngSanitize", "pascalprecht.translate",
   "ui.bootstrap", "ui.bootstrap.tpls", "angular-loading-bar", "chieffancypants.loadingBar", "satellizer",
   "angular.filter", "ngDialog", "toaster", "ngWebSocket", "angular-websocket", "angularMoment",
   "irontec.simpleChat", "app.tpl", 'app.system'
 ];
-var commonModule = 'app.common';
-var commons = ['app.service.detect', 'app.i18n', 'app.navs', 'app.service.satellizer', 'app.service.path'];
+let commonModule = 'app.common';
+let commons = ['app.service.detect', 'app.i18n', 'app.navs', 'app.service.satellizer', 'app.service.path'];
 
 function addCopyPageJsTask(pagename) {
-  gulp.task('copy:' + pagename + '.js', function() {
-    // var src = Lazy([resource.js, config.src]).flatten().toArray();
-    let resource = require('../../resource/' + pagename + '.json').local;
+  gulp.task(`copy:${pagename}.js`, () => {
+    // let src = Lazy([resource.js, config.src]).flatten().toArray();
+    let resource = require(`../../resource/${pagename}.json`).local;
 
     return new StreamQueue({
         objectMode: true,
@@ -71,8 +71,8 @@ gulp.task('copy:scripts:export', () => {
       Translates: I18nZhCN.PAGE.LOGIN.OAUTH,
       Stuns: require('./stuns.json'),
     });
-    require('fs').writeFileSync(config.dest + '/api-data.js', `var ApiData=${ApiDataJson};`);
-    require('fs').writeFileSync(config.dest + '/api-data.json', `${ApiDataJson}`);
+    fs.writeFileSync(config.dest + '/api-data.js', `var ApiData=${ApiDataJson};`);
+    fs.writeFileSync(config.dest + '/api-data.json', `${ApiDataJson}`);
   });
 });
 
@@ -84,7 +84,7 @@ gulp.task('copy:scripts:common', function() {
     constants: {
       AppSystem: env.ApiData,
     },
-  });
+  }).pipe($.header(fs.readFileSync(`src/scripts/preload/env-${utils.getEnvName()}.js`, 'utf8')));
 
   // all local modules
   let commonScripts = gulp.src(config.src).pipe(ngDeps(commonModule, exclude)).pipe($.concat('common.js'));
@@ -119,10 +119,10 @@ gulp.task('copy:scripts:common', function() {
   pipe(gulp.dest(config.dest));
 });
 
-var tasks = ['copy:scripts:common', 'copy:scripts:export'];
+let tasks = ['copy:scripts:common', 'copy:scripts:export'];
 pages.forEach(function(page) {
   addCopyPageJsTask(page);
-  tasks.push('copy:' + page + '.js');
+  tasks.push(`copy:${page}.js`);
 });
 
 gulp.task('copy:scripts', function(done) {

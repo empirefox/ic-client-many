@@ -1,4 +1,4 @@
-<div class="container" ng-controller="RoomsMainCtrl">
+<div class="container" ng-controller="RoomsMainCtrl" style="margin-bottom:20px;">
 	<div class="col-md-10">
 		<div ng-repeat="room in RoomsRtc.rooms" class="col-md-12 room">
 			<div class="page-header">
@@ -31,25 +31,38 @@
 				</div>
 				<p ng-if="room.Desc" ng-bind="room.Desc"></p>
 			</div>
-			<div ng-if="camera.Online||room.IsOwner" ng-repeat="camera in room.Cameras">
-				<div>
-					<h4 ng-if="!room.IsOwner" ng-bind="camera.Id" class="room-title"></h4>
-					<!-- camera.disabled used when setting camera. see dialog-factory.js -->
-					<a ng-if="room.IsOwner" type="button" class="btn btn-link" ng-disabled="camera.disabled" ng-click="Dialog.openManageIpcamDialog(room,camera)">
+
+			<div ng-repeat="camera in room.cameras" style="margin-bottom:20px;">
+				<h4 ng-if="!room.IsOwner" ng-bind="camera.Id" class="room-title"></h4>
+				<div ng-if="room.IsOwner">
+					<!-- see dialog-factory.js for Dialog.waitOpenDialog -->
+					<a type="button" class="btn btn-link" ng-disabled="Dialog.waitOpenDialog" ng-click="Dialog.openManageIpcamDialog(room,camera.Id)">
 						<i class="fa fa-pencil"></i>
 						<h4 ng-bind="camera.Id" class="room-title"></h4>
 					</a>
-					<div class="pull-right" ng-if="room.IsOwner">
+					<div class="pull-right">
 						<button type="button" class="btn btn-default btn-warning" ng-click="Dialog.openManageDelIpcamDialog(room,camera)">
 							<i class="fa fa-trash"></i>
 							<span class="hidden-xs" ng-bind="'PAGE.ROOMS.OPEN_DEL_CAM'|translate"></span>
 						</button>
 					</div>
-					<p>
-						<small ng-if="camera.UpdatedAt" am-time-ago="camera.UpdatedAt"></small>
-					</p>
 				</div>
+				<p>
+					<small ng-if="camera.UpdatedAt" am-time-ago="camera.UpdatedAt"></small>
+				</p>
 				<rtc-videojs room="room" camera="camera"></rtc-videojs>
+			</div>
+
+			<div ng-if="!room.IsOwner">
+				<h4 ng-repeat="offId in room.offlineIds" ng-bind="offId"> </h4>
+			</div>
+			<div ng-if="room.IsOwner">
+				<div ng-repeat="offId in room.offlineIds">
+					<a type="button" class="btn btn-link" ng-disabled="Dialog.waitOpenDialog" ng-click="Dialog.openManageIpcamDialog(room,offId)">
+						<i class="fa fa-pencil"></i>
+						<h4 ng-bind="offId" class="room-title"></h4>
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -1,21 +1,17 @@
 'use strict';
-var gulp = require('gulp');
-var jetpack = require('fs-jetpack');
-var ping = require('jjg-ping');
+let gulp = require('gulp');
+let fs = require('fs');
+let ping = require('jjg-ping');
 
 // TODO Also Validate ice form:
 // http://olegh.ftp.sh/public-stun.txt
 // Here we just use freeice.
-var list = require('freeice/stun.json') || [];
-var destDir = jetpack.cwd('./gulp/tasks/copy');
-
+let list = require('freeice/stun.json') || [];
 gulp.task('freeice', () => {
-  list.map(s => {
-    return {
-      host: s.split(':')[0],
-      stun: s,
-    };
-  }).forEach((target, index, stuns) => {
+  list.map(s => ({
+    host: s.split(':')[0],
+    stun: s,
+  })).forEach((target, index, stuns) => {
     ping.system.ping(target.host, (latency, status) => {
       if (status) {
         target.ms = latency;
@@ -32,5 +28,5 @@ gulp.task('freeice', () => {
 function pingCallback(stuns) {
   stuns = stuns.filter(s => !!s.ms).sort((a, b) => a.ms - b.ms).map(s => s.stun);
   // process.stdout.write(JSON.stringify(stuns) + '\n');
-  destDir.write('stuns.json', stuns);
+  fs.writeFileSync(`${__dirname}/stuns.json`, JSON.stringify(stuns, null, '  '));
 }

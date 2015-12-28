@@ -20,7 +20,8 @@
       "bower_components/apprtc/src/web_app/js/adapter.js",
       "bower_components/apprtc/src/web_app/js/sdputils.js",
       "bower_components/apprtc/src/web_app/js/peerconnectionclient.js",
-      "bower_components/detectrtc/DetectRTC.js",
+      "bower_components/modernizr/modernizr.js",
+      "bower_components/detectizr/dist/detectizr.js",
       "bower_components/video.js/dist/video.js",
       "bower_components/video.js/dist/lang/zh-CN.js"
     ],

@@ -37,6 +37,7 @@ try {
   }).sort((a, b) => sequence.indexOf(a.Name) - sequence.indexOf(b.Name));
 } catch (e) {
   console.log('env.js', e);
+  env.ApiData.Providers = [];
 }
 
 env.ApiData.LoginUrl = '/login.html';
