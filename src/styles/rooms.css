@@ -19,3 +19,7 @@ video {
 .room-title {
   display: inline-block;
 }
+div.room-bottom {
+  margin: 25px;
+  display: inline-block;
+}

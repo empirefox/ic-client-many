@@ -46,7 +46,12 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
             }
             break;
           case 'NoIc':
-            service.ManageGetIpcamCallback = null;
+            if (service.ManageGetIpcamCallback) {
+              service.ManageGetIpcamCallback({
+                stopWaitOpenDialog: 1,
+              });
+              service.ManageGetIpcamCallback = null;
+            }
             break;
           case 'Info':
             toaster.pop('info', 'info', data.part);
@@ -62,7 +67,7 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
       });
 
       ctrlStream.onMessage(function(raw) {
-        console.log(raw.data);
+        // console.log(raw.data);
         var data = JSON.parse(raw.data);
         switch (data.type) {
           case 'LoginOk':

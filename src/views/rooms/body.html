@@ -1,4 +1,4 @@
-<div class="container" ng-controller="RoomsMainCtrl" style="margin-bottom:20px;">
+<div class="container" ng-controller="RoomsMainCtrl">
 	<div class="col-md-10">
 		<div ng-repeat="room in RoomsRtc.rooms" class="col-md-12 room">
 			<div class="page-header">
@@ -32,7 +32,7 @@
 				<p ng-if="room.Desc" ng-bind="room.Desc"></p>
 			</div>
 
-			<div ng-repeat="camera in room.cameras" style="margin-bottom:20px;">
+			<div ng-repeat="camera in room.cameras">
 				<h4 ng-if="!room.IsOwner" ng-bind="camera.Id" class="room-title"></h4>
 				<div ng-if="room.IsOwner">
 					<!-- see dialog-factory.js for Dialog.waitOpenDialog -->
@@ -51,6 +51,7 @@
 					<small ng-if="camera.UpdatedAt" am-time-ago="camera.UpdatedAt"></small>
 				</p>
 				<rtc-videojs room="room" camera="camera"></rtc-videojs>
+				<div class="room-bottom"> </div>
 			</div>
 
 			<div ng-if="!room.IsOwner">

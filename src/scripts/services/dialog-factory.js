@@ -61,6 +61,10 @@ angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl', 'app.servi
       }
       service.waitOpenDialog = true;
       CtrlClient.ManageGetIpcamCallback = function(data) {
+        if (data.stopWaitOpenDialog) {
+          service.waitOpenDialog = false;
+          return;
+        }
         var cameraId = data.Id;
         if (!cameraId) {
           return;
@@ -84,6 +88,7 @@ angular.module('app.service.dialog', ['ngDialog', 'app.service.ctrl', 'app.servi
       };
       CtrlClient.exec('ManageGetIpcam', room.ID, cameraId);
     };
+
 
     service.openManageNewIpcamDialog = function(room) {
       ngDialog.openConfirm({
