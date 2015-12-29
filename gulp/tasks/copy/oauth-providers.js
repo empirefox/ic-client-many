@@ -4,6 +4,7 @@ var providers = {
   "mock": {
     "AuthURL": "http://127.0.0.1:14000/authorize",
     "Icon": "fa fa-sign-in",
+    requiredUrlParams: ['state'],
   },
   "douban": {
     "AuthURL": "https://www.douban.com/service/auth2/auth",

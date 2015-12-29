@@ -42,7 +42,7 @@ function addCopyPageJsTask(pagename) {
     done().
       // concat
     pipe($.concat(pagename + '.js')).pipe(toStaticfilesCDN()).
-    pipe($.uglify()).
+      // pipe($.uglify()).
     pipe(gulp.dest(config.dest));
   });
 }
@@ -51,6 +51,9 @@ gulp.task('copy:scripts:export', () => {
   let ngEnviorment = new ngcompile([{
     name: 'satellizer',
     path: './bower_components/satellizer/satellizer.js',
+  }, {
+    name: 'app.const.providers-config',
+    path: 'src/scripts/constants/providers-config-const.js',
   }, {
     name: 'pascalprecht.translate',
     path: './bower_components/angular-translate/angular-translate.js',
@@ -61,18 +64,37 @@ gulp.task('copy:scripts:export', () => {
     name: 'app.i18n.en_US',
     path: 'src/scripts/share/translate_en-US.js',
   }], './bower_components/angular/angular.js');
-  let $injector = window.angular.injector(['ng', 'satellizer', 'app.i18n.zh_CN', 'app.i18n.en_US']);
-  $injector.invoke((SatellizerConfig, I18nZhCN) => {
+
+  let $injector = window.angular.injector(['ng', 'satellizer', 'app.const.providers-config', 'app.i18n.zh_CN', 'app.i18n.en_US']);
+  $injector.invoke((SatellizerConfig, SatellizerPopup, SatellizerOauth2, I18nZhCN, satellizerProvidersConfig) => {
+
+    let stateRegex = /&state=state/g;
+    let authUrls = {};
+    SatellizerPopup.open = (url, name) => {
+      authUrls[name] = stateRegex.test(url) ? url.replace(stateRegex, '') + '&state=' : url;
+      return {
+        // needed by satellizer
+        pollPopup: () => Promise.reject(),
+      };
+    };
+    env.ApiData.Providers && satellizerProvidersConfig(SatellizerConfig, env.ApiData, 'state').forEach(r => {
+      // will call SatellizerPopup.open
+      new SatellizerOauth2().open(Object.assign({}, SatellizerConfig.providers[r.name], r));
+    });
+
     let ApiDataJson = JSON.stringify({
       ApiOrigin: env.ApiData.ApiOrigin,
       ProxyAuthServer: env.ApiData.ProxyAuthServer,
-      Providers: env.ApiData.Providers,
-      Satellizers: SatellizerConfig.providers,
+      Providers: env.ApiData.Providers.map(p => {
+        p.AuthUrlTpl = authUrls[p.Name];
+        return p;
+      }),
       Translates: I18nZhCN.PAGE.LOGIN.OAUTH,
       Stuns: require('./stuns.json'),
     });
     fs.writeFileSync(config.dest + '/api-data.js', `var ApiData=${ApiDataJson};`);
     fs.writeFileSync(config.dest + '/api-data.json', `${ApiDataJson}`);
+
   });
 });
 
@@ -84,7 +106,7 @@ gulp.task('copy:scripts:common', function() {
     constants: {
       AppSystem: env.ApiData,
     },
-  }).pipe($.header(fs.readFileSync(`src/scripts/preload/env-${utils.getEnvName()}.js`, 'utf8')));
+  }).pipe($.header(utils.readFile(`src/scripts/preload/env-${utils.getEnvName()}.js`)));
 
   // all local modules
   let commonScripts = gulp.src(config.src).pipe(ngDeps(commonModule, exclude)).pipe($.concat('common.js'));
@@ -115,7 +137,7 @@ gulp.task('copy:scripts:common', function() {
     objectMode: true,
   }).queue(apiScripts, tplScripts, commonScripts).done().
   pipe($.concat(config.commonDestName)).
-  pipe($.uglify()).
+    // pipe($.uglify()).
   pipe(gulp.dest(config.dest));
 });
 

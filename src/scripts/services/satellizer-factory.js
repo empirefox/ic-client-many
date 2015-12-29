@@ -1,7 +1,8 @@
 'use strict';
-angular.module('app.service.satellizer', ['satellizer', 'toaster', 'app.system']).factory('SatellizerService', [
-  '$q', '$auth', 'SatellizerStorage', 'ngDialog',
-  function($q, $auth, SatellizerStorage, ngDialog) {
+angular.module('app.service.satellizer', ['satellizer', 'toaster', 'app.system', 'app.const.providers-config']).
+factory('SatellizerService', [
+  '$q', '$auth', 'SatellizerStorage', 'ngDialog', 'AppSystem',
+  function($q, $auth, SatellizerStorage, ngDialog, AppSystem) {
     var service = {};
     service.getUser = function() {
       try {
@@ -10,8 +11,8 @@ angular.module('app.service.satellizer', ['satellizer', 'toaster', 'app.system']
       return {};
     };
     service.openLoginDialog = function() {
-      if (window.location.protocol === 'http:') {
-        window.location.assign('https://' + window.location.host + '/login.html');
+      if (window.location.protocol + '//' !== AppSystem.SiteProto) {
+        window.location.assign(AppSystem.SiteProto + window.location.host + '/login.html');
       }
       service.logout();
       return ngDialog.openConfirm({
@@ -61,7 +62,9 @@ angular.module('app.service.satellizer', ['satellizer', 'toaster', 'app.system']
       } else {
         ws.send($auth.getToken());
       }
-    }).catch(function() {
+    }).catch(function(e) {
+      // TODO
+      console.log(e);
       window.location.assign('/login.html');
     });
   };
@@ -81,50 +84,30 @@ angular.module('app.service.satellizer', ['satellizer', 'toaster', 'app.system']
           $window.location.assign('/rooms.html');
         }
       }).catch(function(response) {
+        console.log(response);
         SatellizerStorage.remove('user');
         toaster.pop('error', '', response.data.message);
       });
     };
 
   }
-]).config(['SatellizerConfig', '$authProvider', 'AppSystem', function(SatellizerConfig, $authProvider, AppSystem) {
-  $authProvider.withCredentials = false;
-  $authProvider.baseUrl = AppSystem.ApiOrigin;
-  $authProvider.loginUrl = '/not/login';
-  $authProvider.signupUrl = '/not/signup';
-  $authProvider.unlinkUrl = '/many/unlink/';
+]).config(['SatellizerConfig', '$authProvider', 'AppSystem', 'satellizerProvidersConfig',
+  function(SatellizerConfig, $authProvider, AppSystem, satellizerProvidersConfig) {
+    $authProvider.withCredentials = false;
+    $authProvider.baseUrl = AppSystem.ApiOrigin;
+    $authProvider.loginUrl = '/not/login';
+    $authProvider.signupUrl = '/not/signup';
+    $authProvider.unlinkUrl = '/many/unlink/';
 
-  var redirectUri = window.location.origin;
-  var state = function() {
-    return Math.random().toString(36).slice(2);
-  };
-  AppSystem.Providers.forEach(function(sp) {
-    if (sp.Proxied) {
-      sp.Path = AppSystem.ProxyAuthServer + sp.Path;
-    }
-    if (SatellizerConfig.providers[sp.Name]) {
-      var params = {
-        url: sp.Path,
-        clientId: sp.ClientID,
-        state: state,
-      };
-      if (sp.Scope) {
-        params.scope = sp.Scope;
+    var state = function() {
+      return Math.random().toString(36).slice(2);
+    };
+    satellizerProvidersConfig(SatellizerConfig, AppSystem, state).forEach(function(r) {
+      if (r.exist) {
+        $authProvider[r.name](r);
+      } else {
+        $authProvider.oauth2(r);
       }
-      if (sp.RedirectURL) {
-        params.redirectUri = sp.RedirectURL;
-      }
-      $authProvider[sp.Name](params);
-    } else {
-      $authProvider.oauth2({
-        name: sp.Name,
-        url: sp.Path,
-        clientId: sp.ClientID,
-        redirectUri: sp.RedirectURL ? sp.RedirectURL : redirectUri,
-        authorizationEndpoint: sp.AuthURL,
-        scope: sp.Scope,
-        state: state,
-      });
-    }
-  });
-}]);
+    });
+  }
+]);

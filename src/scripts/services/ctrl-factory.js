@@ -67,7 +67,7 @@ angular.module('app.service.ctrl', ['toaster', 'ngAnimate', 'ngWebSocket', 'app.
       });
 
       ctrlStream.onMessage(function(raw) {
-        // console.log(raw.data);
+        console.log(raw.data);
         var data = JSON.parse(raw.data);
         switch (data.type) {
           case 'LoginOk':
