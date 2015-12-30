@@ -10,20 +10,18 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
 
       // Public options. Keep it sorted.
       this.gettoken = null;
-      this.validate = null;
-
-      this.onerror = null;
       this.onmessage = null;
+      this.validate = null;
+    };
+
+    SignalingChannel.prototype.ready = function() {
+      return this.websocket_ && this.websocket_.readyState === WebSocket.OPEN;
     };
 
     SignalingChannel.prototype.open = function() {
       if (this.websocket_) {
         trace('ERROR: SignalingChannel has already opened.');
-        if (this.gettoken && !this.authed_) {
-          return Promise.reject();
-        } else {
-          return Promise.resolve();
-        }
+        return this.gettoken && !this.authed_ ? Promise.reject() : Promise.resolve();
       }
       this.authed_ = !this.gettoken;
 
@@ -91,7 +89,7 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
     };
 
     SignalingChannel.prototype.send = function(message) {
-      if (!this.websocket_) {
+      if (!this.ready()) {
         trace('ERROR: WebSocket not ok.');
         return;
       }
@@ -332,21 +330,20 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
       this.cameras = [];
       // offline ids
       this.offlineIds = [];
-    };
 
-    Room.prototype.online = function() {
       this.channel_ = new SignalingChannel(this.params_.wssUrl);
       this.channel_.gettoken = this.options_.gettoken && this.getToken_.bind(this);
       this.channel_.validate = this.options_.validate;
       this.channel_.onmessage = this.onRecvSignalingChannelMessage_.bind(this);
+    };
+
+    Room.prototype.online = function() {
       trace('Room online.');
+      return this.channel_.open();
     };
 
     Room.prototype.offline = function() {
-      if (this.channel_) {
-        this.channel_.close();
-        this.channel_ = null;
-      }
+      this.channel_.close();
       this.clearCalls();
       this.cameraIds = [];
       this.cameras = [];
@@ -356,10 +353,10 @@ angular.module('rooms.service.rtc', ['app.system', 'app.service.utils']).service
 
     Room.prototype.startCall = function(camera, video, hasVideo, hasAudio) {
       if (!camera || !camera.Id) {
-        trace('ERROR: Call to empty camera.');
+        trace('ERROR: Call to empty camera:' + camera);
         return;
       }
-      if (!this.channel_) {
+      if (!this.channel_ || !this.channel_.ready()) {
         trace('ERROR: Signaling was down.');
         return;
       }

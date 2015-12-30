@@ -16,6 +16,7 @@ let csp = cspBuilder({
     'style-src': [`'self'`, `'unsafe-inline'`, 'https://dn-cdnjscn.qbox.me', 'https://cdn.rawgit.com'],
     'font-src': [`'self'`, 'https:', 'data:'],
     'img-src': [`'self'`, 'https:', 'data:'],
+    'media-src': [`'self'`, 'https:', 'blob:'],
     'child-src': `'none'`,
     'object-src': `'none'`,
   },

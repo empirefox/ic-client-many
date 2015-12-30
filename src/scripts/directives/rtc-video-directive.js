@@ -46,7 +46,7 @@ angular.module('rooms.directive.rtc-videojs', ['pascalprecht.translate']).direct
             if (call_) {
               call_.bindto(video);
             } else {
-              scope.room.startCall(camera_.Id, video, camera_.HasVideo, camera_.HasAudio);
+              scope.room.startCall(camera_, video, camera_.HasVideo, camera_.HasAudio);
             }
           };
 
