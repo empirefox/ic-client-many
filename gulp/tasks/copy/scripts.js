@@ -42,7 +42,7 @@ function addCopyPageJsTask(pagename) {
     done().
       // concat
     pipe($.concat(pagename + '.js')).pipe(toStaticfilesCDN()).
-      // pipe($.uglify()).
+    pipe($.uglify()).
     pipe(gulp.dest(config.dest));
   });
 }
@@ -137,7 +137,7 @@ gulp.task('copy:scripts:common', function() {
     objectMode: true,
   }).queue(apiScripts, tplScripts, commonScripts).done().
   pipe($.concat(config.commonDestName)).
-    // pipe($.uglify()).
+  pipe($.uglify()).
   pipe(gulp.dest(config.dest));
 });
 

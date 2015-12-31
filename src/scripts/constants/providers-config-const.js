@@ -16,7 +16,7 @@ constant('satellizerProvidersConfig', function(SatellizerConfig, AppSystem, stat
 
     angular.forEach([
       'defaultUrlParams', 'requiredUrlParams', 'optionalUrlParams',
-      'scope', 'scopePrefix', 'scopeDelimiter', 'display', 'popupOptions'
+      'scope', 'scopePrefix', 'scopeDelimiter', 'display', 'confirmLogin', 'popupOptions'
     ], function(k) {
       if (sp[k]) {
         params[k] = sp[k];

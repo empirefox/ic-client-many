@@ -11,7 +11,7 @@ let swig = $.swig;
 
 let csp = cspBuilder({
   directives: {
-    'default-src': [`'self'`, `'unsafe-eval'`, 'https://dn-cdnjscn.qbox.me', 'https://cdn.rawgit.com'],
+    'script-src': [`'self'`, `'unsafe-eval'`, 'https://dn-cdnjscn.qbox.me', 'https://cdn.rawgit.com'],
     'connect-src': [env.ApiData.ApiOrigin, env.ApiData.WsPrefix, env.ApiData.ProxyAuthServer],
     'style-src': [`'self'`, `'unsafe-inline'`, 'https://dn-cdnjscn.qbox.me', 'https://cdn.rawgit.com'],
     'font-src': [`'self'`, 'https:', 'data:'],

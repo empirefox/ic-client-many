@@ -9,6 +9,7 @@ var providers = {
   "douban": {
     "AuthURL": "https://www.douban.com/service/auth2/auth",
     "Icon": "fa icon-CN_douban",
+    optionalUrlParams: ['state'],
     popupOptions: {
       width: 724,
       height: 457,
@@ -27,6 +28,9 @@ var providers = {
     "AuthURL": "https://openapi.baidu.com/oauth/2.0/authorize",
     "Scope": "basic",
     "Icon": "fa icon-CN_baidu",
+    optionalUrlParams: ['state', 'display', 'confirm_login'],
+    display: 'popup',
+    confirmLogin: '1',
     popupOptions: {
       width: 676,
       height: 541,
