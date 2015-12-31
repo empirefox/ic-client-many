@@ -39,14 +39,11 @@
     "modernizr": "2.8.3",
     "detectizr": "2.2.0",
     "satellizer": "0.13.3",
-    "string": "3.3.1",
     "video.js": "5.4.6",
     "apprtc": "webrtc/apprtc#2b83ea92a20e1b35837cfce0b6d6611ffdf7fc54",
-    "abs-chat": "empirefox/angular-bootstrap-simple-chat#e467de698d0a5596d1e57f7bc51994455a14f601",
     "patternbolt": "buseca/patternbolt#gh-pages"
   },
   "devDependencies": {
-    "angular-mocks": "1.4.8",
-    "Detect.js": "*"
+    "angular-mocks": "1.4.8"
   }
 }

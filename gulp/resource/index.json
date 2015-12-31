@@ -29,8 +29,7 @@
       "bower_components/angular-loading-bar/build/loading-bar.css",
       "bower_components/ngDialog/css/ngDialog.css",
       "bower_components/ngDialog/css/ngDialog-theme-plain.css",
-      "bower_components/angularjs-toaster/toaster.css",
-      "bower_components/patternbolt/PatternBolt/css/patternbolt.css"
+      "bower_components/angularjs-toaster/toaster.css"
     ]
   },
 

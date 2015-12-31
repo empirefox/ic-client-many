@@ -110,7 +110,7 @@
   }, {
     "file": "**/angular-websocket/**/*.js",
     "package": "angular-websocket",
-    "cdn": "https://cdn.rawgit.com/gdi2290/angular-websocket/v${ version }/${ filenameMin }"
+    "cdn": "https://cdn.rawgit.com/AngularClass/angular-websocket/v${ version }/${ filenameMin }"
   }, {
     "file": "**/patternbolt.css",
     "cdn": "https://cdn.rawgit.com/buseca/patternbolt/dd2f4ccd31cf6007fde0c7b72072b4ed93496543/PatternBolt/css/patternbolt.css"

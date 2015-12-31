@@ -142,8 +142,8 @@ angular.module('rooms.service.rooms', ['rooms.service.rtc', 'app.service.satelli
 
           case 'IcIds':
             // string array
-            room.cameraIds = data.part;
-            room.offlineIds = data.part.slice(0);
+            room.cameraIds = data.part || [];
+            room.offlineIds = room.cameraIds.slice(0);
             break;
 
           case 'Ic':

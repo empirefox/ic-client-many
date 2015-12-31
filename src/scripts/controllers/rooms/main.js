@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('rooms.ctrl.main', ['irontec.simpleChat', 'app.service.dialog', 'app.service.ctrl', 'rooms.directive.rtc-videojs', 'rooms.service.rooms']).
+angular.module('rooms.ctrl.main', ['app.service.dialog', 'app.service.ctrl', 'rooms.directive.rtc-videojs', 'rooms.service.rooms']).
 controller('RoomsMainCtrl', ['$scope', 'RoomsRtc', 'Dialog', 'CtrlClient',
   function($scope, RoomsRtc, Dialog, CtrlClient) {
     $scope.Dialog = Dialog;
