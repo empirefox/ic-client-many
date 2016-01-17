@@ -1,13 +1,13 @@
 [
-  "stun3.l.google.com:19302",
-  "stun2.l.google.com:19302",
-  "stun1.l.google.com:19302",
-  "stun.voxgratia.org",
-  "stun.ideasip.com",
-  "stun4.l.google.com:19302",
-  "stun.voipstunt.com",
-  "stun.voipbuster.com",
-  "stun.voiparound.com",
-  "stun.ekiga.net",
-  "stun.schlund.de"
+  "stun:stun3.l.google.com:19302",
+  "stun:stun2.l.google.com:19302",
+  "stun:stun1.l.google.com:19302",
+  "stun:stun4.l.google.com:19302",
+  "stun:stun.voxgratia.org",
+  "stun:stun.ideasip.com",
+  "stun:stun.voiparound.com",
+  "stun:stun.voipstunt.com",
+  "stun:stun.ekiga.net",
+  "stun:stun.voipbuster.com",
+  "stun:stun.schlund.de"
 ]

@@ -41,6 +41,6 @@ try {
 }
 
 env.ApiData.LoginUrl = '/login.html';
-env.ApiData.Stuns = require('./stuns.json').map(s => 'stun:' + s);
+env.ApiData.Stuns = require('./stuns.json');
 
 module.exports = env;

@@ -30,6 +30,10 @@ angular.module('rooms.directive.rtc-videojs', ['pascalprecht.translate']).direct
         var player;
 
         var init = function() {
+          if (!scope.camera.Width && !scope.camera.Height) {
+            console.log('Error aspectRatio', scope.camera.Width + ':' + scope.camera.Height);
+            return;
+          }
           element.html('<video class="video-js vjs-default-skin vjs-big-play-centered col-md-10 col-sm-12"></video>');
           video = element.find('video')[0];
           options.aspectRatio = scope.camera.Width + ':' + scope.camera.Height;
@@ -64,7 +68,7 @@ angular.module('rooms.directive.rtc-videojs', ['pascalprecht.translate']).direct
         scope.$watch(function() {
           return $translate.use();
         }, function() {
-          player.language($translate.use());
+          player && player.language($translate.use());
         });
 
         scope.$on('$destroy', function() {
@@ -72,7 +76,7 @@ angular.module('rooms.directive.rtc-videojs', ['pascalprecht.translate']).direct
           if (call_) {
             call_.unbindto(video);
           }
-          player.dispose();
+          player && player.dispose();
         });
       },
     };

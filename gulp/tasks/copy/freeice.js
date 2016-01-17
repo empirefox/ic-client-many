@@ -26,7 +26,7 @@ gulp.task('freeice', () => {
 });
 
 function pingCallback(stuns) {
-  stuns = stuns.filter(s => !!s.ms).sort((a, b) => a.ms - b.ms).map(s => s.stun);
+  stuns = stuns.filter(s => !!s.ms).sort((a, b) => a.ms - b.ms).map(s => `stun:${s.stun}`);
   // process.stdout.write(JSON.stringify(stuns) + '\n');
   fs.writeFileSync(`${__dirname}/stuns.json`, JSON.stringify(stuns, null, '  '));
 }
