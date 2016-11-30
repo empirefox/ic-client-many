@@ -28,8 +28,8 @@ var helper = {
   },
 
   toStaticfilesCDN: function() {
-    return replace(/\/\/cdnjs\.cloudflare\.com\/(.*)"/g, '//dn-cdnjscn.qbox.me/$1" crossorigin="anonymous"');
-    // return replace(/\/\/cdnjs\.cloudflare\.com\/ajax\/libs(.*)"/g, '//cdn.bootcss.com/$1" crossorigin="anonymous"');
+    // return replace(/\/\/cdnjs\.cloudflare\.com\/(.*)"/g, '//dn-cdnjscn.qbox.me/$1" crossorigin="anonymous"');
+    return replace(/\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/(.*)"/g, '//cdn.bootcss.com/$1" crossorigin="anonymous"');
   }
 };
 
